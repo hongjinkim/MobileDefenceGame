@@ -5,7 +5,7 @@ using UnityEngine;
 public class DataManager : BasicSingleton<DataManager>
 {
     private PlayerData _playerData = new();
-    private StageData stageData;
+    private StageData _stageData = new();
 
     public static PlayerData GetPlayerData()
 	{

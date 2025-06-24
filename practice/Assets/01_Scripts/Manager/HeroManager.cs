@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HeroManager : MonoBehaviour
 {
+    [SerializeField] private Transform CenterPosition;
     public List<HeroControl> HeroList;
 
     public HeroControl FindNearTarget(Vector3 pos)
