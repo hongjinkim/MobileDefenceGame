@@ -3,41 +3,45 @@ using UnityEngine;
 public class GameManager : BasicSingleton<GameManager>
 {
     [Header("ÀÌº¥Æ®")]
-    [SerializeField] private VoidEventChannelSO gameStartEvent;
-    [SerializeField] private VoidEventChannelSO gameEndEvent;
+    [SerializeField] private VoidEventChannelSO dataLoaded;
 
+    [SerializeField] private AudioPlayerDissolve bgmSound;
+    [HideInInspector] public bool dataLoadComplete = false;
 
     void OnEnable()
     {
-        if (gameStartEvent != null)
-        {
-            gameStartEvent.AddListener(OnGameStart);
-        }
-        if (gameEndEvent != null)
-        {
-            gameEndEvent.AddListener(OnGameEnd);
-        }
+        if(dataLoaded != null)
+		{
+            dataLoaded.AddListener(OnDataLoaded);
+		}
     }
 
     void OnDisable()
     {
-        if (gameStartEvent != null)
+        if (dataLoaded != null)
         {
-            gameStartEvent.RemoveListener(OnGameStart);
-        }
-        if (gameEndEvent != null)
-        {
-            gameEndEvent.RemoveListener(OnGameEnd);
+            dataLoaded.RemoveListener(OnDataLoaded);
         }
     }
 
-    private void OnGameStart()
+    private void OnDataLoaded()
     {
         
     }
 
-    private void OnGameEnd()
-    {
-        
-    }
+    private void Start() => Init();
+
+    private void Init()
+	{
+        Application.targetFrameRate = 60;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        bgmSound.Play();
+
+        dataLoadComplete = true;
+        dataLoaded.TriggerEvent();
+	}
+
+    public void ResetData() => Init();
+
 }
