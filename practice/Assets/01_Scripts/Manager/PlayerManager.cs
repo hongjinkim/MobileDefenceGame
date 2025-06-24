@@ -1,9 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-public class PlayerManager : BasicSingleton<GameManager>
+
+
+// 유저 정보 관리
+public class PlayerManager : BasicSingleton<PlayerManager>
 {
-	public List<HeroControl> HeroList;
+    [Header("이벤트")]
+    [SerializeField] private VoidEventChannelSO levelUp;
 
+    private PlayerData playerData => DataManager.GetPlayerData();
+    
+    private void OnEnable()
+    {
+        
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    private void Start()
+    {
+
+    }
+
+    public void GainExp(BigNum GetExp)
+    {
+        
+    }
 
 }
 

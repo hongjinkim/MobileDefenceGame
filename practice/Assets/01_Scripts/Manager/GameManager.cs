@@ -24,7 +24,7 @@ public class GameManager : BasicSingleton<GameManager>
         }
     }
 
-    private void OnDataLoaded()
+    private void OnDataLoaded(Void _)
     {
         
     }
@@ -39,7 +39,7 @@ public class GameManager : BasicSingleton<GameManager>
         bgmSound.Play();
 
         dataLoadComplete = true;
-        dataLoaded.TriggerEvent();
+        dataLoaded.RaiseEvent();
 	}
 
     public void ResetData() => Init();

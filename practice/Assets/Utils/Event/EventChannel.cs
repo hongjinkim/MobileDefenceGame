@@ -4,25 +4,28 @@ using System.Collections.Generic;
 
 public abstract class EventChannelSO<T> : ScriptableObject
 {
-    // C# 델리게이트 (코드에서 구독/발생용)
-    private event UnityAction<T> onEventTriggered;
+    // 인스펙터에서 리스너를 등록하기 위한 UnityEvent
+    public UnityEvent<T> onEventRaised;
 
-    // 이벤트를 구독하는 메서드
+    // 코드 기반으로 리스너를 등록하기 위한 C# Action (기존 방식)
+    private UnityAction<T> _onEventRaised;
+
     public void AddListener(UnityAction<T> action)
     {
-        onEventTriggered += action;
+        _onEventRaised += action;
     }
 
-    // 이벤트 구독을 해제하는 메서드
     public void RemoveListener(UnityAction<T> action)
     {
-        onEventTriggered -= action;
+        _onEventRaised -= action;
     }
 
-    // 이벤트를 발생시키는 메서드
-    public void TriggerEvent(T value)
+    public void RaiseEvent(T value)
     {
-        // C# 델리게이트를 통해 이벤트를 발생시킵니다.
-        onEventTriggered?.Invoke(value);
+        // 1. 인스펙터에 연결된 리스너들 호출
+        onEventRaised?.Invoke(value);
+
+        // 2. 코드로 구독한 리스너들 호출
+        _onEventRaised?.Invoke(value);
     }
 }
