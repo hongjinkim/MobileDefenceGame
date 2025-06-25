@@ -1,16 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class StageManager : MonoBehaviour
+public class StageManager : BasicSingleton<StageManager>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]private ChapterData _stageData;
+    public static ChapterData GetStageData()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return Instance._stageData;
     }
 }

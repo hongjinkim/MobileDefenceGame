@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEditor;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,93 +14,38 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 	[Header("이벤트")]
 	[SerializeField] private VoidEventChannelSO monsterGen;
 
-	private List<EnemyControl> MonsterList = new List<EnemyControl>();
-
-
-
-	private PlayerData Player => DataManager.GetPlayerData();
-	private StageData Stage => DataManager.GetStageData();
-
 	
+
+	private List<EnemyControl> MonsterList = new List<EnemyControl>();
+	private PlayerData Player => DataManager.GetPlayerData();
+	private ChapterData Stage => StageManager.GetStageData();
+	//private WaveData[] waves;
+	//private int _currentWaveIndex = 0;
+
 
 	// N 스테이지 시작
 	private void StartStage()
 	{
-		EnemyClearAll();
+		InitStage();
 		StopAllCoroutines();
-		//StartCoroutine(SpawnStageEnemy(EEnemyType.StageMonster));
+		//StartCoroutine(SpawnAllWaves());
 	}
 
-	// 해당 스테이지 적 초기화
-	private void StageEnemyInit(int StageNum)
+	private void InitStage()
 	{
-		
+		ClearAllEnemy();
+		//waves = Stage.GetWaveData();
 	}
 
-	// 스테이지 적 스폰
-	//IEnumerator SpawnStageEnemy()
-	//{
-		
-	//}
-
-	// 몬스터 젠
-	private IEnumerator GenStageMonster()
-	{
-		yield return new WaitForSeconds(1);
-	}
-
-	// 보스 몬스터 젠
-	private void GenStageBoss()
-	{
-		
-	}
-
-	// 스테이지 적 소환
-	private void EnemySummon()
-	{
-		
-	}
-
-	/************************************************************/
-
-	//전체 사망시 적 공격행위 중단
-	private void EnemyStopAttack()
+	private void ClearAllEnemy()
 	{
 		for (int i = 0; i < MonsterList.Count; i++)
 		{
-			//MonsterList[i].StopAttackWhenHeroDie();
-		}
-	}
-
-	// 적 전부 삭제
-	private void EnemyClearAll()
-	{
-		for (int i = 0; i < MonsterList.Count; i++)
-		{
-			EnemyPoolManager.Instance.Push(MonsterList[i].gameObject, EPoolType.Monster);
+			EnemyPoolManager.Instance.Push(MonsterList[i].gameObject, EPoolType.Enemy);
 		}
 		MonsterList.Clear();
 	}
 
-	// 적 처치(사망처리, 보상)
-	public void EnemyDeath(EnemyControl m)
-	{
-		MonsterList.Remove(m);
-	}
-
-	private void SetPosition(EnemyControl m)
-	{
-		
-	}
-
-	// 적 보상
-	public void Reward()
-	{
-		
-	}
-
-
-	// 대상과 가장 가까운 몬스터를 탐색
 	public EnemyControl FindNearTarget(Vector3 pos, int HeroIndex)
 	{
 		var monster = MonsterList;
@@ -210,5 +156,92 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 	{
 		return MonsterList.Count;
 	}
+
+	// Wave 정보에 맞게 적을 스폰
+	//private IEnumerator SpawnAllWaves()
+	//{
+	//	// 모든 웨이브를 순서대로 진행
+	//	while (_currentWaveIndex < waves.Length)
+	//	{
+	//		WaveData currentWave = waves[_currentWaveIndex];
+	//		yield return StartCoroutine(SpawnWave(currentWave));
+	//		_currentWaveIndex++;
+	//	}
+
+	//	Debug.Log("모든 웨이브가 종료되었습니다!");
+	//}
+
+	//private IEnumerator SpawnWave(WaveData wave)
+	//{
+	//	Debug.Log($"--- {wave.waveName} 웨이브 시작 ---");
+
+	//	for (int i = 0; i < wave.enemyCount; i++)
+	//	{
+	//		var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
+	//		var enemyComp = newEnemy.GetComponent<EnemyControl>();
+	//		var enemyType = enemyComp.EnemyType;
+
+	//		// 몬스터 위치 및 인덱스 설정
+	//		if (enemyType == EEnemyType.StageMonster)
+	//		{
+	//			enemyComp.transform.position = GetSpawnPosition(wave.spawnPattern, wave.patternRadius, i, wave.enemyCount);
+	//		}
+	//		else if (enemyType == EEnemyType.Boss)
+	//		{
+	//			enemyComp.transform.position = PositionInfo.Instance.BossPos.position;
+	//		}
+
+
+	//		//enemyComp.InitEnemy();
+	//		MonsterList.Add(enemyComp);
+
+	//		// 다음 적 소환까지 대기
+	//		yield return new WaitForSeconds(wave.timeBetweenSpawns);
+	//	}
+
+	//	Debug.Log($"--- {wave.waveName} 웨이브 종료 ---");
+
+	//	// 다음 웨이브까지 대기
+	//	yield return new WaitForSeconds(wave.waveDelay);
+	//}
+
+	//private Vector3 GetSpawnPosition(ESpawnPattern pattern, float radius, int spawnIndex, int totalSpawns)
+	//{
+	//	Vector3 position = PositionInfo.Instance.MapCenter.position; // 기본 위치는 맵 중심
+
+	//	switch (pattern)
+	//	{
+	//		case ESpawnPattern.Circle:
+	//			float angle = spawnIndex * (360f / totalSpawns);
+	//			position += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0) * radius;
+	//			break;
+
+	//		case ESpawnPattern.RandomAroundTarget:
+	//			Vector2 randomCircle = Random.insideUnitCircle.normalized * radius;
+	//			position += new Vector3(randomCircle.x, randomCircle.y, 0);
+	//			break;
+
+	//		case ESpawnPattern.Line:
+	//			// 예: 화면 상단에서 좌우로 생성
+	//			// 실제 사용 시에는 카메라 뷰포트 등을 이용해 화면 밖 좌표를 계산하는 것이 좋음
+	//			float screenEdgeX = Camera.main.orthographicSize * Camera.main.aspect + 2f;
+	//			float screenEdgeY = Camera.main.orthographicSize + 2f;
+	//			position = new Vector3(Mathf.Lerp(-screenEdgeX, screenEdgeX, (float)spawnIndex / totalSpawns), screenEdgeY, 0);
+	//			break;
+
+	//		case ESpawnPattern.CardinalDirections:
+	//			// 4방향을 순환하며 생성
+	//			switch (spawnIndex % 4)
+	//			{
+	//				case 0: position += new Vector3(0, radius, 0); break; // North
+	//				case 1: position += new Vector3(radius, 0, 0); break; // East
+	//				case 2: position += new Vector3(0, -radius, 0); break; // South
+	//				case 3: position += new Vector3(-radius, 0, 0); break; // West
+	//			}
+	//			break;
+	//	}
+
+	//	return position;
+	//}
 }
 

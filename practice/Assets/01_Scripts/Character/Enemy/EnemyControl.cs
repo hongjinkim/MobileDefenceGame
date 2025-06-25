@@ -5,9 +5,15 @@ using UnityEngine.UIElements;
 
 public class EnemyControl : CharacterBase
 {
+    public EEnemyType EnemyType;
+
     private State<EnemyControl>[] States;
     private State<EnemyControl> CurrentState;
 
+    public void InitEnemy()
+	{
+
+	}
 
     // State º¯°æ
     public void ChangeState(EActType NewState)

@@ -1,5 +1,5 @@
 
 public enum EPoolType
 {
-    Monster
+    Enemy
 }
