@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BaseAudioPlayer : MonoBehaviour
 {
-    [field: SerializeField]
+    [SerializeField]
     public virtual MixerChannel Channel { get; set; } = MixerChannel.None;
     public AudioHandler AudioHandler = null;
 
@@ -50,7 +50,7 @@ public class BaseAudioPlayer : MonoBehaviour
         {
             try
             {
-                string path = $"Assets/POOMLibrary/AudioSystem/Asset/Audio/{Channel}AudioHandler.asset";
+                string path = $"Assets/Utils/AudioSystem/Asset/Audio/{Channel}AudioHandler.asset";
                 var handler = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioHandler>(path);
                 AudioHandler = handler;
             }
