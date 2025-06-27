@@ -2,7 +2,6 @@ using System;
 using System.Text;
 using UnityEngine;
 
-
 [Serializable]
 public struct BigNum
 {
@@ -432,32 +431,153 @@ public struct BigNum
 
         return success;
     }
+}
+public static class PoomNumExtensions
+{
+    public static string ToRegularFormat(this BigNum x)
+    {
+        if (x.IsNegative() || x.IsZero() || x.E < -8) return "0"; // 1보다 작다면 0으로 표시
 
+        long m = x.M;
+        long e = x.E;
 
+        if (e < -5)
+        {
+            return e switch
+            {
+                -8 => (m / 100000000).ToString("0"),
+                -7 => (m / 10000000).ToString("0"),
+                -6 => (m / 1000000).ToString("0"),
+                _ => "0"
+            };
+        }
+        else
+        {
+            StringBuilder result = new StringBuilder();
+            string digit = m.ToString("0");
+            string clean = ((e + 8) % 3) switch
+            {
+                0 => $"{digit[0]}.{digit[1]}{digit[2]}",
+                1 => $"{digit[0]}{digit[1]}.{digit[2]}",
+                2 => $"{digit[0]}{digit[1]}{digit[2]}.",
+                _ => string.Empty,
+            };
+            result.Append(clean.TrimEnd('0').TrimEnd('.'));
+
+            // normalize Exponent
+            e = (e + 5) / 3;
+
+            int letterCount = 0;
+            long cutline = 0;
+            long multiply = 1;
+            long prev, index;
+
+            do
+            {
+                multiply *= 26;
+                prev = cutline;
+                cutline += multiply;
+                letterCount++;
+            }
+            while (e >= cutline);
+
+            for (int i = 0; i < letterCount; i++)
+            {
+                multiply /= 26;
+                index = (e - prev) / multiply;
+                result.Append((char)(index % 26 + 65));
+                e -= index * multiply;
+                prev -= multiply;
+            }
+
+            return result.ToString();
+        }
+
+    }
+
+    public static string ToWideFormat(this BigNum x)
+    {
+        if (x.IsNegative() || x.IsZero() || x.E < -8) return "0"; // 1보다 작다면 0으로 표시
+
+        long m = x.M;
+        long e = x.E;
+
+        if (e < -2)
+        {
+            return e switch
+            {
+                -8 => (m / 100000000).ToString("0"),
+                -7 => (m / 10000000).ToString("0"),
+                -6 => (m / 1000000).ToString("0"),
+                -5 => (m / 100000).ToString("0"),
+                -4 => (m / 10000).ToString("0"),
+                -3 => (m / 1000).ToString("0"),
+                _ => "0"
+            };
+        }
+        else
+        {
+            StringBuilder result = new();
+            string digit = m.ToString("0");
+            string clean = ((e + 8) % 3) switch
+            {
+                0 => $"{digit[0]}.{digit[1]}{digit[2]}",
+                1 => $"{digit[0]}{digit[1]}.{digit[2]}",
+                2 => $"{digit[0]}{digit[1]}{digit[2]}.",
+                _ => string.Empty,
+            };
+            result.Append(clean.TrimEnd('0').TrimEnd('.'));
+
+            // normalize Exponent
+            e = (e + 5) / 3;
+
+            int letterCount = 0;
+            long cutline = 0;
+            long multiply = 1;
+            long prev, index;
+
+            do
+            {
+                multiply *= 26;
+                prev = cutline;
+                cutline += multiply;
+                letterCount++;
+            }
+            while (e >= cutline);
+
+            for (int i = 0; i < letterCount; i++)
+            {
+                multiply /= 26;
+                index = (e - prev) / multiply;
+                result.Append((char)(index % 26 + 65));
+                e -= index * multiply;
+                prev -= multiply;
+            }
+
+            return result.ToString();
+        }
+
+    }
 }
 
-
-//[Type(typeof(BigNum), new string[] { "BigNum", "bignum", "BN" })]
-//public class BigNumType : IType
-//{
-//    public object DefaultValue => new BigNum(0);
-//    /// <summary>
-//    /// value는 스프레드 시트에 적혀있는 값
-//    /// </summary> 
-//    public object Read(string value)
-//    {
-//        return BigNum.Parse(value);
-//    }
-
-//    /// <summary>
-//    /// value write to google sheet
-//    /// </summary> 
-//    public string Write(object value)
-//    {
-//        BigNum num = (BigNum)value;
-//        return $"[{num}]";
-//    }
-//}
+namespace GoogleSheet.Type
+{
+    [Type(typeof(string), new string[] { "BigNum", "bignum", "BN" })]
+    public class StringType : IType
+    {
+        public object DefaultValue => new BigNum(0);
+   
+        public object Read(string value)
+        {
+            return BigNum.Parse(value);
+        }
+        public string Write(object value)
+        {
+            BigNum num = (BigNum)value;
+            return $"[{num}]";
+        }
+    }
+}
 
 
 

@@ -53,15 +53,10 @@ public class CharacterState
 public abstract class CharacterBase : MonoBehaviour
 {
     [SerializeField] public CharacterBase Target;
-    [SerializeField] protected RectTransform HP_HUD;
-    [SerializeField] protected RectTransform HP_HUD_After;
-    //[SerializeField] protected RoundedFillUI HP_HUD_Fill;
-    //[SerializeField] protected RoundedFillUI HP_HUD_Fill_After;
     [SerializeField] protected Collider AttackCollider;
     public Transform CenterPoint;
 
     public CharacterState State = new CharacterState();
-    private bool _showHPWhenStart;
     protected bool isEnemy;
 
     protected void Awake()
@@ -97,14 +92,13 @@ public abstract class CharacterBase : MonoBehaviour
         else
             State.Invincible = true;
     }
-    //public virtual void TakeHit(AttackInfo HitInfo)
-    //{
+	public virtual void TakeHit(AttackInfo HitInfo)
+	{
 
-    //}
-    public virtual void Die()
+	}
+	public virtual void Die()
     {
-        HP_HUD.gameObject.SetActive(false);
-        HP_HUD_After.gameObject.SetActive(false);
+        
     }
     //protected virtual void KnockBack(float knockBackForce, EAttackerType attackerType, int heroIndex) { }
 
@@ -139,44 +133,9 @@ public abstract class CharacterBase : MonoBehaviour
 
 
     // 체력 초기화
-    protected void InitHP(float maxHp, bool showHPWhenStart)
-    {
-        //HP_HUD.transform.localScale = new Vector3(1, 1, 1);
-        HP_HUD.gameObject.SetActive(showHPWhenStart);
-        HP_HUD_After.gameObject.SetActive(showHPWhenStart);
-        _showHPWhenStart = showHPWhenStart;
-
+    protected virtual void InitHP(float maxHp, bool showHPWhenStart)
+    { 
         State.MaxHp = maxHp;
         State.CurrentHp = maxHp;
-        UpdateHp();
-    }
-
-    // 체력바 갱신
-    protected void UpdateHp()
-    {
-        //if (State.CurrentHp >= State.MaxHp)
-        //{
-        //    HP_HUD_Fill.SetProgress(1f);
-        //    HP_HUD_Fill_After.SetProgress(1f);
-        //    HP_HUD_Fill_After.StopAfterSlide();
-        //}
-        //else if (State.CurrentHp <= 0 || State.CurrentHp * 1000000000 < State.MaxHp)
-        //{
-        //    HP_HUD_Fill.SetProgress(0f);
-        //    HP_HUD_Fill_After.SetProgress_After(0f);
-        //}
-        //else
-        //{
-        //    if (!_showHPWhenStart) //시작시 노출 안됐다면 노출시킴
-        //    {
-        //        HP_HUD.gameObject.SetActive(true);
-        //        HP_HUD_After.gameObject.SetActive(true);
-        //        _showHPWhenStart = true;
-        //    }
-         
-        //    float ratio = (float)(double)(State.CurrentHp / State.MaxHp);
-        //    HP_HUD_Fill.SetProgress(ratio);
-        //    HP_HUD_Fill_After.SetProgress_After(ratio);
-        //}
     }
 }
