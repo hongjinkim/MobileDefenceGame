@@ -12,7 +12,7 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     [SerializeField] private VoidEventChannelSO levelUp;
 
     private PlayerData playerData => DataManager.GetPlayerData();
-    
+
     private void OnEnable()
     {
         

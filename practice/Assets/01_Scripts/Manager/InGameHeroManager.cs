@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroManager : MonoBehaviour
+public class InGameHeroManager : MonoBehaviour
 {
     [SerializeField] private Transform CenterPosition;
     public List<HeroControl> HeroList;
