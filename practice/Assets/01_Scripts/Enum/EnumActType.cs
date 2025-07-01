@@ -4,7 +4,10 @@ using UnityEngine;
 
 public enum EActType
 {
-	Idle,
-	Move,
-	Attack
+	Init,       //0
+	Idle,       //1
+	Attack,     //2
+    Skill,      //3
+    Die,        //4
+    Move        //5
 }

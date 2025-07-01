@@ -38,9 +38,10 @@ public class CharacterState
     public float DieTime = 1f;           // 사망 이펙트 대기 시간
     //public float RebirthTime = 3f;
 
-    // 스킬 사용 후 대기시간
-    //public float skillWaitTimer = 0f;
-    //public float skillWaitTime = 0.1f;
+    //스킬 사용 후 대기시간
+    public bool IsHaveSkill = false;
+    public float SkillTermTimer = 0f;
+    public float SkillTermTime = 3f;
 
     public float Range = 4f;
     public float Speed = 10f;
@@ -55,6 +56,7 @@ public abstract class CharacterBase : MonoBehaviour
     [SerializeField] public CharacterBase Target;
     [SerializeField] protected Collider AttackCollider;
     public Transform CenterPoint;
+    public Rigidbody Rigid;
 
     public CharacterState State = new CharacterState();
     protected bool isEnemy;
@@ -102,9 +104,9 @@ public abstract class CharacterBase : MonoBehaviour
     }
     //protected virtual void KnockBack(float knockBackForce, EAttackerType attackerType, int heroIndex) { }
 
-    //protected abstract void HandleEvent(string eventName);
+    protected abstract void HandleEvent(string eventName);
 
-    //protected abstract void Finish(EActType ActType);
+    protected abstract void Finish(EActType ActType);
 
     // 타겟 방향 바라보기
 
@@ -133,9 +135,33 @@ public abstract class CharacterBase : MonoBehaviour
 
 
     // 체력 초기화
-    protected virtual void InitHP(float maxHp, bool showHPWhenStart)
+    protected virtual void InitHP(float maxHp)
     { 
         State.MaxHp = maxHp;
         State.CurrentHp = maxHp;
+    }
+
+    // 체력바 갱신
+    protected void UpdateHp()
+    {
+        if (isEnemy)
+            return;
+        //if (State.CurrentHp >= State.MaxHp)
+        //{
+        //    HP_HUD_Fill.SetProgress(1f);
+        //    HP_HUD_Fill_After.SetProgress(1f);
+        //    HP_HUD_Fill_After.StopAfterSlide();
+        //}
+        //else if (State.CurrentHp <= 0 || State.CurrentHp * 1000000000 < State.MaxHp)
+        //{
+        //    HP_HUD_Fill.SetProgress(0f);
+        //    HP_HUD_Fill_After.SetProgress_After(0f);
+        //}
+        //else
+        //{
+        //    float ratio = (float)(double)(State.CurrentHp / State.MaxHp);
+        //    HP_HUD_Fill.SetProgress(ratio);
+        //    HP_HUD_Fill_After.SetProgress_After(ratio);
+        //}
     }
 }

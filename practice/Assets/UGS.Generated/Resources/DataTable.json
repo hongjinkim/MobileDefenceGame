@@ -1,0 +1,1 @@
+{"jsonObject":{"시작값":{"게임진행속도 : float":["1"],"기본_공격력 : int":["10"],"기본_체력 : int":["100"],"기본_공속 : float":["1"],"기본_사거리 : float":["10"]},"영웅":{"영웅_이름 : string":["HERO_0","HERO_1","HERO_2","HERO_3","HERO_4"]}},"spreadSheetName":"DataTable","spreadSheetID":"1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc","sheetIDList":["0","1399143667"],"tableTypes":[0,0],"instruction":1,"error":null}

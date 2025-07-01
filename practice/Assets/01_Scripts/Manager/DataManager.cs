@@ -6,6 +6,7 @@ using UnityEngine;
 public class DataManager : BasicSingleton<DataManager>
 {
     private PlayerData _playerData = new();
+	private InitialData _initialData = new();
 
 	private void Awake()
 	{
@@ -17,6 +18,11 @@ public class DataManager : BasicSingleton<DataManager>
 	{
         return Instance._playerData;
     }
+
+	public static InitialData GetInitialData()
+	{
+		return Instance._initialData;
+	}
 
 	//foreach (var value in DefaultTable.Data.DataList)
  //       {
