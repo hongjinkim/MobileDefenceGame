@@ -12,7 +12,7 @@ public class HeroData
     public int Level { get; private set; }
     public BigNum Exp { get; private set; }
     public BigNum MaxExp { get; private set; }
-    
+
     public HeroData(DataTable.영웅 hero)
     {
         LoadData(hero);

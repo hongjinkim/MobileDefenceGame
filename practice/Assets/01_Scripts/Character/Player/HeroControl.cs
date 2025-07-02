@@ -156,8 +156,6 @@ public class HeroControl : CharacterBase
         ChangeState(EActType.Die);
         AttackCollider.gameObject.SetActive(false);
         State.IsLive = false;
-
-        float fadeOutTime = 1f;
     }
 
 

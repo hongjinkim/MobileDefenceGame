@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using UnityEngine;
+using GoogleSheet.Type;
 
 [Serializable]
 public struct BigNum
@@ -560,24 +561,33 @@ public static class PoomNumExtensions
     }
 }
 
-namespace GoogleSheet.Type
+
+[Type(typeof(BigNum), new string[] { "BigNum", "bignum", "BN" })]
+public class BigNumType : IType
 {
-    [Type(typeof(string), new string[] { "BigNum", "bignum", "BN" })]
-    public class StringType : IType
-    {
-        public object DefaultValue => new BigNum(0);
+    public object DefaultValue => new BigNum(0);
    
-        public object Read(string value)
+    public object Read(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+            throw new UGSValueParseException("Parse Faield => " + value + " To " + GetType().Name);
+
+        BigNum @bigNum = new BigNum(0);
+        var b = BigNum.TryParse(value, out @bigNum);
+        if (b == false)
         {
-            return BigNum.Parse(value);
+            throw new UGSValueParseException("Parse Faield => " + value + " To " + this.GetType().Name);
+
         }
-        public string Write(object value)
-        {
-            BigNum num = (BigNum)value;
-            return $"[{num}]";
-        }
+        return @bigNum;
+    }
+    public string Write(object value)
+    {
+        BigNum num = (BigNum)value;
+        return $"[{num}]";
     }
 }
+
 
 
 

@@ -969,6 +969,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3067104243492467188, guid: 4cc35e81f9569e941986b150aee427b5, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: da034cb22be73be4dbc600ae754b65ea, type: 2}
     - target: {fileID: 4817980311572153942, guid: 4cc35e81f9569e941986b150aee427b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1059,6 +1063,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   AttackCollider: {fileID: 558621346}
   CenterPoint: {fileID: 558621344}
+  Rigid: {fileID: 0}
   State:
     MaxHp:
       M: 0
@@ -1080,6 +1085,9 @@ MonoBehaviour:
     IsInitialized: 0
     DieTimer: 0
     DieTime: 1
+    IsHaveSkill: 0
+    SkillTermTimer: 0
+    SkillTermTime: 3
     Range: 4
     Speed: 10
     InSight: 8
@@ -3102,6 +3110,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   AttackCollider: {fileID: 1741225409}
   CenterPoint: {fileID: 1741225407}
+  Rigid: {fileID: 0}
   State:
     MaxHp:
       M: 0
@@ -3123,12 +3132,20 @@ MonoBehaviour:
     IsInitialized: 0
     DieTimer: 0
     DieTime: 1
+    IsHaveSkill: 0
+    SkillTermTimer: 0
+    SkillTermTime: 3
     Range: 4
     Speed: 10
     InSight: 8
     Scale: {x: 0, y: 0, z: 0}
     NoneAttack: 0
     NoneMove: 0
+  DieSound: {fileID: 0}
+  HitSound: {fileID: 0}
+  AppearSound: {fileID: 0}
+  BodyCollider: {fileID: 0}
+  HeroIndex: 0
 --- !u!114 &1741225411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3680,7 +3697,7 @@ GameObject:
   - component: {fileID: 1953706902}
   - component: {fileID: 1953706903}
   m_Layer: 0
-  m_Name: HeroManager
+  m_Name: InGameHeroManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4157,6 +4174,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1543300167411698818, guid: 10964a65dd580ae43ba4c64cac3975f7, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: fdfdf7bce007a5d488b7ed69682f0b13, type: 3}
     - target: {fileID: 1543300167411698819, guid: 10964a65dd580ae43ba4c64cac3975f7, type: 3}
       propertyPath: m_Alpha
       value: 0

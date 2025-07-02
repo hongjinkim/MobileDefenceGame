@@ -18,10 +18,9 @@ public class DataManager : BasicSingleton<DataManager>
 
     private void LoadAllHeroData()
     {
-        // 이 메소드는 Awake에서 호출되어 영웅 데이터를 초기화합니다.
         foreach (var hero in DataTable.영웅.영웅List)
         {
-            heroDict[hero.영웅_id] = new HeroData(hero);
+            heroDict[hero.영웅_ID] = new HeroData(hero);
         }
     }
 

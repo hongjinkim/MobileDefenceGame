@@ -75,4 +75,15 @@ public class EnemyControl : CharacterBase
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    protected override void HandleEvent(string eventName)
+    {
+
+    }
+
+    // ¸ð¼Ç ³¡
+    protected override void Finish(EActType ActType)
+    {
+
+    }
 }

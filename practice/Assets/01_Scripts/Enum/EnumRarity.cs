@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using GoogleSheet.Core.Type;
+using System;
 
+[UGS(typeof(ERarity))]
 public enum ERarity
 {
     Common,
