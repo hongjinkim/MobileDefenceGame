@@ -18,7 +18,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 
 	private List<EnemyControl> MonsterList = new List<EnemyControl>();
 	private PlayerData Player => DataManager.GetPlayerData();
-	private ChapterData Stage => StageManager.GetStageData();
+	private ChapterData Chapter => StageManager.GetStageData();
 	//private WaveData[] waves;
 	//private int _currentWaveIndex = 0;
 
@@ -157,7 +157,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 		return MonsterList.Count;
 	}
 
-	// Wave 정보에 맞게 적을 스폰
+	//Wave 정보에 맞게 적을 스폰
 	//private IEnumerator SpawnAllWaves()
 	//{
 	//	// 모든 웨이브를 순서대로 진행
@@ -205,43 +205,66 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 	//	yield return new WaitForSeconds(wave.waveDelay);
 	//}
 
-	//private Vector3 GetSpawnPosition(ESpawnPattern pattern, float radius, int spawnIndex, int totalSpawns)
-	//{
-	//	Vector3 position = PositionInfo.Instance.MapCenter.position; // 기본 위치는 맵 중심
+	
 
-	//	switch (pattern)
-	//	{
-	//		case ESpawnPattern.Circle:
-	//			float angle = spawnIndex * (360f / totalSpawns);
-	//			position += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0) * radius;
-	//			break;
+	public void SpawnEnemy(ESpawnPattern spawnPattern, float patternRadius, int enemyCount)
+	{
+        var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
+        var enemyComp = newEnemy.GetComponent<EnemyControl>();
+        var enemyType = enemyComp.Info.EnemyType;
 
-	//		case ESpawnPattern.RandomAroundTarget:
-	//			Vector2 randomCircle = Random.insideUnitCircle.normalized * radius;
-	//			position += new Vector3(randomCircle.x, randomCircle.y, 0);
-	//			break;
+        for (int i = 0; i < enemyCount; i++)
+		{
+			// 몬스터 위치 및 인덱스 설정
+			if (enemyType == EEnemyType.StageMonster)
+			{
+				enemyComp.transform.position = GetSpawnPosition(spawnPattern, patternRadius, i, enemyCount);
+			}
+			else if (enemyType == EEnemyType.Boss)
+			{
+				enemyComp.transform.position = PositionInfo.Instance.BossPos.position;
+			}
+		}
 
-	//		case ESpawnPattern.Line:
-	//			// 예: 화면 상단에서 좌우로 생성
-	//			// 실제 사용 시에는 카메라 뷰포트 등을 이용해 화면 밖 좌표를 계산하는 것이 좋음
-	//			float screenEdgeX = Camera.main.orthographicSize * Camera.main.aspect + 2f;
-	//			float screenEdgeY = Camera.main.orthographicSize + 2f;
-	//			position = new Vector3(Mathf.Lerp(-screenEdgeX, screenEdgeX, (float)spawnIndex / totalSpawns), screenEdgeY, 0);
-	//			break;
+        enemyComp.Init();
+        MonsterList.Add(enemyComp);
+    }
 
-	//		case ESpawnPattern.CardinalDirections:
-	//			// 4방향을 순환하며 생성
-	//			switch (spawnIndex % 4)
-	//			{
-	//				case 0: position += new Vector3(0, radius, 0); break; // North
-	//				case 1: position += new Vector3(radius, 0, 0); break; // East
-	//				case 2: position += new Vector3(0, -radius, 0); break; // South
-	//				case 3: position += new Vector3(-radius, 0, 0); break; // West
-	//			}
-	//			break;
-	//	}
+    private Vector3 GetSpawnPosition(ESpawnPattern pattern, float radius, int spawnIndex, int totalSpawns)
+    {
+        Vector3 pos = PositionInfo.Instance.MapCenter.position; // 기본 위치는 맵 중심
 
-	//	return position;
-	//}
+        switch (pattern)
+        {
+            case ESpawnPattern.Circle:
+                float angle = spawnIndex * (360f / totalSpawns);
+                pos += new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), 0, Mathf.Sin(angle * Mathf.Deg2Rad)) * radius;
+                break;
+
+            case ESpawnPattern.Random:
+                Vector2 randomCircle = Random.insideUnitCircle.normalized * radius; 
+                pos += new Vector3(randomCircle.x, 0, randomCircle.y);
+                break;
+
+            case ESpawnPattern.Line:
+                float startX = pos.x - radius;
+                float endX = pos.x + radius;
+                float z = pos.z + radius;
+                float t = totalSpawns > 1 ? (float)spawnIndex / (totalSpawns - 1) : 0.5f;
+                pos = new Vector3(Mathf.Lerp(startX, endX, t), pos.y, z);
+                break;
+
+            // 필요시 다른 패턴 추가
+            default:
+                break;
+        }
+        return pos;
+    }
+
+    // 적 처치(사망처리, 보상)
+    public void EnemyDeath(EnemyControl m)
+    {
+        MonsterList.Remove(m);
+    }
 }
 
