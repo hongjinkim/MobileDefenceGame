@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using static UnityEditor.VersionControl.Asset;
@@ -27,7 +29,6 @@ public class EnemyControl : CharacterBase
 
 
     public EnemyInfo Info = new EnemyInfo();
-    public Vector3 StayTarget = Vector3.zero;
 
     private State<EnemyControl>[] States;
     private State<EnemyControl> CurrentState;
@@ -35,6 +36,25 @@ public class EnemyControl : CharacterBase
 
     private PlayerData Player => DataManager.GetPlayerData();
     private InitialData Inital => DataManager.GetInitialData();
+
+    [Header("애니메이션 설정")]
+    public Face faces;
+    public GameObject SmileBody;
+    public Animator animator;
+    public NavMeshAgent agent;
+    private Material faceMaterial;
+    private Vector3 originPos;
+
+    void Start()
+    {
+        originPos = transform.position;
+        faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
+    }
+
+    public void SetFace(Texture tex)
+    {
+        faceMaterial.SetTexture("_MainTex", tex);
+    }
 
     private void OnEnable()
     {
@@ -68,7 +88,7 @@ public class EnemyControl : CharacterBase
 
     public void Init()
     {
-
+        ChangeState(EActType.Init);
     }
 
 
@@ -92,11 +112,20 @@ public class EnemyControl : CharacterBase
         base.TakeHit(HitInfo);
 
         HitSound.Play();
+        // 피격 애니메이션이 재생중인 경우 중복 실행 방지
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Damage0")
+                    || animator.GetCurrentAnimatorStateInfo(0).IsName("Damage1")
+                    || animator.GetCurrentAnimatorStateInfo(0).IsName("Damage2")) return;
+
+        StopAgent();
+        animator.SetTrigger("Damage");
+        //animator.SetInteger("DamageType", damType);
+        SetFace(faces.damageFace);
 
         if (HitInfo.HitCount == 1)
         {
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(this.transform.position + new Vector3(0, 1f, 0), HitInfo);
+            FXPoolManager.Instance.PopDamageText(this.transform.position + new Vector3(0, 1f, 0)  , HitInfo);
             FXPoolManager.Instance.Pop(HitInfo.EffectType, new Vector3(this.transform.position.x, this.transform.position.y + 2f, 0));
 
             UpdateHp();
@@ -111,7 +140,12 @@ public class EnemyControl : CharacterBase
             }
         }
     }
-
+    public void StopAgent()
+    {
+        agent.isStopped = true;
+        animator.SetFloat("Speed", 0);
+        agent.updateRotation = false;
+    }
 
     // 타수 적용
     private IEnumerator MultiHit(AttackInfo HitInfo)
@@ -148,21 +182,13 @@ public class EnemyControl : CharacterBase
         // 새로운 상태로 변경하고, 새로 바뀐 상태의 Enter() 메소드 호출
         CurrentState = States[(int)NewState];
         CurrentState.Enter(this);
+        State.CurrActName = NewState.DisplayName(); // 현재 액션 이름 업데이트
     }
 
     public void StopAttackWhenMainHeroDie()
     {
         Target = null;
         ChangeState(EActType.Idle);
-    }
-
-    protected override void HandleEvent(string eventName)
-    {
-    }
-
-    protected override void Finish(EActType ActType)
-    {
-
     }
 
     private void LateUpdate()
@@ -213,7 +239,7 @@ public class EnemyControl : CharacterBase
     {
         EnemyPoolManager.Instance.Push(gameObject, EPoolType.Enemy);
     }
- private void RangeAttack()
+    private void RangeAttack()
     {
         if (Target != null)
         {
@@ -221,4 +247,44 @@ public class EnemyControl : CharacterBase
             //MonsterRangeAttack.GetComponent<MonsterRangeAttackObject>().Init(this, Target);
         }
     }
+
+    // Animation Event
+    public void AlertObservers(string message)
+    {
+        if (message.Equals("AnimationAttackStarted"))
+        {
+            if (Target != null)
+            {
+                AttackCollider.transform.localPosition = (Target.CenterPoint.position - CenterPoint.position).normalized * 0.8f + CenterPoint.localPosition;
+            }
+            AttackCollider.gameObject.SetActive(true);
+        }
+
+        if (message.Equals("AnimationDamageEnded"))
+        {
+            float distanceOrg = Vector3.Distance(transform.position, originPos);
+            if (distanceOrg > 1f)
+            {
+                ChangeState(EActType.Move);
+            }
+            else ChangeState(EActType.Idle);
+
+            //Debug.Log("DamageAnimationEnded");
+        }
+
+        if (message.Equals("AnimationAttackEnded"))
+        {
+            AttackCollider.gameObject.SetActive(false);
+            ChangeState(EActType.Idle);
+        }
+    }
+    void OnAnimatorMove()
+    {
+        // apply root motion to AI
+        Vector3 position = animator.rootPosition;
+        position.y = agent.nextPosition.y;
+        transform.position = position;
+        agent.nextPosition = transform.position;
+    }
+
 }

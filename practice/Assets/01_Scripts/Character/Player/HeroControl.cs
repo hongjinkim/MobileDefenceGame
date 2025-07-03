@@ -87,39 +87,6 @@ public class HeroControl : CharacterBase
         CurrentState.Enter(this);
     }
 
-    protected override void HandleEvent(string eventName)
-    {
-        //switch (eventName)
-        //{
-        //    case "HIT":
-        //        AttackCollider.gameObject.SetActive(true);
-        //        break;
-        //    case "ANGEL":
-        //        RangedAttack();
-        //        break;
-        //    case "SKILL":
-        //        if (SkillManager.Instance.AutoMode == true)
-        //            SkillManager.Instance.AutoOrder();
-        //        break;
-        //    case "END":
-        //        AttackCollider.gameObject.SetActive(false);
-        //        break;
-        //    default:
-        //        break;
-        //}
-    }
-
-    // ¸ð¼Ç ³¡
-    protected override void Finish(EActType ActType)
-    {
-        //switch (ActType)
-        //{
-        //    case EActType.Attack: ChangeState(EActType.Idle); break;
-        //    case EActType.Attack_Range: ChangeState(EActType.Idle); break;
-        //    default: break; 
-        //}
-    }
-
     protected new void Update()
     {
         base.Update();

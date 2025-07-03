@@ -12,12 +12,21 @@ public class EnemyMove : State<EnemyControl>
 
     public override void Execute(EnemyControl entity)
     {
+        if (entity.animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) return;
+
         // 타겟 없으면 idle전환
         if (entity.Target == null) { entity.ChangeState(EActType.Idle); }
 
         // 타켓이 있는 경우
         else
         {
+            entity.SetFace(entity.faces.WalkFace); // 걷는 표정으로 변경
+
+            entity.agent.isStopped = false;
+            entity.agent.updateRotation = true;
+
+            entity.animator.SetFloat("Speed", entity.agent.velocity.magnitude);
+
             float Distance = Vector3.Distance(entity.CenterPoint.position, entity.Target.CenterPoint.position);
 
             //사거리 안에 있는 경우

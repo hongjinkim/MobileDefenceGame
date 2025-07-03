@@ -10,9 +10,14 @@ public class EnemyIdle : State<EnemyControl>
 
     public override void Execute(EnemyControl entity)
     {
+        if (entity.animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
+           
         if (entity.State.Invincible == true) return;
 
         if (entity.State.NoneMove == true) return;
+
+        entity.StopAgent();
+        entity.SetFace(entity.faces.Idleface);
 
         //타켓이 없는 경우 타겟 서치
         if (entity.Target == null) { entity.Target = entity.NearPlayer(); }
@@ -20,12 +25,12 @@ public class EnemyIdle : State<EnemyControl>
         //타겟이 있는 경우
         else
         {
-            if ((entity.Target as HeroControl).HeroIndex == 0) entity.Target = entity.NearPlayer();
             float Distance = Vector3.Distance(entity.CenterPoint.position, entity.Target.CenterPoint.position);
 
             //사거리 안에 있는 경우
             if (Distance < entity.State.Range)
             {
+                Debug.Log($"target is in range");
                 if(entity.State.IsHaveSkill && entity.State.SkillTermTimer >= entity.State.SkillTermTime)
                 {
                     //스킬 사용

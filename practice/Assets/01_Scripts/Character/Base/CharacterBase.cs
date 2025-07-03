@@ -45,10 +45,11 @@ public class CharacterState
 
     public float Range = 4f;
     public float Speed = 10f;
-    public float InSight = 8;
     public Vector3 Scale;
     public bool NoneAttack;     // 공격 유무
     public bool NoneMove;       // Idle상태 유지
+
+    public string CurrActName; // 현재 액션 이름
 }
 
 public abstract class CharacterBase : MonoBehaviour
@@ -103,10 +104,6 @@ public abstract class CharacterBase : MonoBehaviour
         
     }
     //protected virtual void KnockBack(float knockBackForce, EAttackerType attackerType, int heroIndex) { }
-
-    protected abstract void HandleEvent(string eventName);
-
-    protected abstract void Finish(EActType ActType);
 
     // 타겟 방향 바라보기
 
