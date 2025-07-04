@@ -30,7 +30,6 @@ public class EnemyIdle : State<EnemyControl>
             //사거리 안에 있는 경우
             if (Distance < entity.State.Range)
             {
-                Debug.Log($"target is in range");
                 if(entity.State.IsHaveSkill && entity.State.SkillTermTimer >= entity.State.SkillTermTime)
                 {
                     //스킬 사용

@@ -776,7 +776,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4578963772045854785, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
   m_PrefabInstance: {fileID: 473307260}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 692135131}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1663903d0acb8a4780eb5b28e2ecee1, type: 3}
@@ -969,13 +969,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 145823938513419657, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
+      propertyPath: m_Constraints
+      value: 94
+      objectReference: {fileID: 0}
     - target: {fileID: 4817980311572153942, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4817980311572153942, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4817980311572153942, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1016,7 +1020,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6206542200335207978, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 692135133}
   m_SourcePrefab: {fileID: 100100000, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
 --- !u!1001 &477607538
 PrefabInstance:
@@ -1465,6 +1472,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Pools: []
+--- !u!1 &692135131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6206542200335207978, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
+  m_PrefabInstance: {fileID: 473307260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &692135133
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692135131}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0308cf4e83cf517488b60af58b290fe0, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2be64f57d7d213648aa9b2e5e8e0a39b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &702047487
 GameObject:
   m_ObjectHideFlags: 0
@@ -4167,8 +4200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82e34072dfd5004aa1d3af9300b12e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinPos: {fileID: 0}
-  MaxPos: {fileID: 0}
+  MinPos: {fileID: 989271475}
+  MaxPos: {fileID: 328160196}
   MapCenter: {fileID: 2007158930}
   BossPos: {fileID: 993921447}
   HeroPos:
@@ -4454,7 +4487,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 65
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0

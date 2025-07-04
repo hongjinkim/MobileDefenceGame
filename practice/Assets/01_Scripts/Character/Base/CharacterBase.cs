@@ -57,7 +57,6 @@ public abstract class CharacterBase : MonoBehaviour
     [SerializeField] public CharacterBase Target;
     [SerializeField] protected Collider AttackCollider;
     public Transform CenterPoint;
-    public Rigidbody Rigid;
 
     public CharacterState State = new CharacterState();
     protected bool isEnemy;

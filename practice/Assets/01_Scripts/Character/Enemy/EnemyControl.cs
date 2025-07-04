@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 using static UnityEditor.VersionControl.Asset;
 
 public class EnemyInfo
-{
+{ 
     public EEnemyType EnemyType;
     public BigNum AttackPower = 0;
     public BigNum MaxHp = 1;
@@ -255,7 +255,7 @@ public class EnemyControl : CharacterBase
         {
             if (Target != null)
             {
-                AttackCollider.transform.localPosition = (Target.CenterPoint.position - CenterPoint.position).normalized * 0.8f + CenterPoint.localPosition;
+                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward/2;
             }
             AttackCollider.gameObject.SetActive(true);
         }

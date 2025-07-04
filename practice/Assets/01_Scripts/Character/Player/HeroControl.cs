@@ -62,7 +62,6 @@ public class HeroControl : CharacterBase
         State.HitTermTimer = 0;
         State.InvincibleTime = 2;
         State.InvincibleTimer = 0;     // 스폰 무적시간 타이머
-        Rigid.velocity = Vector3.zero; // 완전히 멈추도록 설정
         State.IsLive = true;
         Target = null;
 

@@ -7,7 +7,7 @@ public class EnemyMove : State<EnemyControl>
 {
     public override void Enter(EnemyControl entity)
     {
-        entity.Rigid.velocity = Vector3.zero;
+
     }
 
     public override void Execute(EnemyControl entity)
@@ -25,7 +25,7 @@ public class EnemyMove : State<EnemyControl>
             entity.agent.isStopped = false;
             entity.agent.updateRotation = true;
 
-            entity.animator.SetFloat("Speed", entity.agent.velocity.magnitude);
+            entity.animator.SetFloat("Speed", entity.State.Speed);
 
             float Distance = Vector3.Distance(entity.CenterPoint.position, entity.Target.CenterPoint.position);
 
