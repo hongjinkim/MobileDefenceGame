@@ -5,7 +5,7 @@ public class HeroInit : State<HeroControl>
 {
     public override void Enter(HeroControl entity)
     {
-        
+        entity.State.InitTimer = 0;
     }
     public override void Execute(HeroControl entity)
     {

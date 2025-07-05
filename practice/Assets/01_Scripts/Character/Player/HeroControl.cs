@@ -1,8 +1,10 @@
-using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class HeroControl : CharacterBase
 {
@@ -14,12 +16,15 @@ public class HeroControl : CharacterBase
     private State<HeroControl>[] States;
     private State<HeroControl> CurrentState;
 
-    private bool isDashing;
-
     public int HeroIndex;
 
     private PlayerData Player => DataManager.GetPlayerData();
     private InitialData Initial => DataManager.GetInitialData();
+
+    [Header("애니메이션 설정")]
+    public Animator animator;
+    private Vector3 originPos;
+    [HideInInspector]public int AttackType = 0; // 공격 타입
 
 
     private void OnEnable()
@@ -76,14 +81,19 @@ public class HeroControl : CharacterBase
     public void ChangeState(EActType NewState)
     {
         // 바꾸려는 상태가 비어있는 경우
-        if (States[(int)NewState] == null) return;
+        if (States[(int)NewState] == null)
+            return;
 
         // 현재 재생중인 상태가 존재하면 기존 상태 종료
-        if (CurrentState != null) { CurrentState.Exit(this); }
+        if (CurrentState != null)
+        {
+            CurrentState.Exit(this);
+        }
 
         // 새로운 상태로 변경하고, 새로 바뀐 상태의 Enter() 메소드 호출
         CurrentState = States[(int)NewState];
         CurrentState.Enter(this);
+        State.CurrActName = NewState.DisplayName(); // 현재 액션 이름 업데이트
     }
 
     protected new void Update()
@@ -157,5 +167,36 @@ public class HeroControl : CharacterBase
     private void SettingRange()
     {
         State.Range = Initial.AttackRange;
-    } 
+    }
+
+    // Animation Event
+    public void AlertObservers(string message)
+    {
+        if (message.Equals("AnimationAttackStarted"))
+        {
+            if (Target != null)
+            {
+                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward / 2;
+            }
+            AttackCollider.gameObject.SetActive(true);
+        }
+
+        if (message.Equals("AnimationDamageEnded"))
+        {
+            float distanceOrg = Vector3.Distance(transform.position, originPos);
+            if (distanceOrg > 1f)
+            {
+                ChangeState(EActType.Move);
+            }
+            else ChangeState(EActType.Idle);
+
+            //Debug.Log("DamageAnimationEnded");
+        }
+
+        if (message.Equals("AnimationAttackEnded"))
+        {
+            AttackCollider.gameObject.SetActive(false);
+            ChangeState(EActType.Idle);
+        }
+    }
 }

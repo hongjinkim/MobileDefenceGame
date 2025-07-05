@@ -11,7 +11,7 @@ public class DataManager : BasicSingleton<DataManager>
 
     private void Awake()
     {
-        UnityGoogleSheet.LoadAllData();
+        //UnityGoogleSheet.LoadAllData();
         // 영웅 데이터 로드 및 Dictionary에 삽입
         LoadAllHeroData();
     }

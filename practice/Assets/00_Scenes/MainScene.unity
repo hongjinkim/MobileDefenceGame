@@ -973,6 +973,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 94
       objectReference: {fileID: 0}
+    - target: {fileID: 4578963772045854785, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 692135133}
     - target: {fileID: 4817980311572153942, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1015,6 +1019,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6206542200335207978, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
       propertyPath: m_Name
+      value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206542200335207978, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
+      propertyPath: m_TagString
       value: Hero
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4585,7 +4593,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1392702117}
-  m_PlaneDistance: 60
+  m_PlaneDistance: 40
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

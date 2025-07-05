@@ -13,6 +13,11 @@ public class HeroAttack : State<HeroControl>
 
     public override void Execute(HeroControl entity)
     {
+
+        if (entity.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
+        entity.AttackType = (entity.AttackType + 1) % 3; // 0,1,2 반복
+        entity.animator.SetInteger("AttackType", entity.AttackType); // 공격 타입 설정
+        entity.animator.SetTrigger("Attack");
     }
 
     public override void Exit(HeroControl entity)
