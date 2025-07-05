@@ -111,7 +111,7 @@ public class EnemyControl : CharacterBase
 
         base.TakeHit(HitInfo);
 
-        HitSound.Play();
+        //HitSound.Play();
         // 피격 애니메이션이 재생중인 경우 중복 실행 방지
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Damage0")
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Damage1")
