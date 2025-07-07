@@ -29,8 +29,8 @@ public class StatManager : MonoBehaviour
     public BigNum FinalPower { get; private set; }                           // 전투력
 
 
-    private PlayerData Player => DataManager.GetPlayerData();
-    private InitialData Initial => DataManager.GetInitialData();
+    private PlayerData Player => DataBase.GetPlayerData();
+    private InitialData Initial => DataBase.GetInitialData();
 
     private BigNum tempTargetPower;
     private void Awake()

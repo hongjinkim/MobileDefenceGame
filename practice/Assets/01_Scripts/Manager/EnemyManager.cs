@@ -17,7 +17,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 	
 
 	private List<EnemyControl> MonsterList = new List<EnemyControl>();
-	private PlayerData Player => DataManager.GetPlayerData();
+	private PlayerData Player => DataBase.GetPlayerData();
 	private ChapterData Chapter => StageManager.GetStageData();
 	//private WaveData[] waves;
 	//private int _currentWaveIndex = 0;

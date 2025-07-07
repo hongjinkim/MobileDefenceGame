@@ -1,0 +1,472 @@
+<?xml version="1.0" ?>
+<multilanguage>
+  <default>
+    <language>en</language>
+  </default>
+  <list>
+    <string>
+      <key>KEY_TITLE_BAR</key>
+      <language>
+        <ko>에셋 관리</ko>
+        <en>AssetManagement</en>
+      </language>
+    </string>
+	<string>
+      <key>KEY_TITLE_LIST</key>
+      <language>
+        <ko>리스트</ko>
+        <en>List</en>
+      </language>
+    </string>
+
+    <string>
+      <key>KEY_CHANGE_LANGUAGE_ERROR_MESSAGE</key>
+      <language>
+        <ko>언어를 변경하지 못했습니다.</ko>
+        <en>Failed to change language.</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_DOCUMENT</key>
+      <language>
+        <ko>문서</ko>
+        <en>Document</en>
+      </language>
+    </string>
+	
+	
+	
+	
+	<string>
+      <key>KEY_ASSETMAP</key>
+      <language>
+        <ko>에셋 맵</ko>
+        <en>AssetMap</en>
+      </language>
+    </string>
+	<string>
+      <key>KEY_ISSUECHECK</key>
+      <language>
+        <ko>이슈 체크</ko>
+        <en>Issue Check</en>
+      </language>
+  </string>
+
+  <string>
+    <key>KEY_UNUSEDASSET</key>
+    <language>
+      <ko>불필요한 에셋 제거</ko>
+      <en>Remove UnusedAsset</en>
+    </language>
+  </string>
+
+  <string>
+    <key>KEY_REFERENCE_FIND</key>
+    <language>
+      <ko>레퍼런스 검색</ko>
+      <en>Reference Find</en>
+    </language>
+  </string>
+	
+	<string>
+      <key>KEY_ASSETMANAGEMENT_ENABLE_DESC</key>
+      <language>
+        <ko>에셋 관리를 사용해야 해당 기능을 이용하실 수 있습니다.</ko>
+        <en>Would you like to use asset management?</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_ASSETMANAGEMENT_ENABLE</key>
+      <language>
+        <ko>에셋관리 사용하기</ko>
+        <en>Enable</en>
+      </language>
+    </string>
+	
+	
+	<string>
+      <key>KEY_NO_ISSUE</key>
+      <language>
+        <ko>현재 이슈가 없습니다</ko>
+        <en>Currently no issues</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_HAS_ISSUE</key>
+      <language>
+        <ko>이슈가 있습니다</ko>
+        <en>Currently has issues</en>
+      </language>
+    </string>
+	
+	
+	<string>
+      <key>KEY_ROOT_ASSET</key>
+      <language>
+        <ko>루트 에셋</ko>
+        <en>Root Asset</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_SELECT_ROOT</key>
+      <language>
+        <ko>루트 선택</ko>
+        <en>Select Root</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_NEED_ROOT_OBJECT</key>
+      <language>
+        <ko>루트 에셋이 선택되어야 동작합니다.</ko>
+        <en>Works only when the root asset is selected</en>
+      </language>
+    </string>
+	
+	
+	<string>
+      <key>KEY_REFERENCE</key>
+      <language>
+        <ko>레퍼런스 - 루트 에셋이 포함된 에셋</ko>
+        <en>Reference - Asset with root asset</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_DEPENDENCY</key>
+      <language>
+        <ko>디팬던시 - 루트 에셋이 포함한 에셋</ko>
+        <en>Dependency - Assets the root asset contains</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_ISSUEWINDOW_TITLE</key>
+      <language>
+        <ko>에셋 이슈 리포터</ko>
+        <en>AssetIssue Repoter</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_FIND_TITLE_BAR</key>
+      <language>
+        <ko>에셋 찾기</ko>
+        <en>AssetFind</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_FIND_TARGET</key>
+      <language>
+        <ko>찾을 타겟</ko>
+        <en>Find Target</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_FIND_CONTAIN_SUBOBJECT</key>
+      <language>
+        <ko>서브오브젝트 포함</ko>
+        <en>Contain SubObject</en>
+      </language>
+    </string>
+
+	<string>
+      <key>KEY_FIND</key>
+      <language>
+        <ko>검색</ko>
+        <en>Find</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_HIERARCHY_VIEW</key>
+      <language>
+        <ko>하이라키 뷰</ko>
+        <en>Hierarchy View</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_PROJECT_VIEW</key>
+      <language>
+        <ko>프로젝트 뷰</ko>
+        <en>Project View</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_REPLACE</key>
+      <language>
+        <ko>바꾸기</ko>
+        <en>Replace</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_ENABLE_REPLACE</key>
+      <language>
+        <ko>바꾸기 사용</ko>
+        <en>Enable Replace</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_SCENE</key>
+      <language>
+        <ko>씬</ko>
+        <en>Scene</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_PREFAB</key>
+      <language>
+        <ko>프리팹</ko>
+        <en>Prefab</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_ASSET</key>
+      <language>
+        <ko>에셋</ko>
+        <en>Asset</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_NOT_FOUND_REFERENCE</key>
+      <language>
+        <ko> 레퍼런스가 없습니다.</ko>
+        <en> Not found Reference</en>
+      </language>
+    </string>
+	
+	
+	<string>
+      <key>KEY_COMPONENT_MISSING</key>
+      <language>
+        <ko>컴포넌트 Missing</ko>
+        <en>Component Missing</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_OPENSCENE</key>
+      <language>
+        <ko>씬 열기</ko>
+        <en>Open Scene</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_CLOSESCENE</key>
+      <language>
+        <ko>씬 닫기</ko>
+        <en>Close Scene</en>
+      </language>
+    </string>
+	
+	<string>
+      <key>KEY_MISSING</key>
+      <language>
+        <ko>Missing</ko>
+        <en>Missing</en>
+      </language>
+    </string>
+
+  <string>
+      <key>KEY_FILTER_OPTION</key>
+      <language>
+        <ko>필터 옵션</ko>
+        <en>FIlter Option</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_FILTER_BUILTIN</key>
+      <language>
+        <ko>Filter Built-in</ko>
+        <en>Filter Built-in</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_FILTER_ASSETBUNDLE</key>
+      <language>
+        <ko>Filter Assetbundles</ko>
+        <en>Filter Assetbundles</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_FILTER_PATHLIST</key>
+      <language>
+        <ko>Filter Path List</ko>
+        <en>Filter Path List</en>
+      </language>
+  </string>
+    
+  <string>
+      <key>KEY_CHECK_ALL</key>
+      <language>
+        <ko>전체 체크</ko>
+        <en>Check All</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_TOTAL_SIZE</key>
+      <language>
+        <ko>전체 크기</ko>
+        <en>Total Size</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_RESTORE_ALL</key>
+      <language>
+        <ko>전체 복구</ko>
+        <en>Restore All</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_REMOVE_ALL</key>
+      <language>
+        <ko>전체 제거</ko>
+        <en>Remove All</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_TAG_FILTER</key>
+      <language>
+        <ko>" (filter)"</ko>
+        <en>" (filter)"</en>
+      </language>
+  </string>
+
+
+  <string>
+      <key>KEY_TAG_REMOVED</key>
+      <language>
+        <ko> (removed)</ko>
+        <en> (removed)</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_CHECK_ASSETS</key>
+      <language>
+        <ko>에셋 체크</ko>
+        <en>Check Asset(s)</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_UNCHECK_ASSETS</key>
+      <language>
+        <ko>에셋 체크 해제</ko>
+        <en>UnCheck Asset(s)</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_FILTER_PATHS</key>
+      <language>
+        <ko>필터</ko>
+        <en>Filter Paths(s)</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_UNFILTER_PATHS</key>
+      <language>
+        <ko>필터 해제</ko>
+        <en>UnFilter Paths(s)</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_REMOVE_ASSETS</key>
+      <language>
+        <ko>에셋 제거</ko>
+        <en>Remove Asset(s)</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_RESTORE_ASSETS</key>
+      <language>
+        <ko>에셋 복구</ko>
+        <en>Restore Asset(s)</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_FILTER</key>
+      <language>
+        <ko>필터</ko>
+        <en>Filter</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_UNFILTER</key>
+      <language>
+        <ko>필터 안함</ko>
+        <en>UnFilter</en>
+      </language>
+  </string>
+
+
+  <string>
+      <key>KEY_REMOVE</key>
+      <language>
+        <ko>제거</ko>
+        <en>Remove</en>
+      </language>
+  </string>
+
+
+  <string>
+      <key>KEY_RESTORE</key>
+      <language>
+        <ko>복구</ko>
+        <en>Restore</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_CHECK_REMOVE</key>
+      <language>
+        <ko>정말 제거하시겠습니까?</ko>
+        <en>Do you really want to remove it?</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_OK</key>
+      <language>
+        <ko>확인</ko>
+        <en>ok</en>
+      </language>
+  </string>
+
+  <string>
+      <key>KEY_CANCEL</key>
+      <language>
+        <ko>취소</ko>
+        <en>Cancel</en>
+      </language>
+  </string>
+    
+  </list>
+</multilanguage>

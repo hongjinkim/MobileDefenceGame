@@ -11,7 +11,7 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     [Header("이벤트")]
     [SerializeField] private VoidEventChannelSO levelUp;
 
-    private PlayerData playerData => DataManager.GetPlayerData();
+    private PlayerData playerData => DataBase.GetPlayerData();
 
     private void OnEnable()
     {

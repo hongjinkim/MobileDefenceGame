@@ -18,8 +18,8 @@ public class HeroControl : CharacterBase
 
     public int HeroIndex;
 
-    private PlayerData Player => DataManager.GetPlayerData();
-    private InitialData Initial => DataManager.GetInitialData();
+    private PlayerData Player => DataBase.GetPlayerData();
+    private InitialData Initial => DataBase.GetInitialData();
 
     [Header("애니메이션 설정")]
     public Animator animator;

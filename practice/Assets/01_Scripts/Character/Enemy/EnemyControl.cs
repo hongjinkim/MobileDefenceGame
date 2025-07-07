@@ -34,8 +34,8 @@ public class EnemyControl : CharacterBase
     private State<EnemyControl> CurrentState;
     private CapsuleCollider MonsterCollider;
 
-    private PlayerData Player => DataManager.GetPlayerData();
-    private InitialData Inital => DataManager.GetInitialData();
+    private PlayerData Player => DataBase.GetPlayerData();
+    private InitialData Inital => DataBase.GetInitialData();
 
     [Header("애니메이션 설정")]
     public Face faces;
