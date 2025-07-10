@@ -47,7 +47,7 @@ public class EnemyMove : State<EnemyControl>
             //사거리밖인경우
             else
             {
-                entity.LookAtTarget(entity.Target.transform.position);       // 바라보는 방향 설정
+                entity.LookAtTarget(entity.Target.CenterPoint.transform.position);       // 바라보는 방향 설정
 
                 // 3D 환경에 맞게 y좌표는 고정, x와 z만 조정
                 Vector3 moveDirect = entity.Target.transform.position - entity.transform.position;

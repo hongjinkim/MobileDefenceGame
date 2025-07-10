@@ -1075,6 +1075,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   AttackCollider: {fileID: 5785268729392647351}
   CenterPoint: {fileID: 8973040327272973435}
+  Anchor: {fileID: 1049917981127159093}
   State:
     MaxHp:
       M: 0
@@ -1112,7 +1113,7 @@ MonoBehaviour:
   DieSound: {fileID: 0}
   HitSound: {fileID: 0}
   AppearSound: {fileID: 0}
-  BodyCollider: {fileID: 3236909165519891910}
+  BodyCollider: {fileID: 0}
   HeroIndex: 0
   animator: {fileID: 8288952950936567541}
   AttackType: 0
@@ -1322,7 +1323,7 @@ Transform:
   m_GameObject: {fileID: 8056804426860119729}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1347,7 +1348,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0.5}

@@ -54,8 +54,6 @@ public abstract class AttackCollision : MonoBehaviour
 
                 Target.TakeHit(AttackInfo);
 
-                Debug.Log($"{Attacker} attacked {Target}");
-
                 break;
             // 적 -> 플레이어
             case TargetType.Hero:
@@ -66,7 +64,7 @@ public abstract class AttackCollision : MonoBehaviour
                 if (singleTargetforEnemy) { return; } //죽는순간 다른 타겟으로 전환되어 다중타격되는것 막음
 
                 AttackInfo.Damage = Enemy.Info.AttackPower;
-                AttackInfo.AttackType = EAttackType.Enemy;
+                AttackInfo.AttackType = EAttackType.Normal;
                 //AttackInfo.EffectType = EFXPoolType.HitEffect_White;
                 AttackInfo.HitCount = 1;
 

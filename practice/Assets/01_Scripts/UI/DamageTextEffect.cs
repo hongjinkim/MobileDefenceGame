@@ -22,9 +22,6 @@ public class DamageTextEffect : MonoBehaviour
     {
         switch (attackInfo.AttackType)
         {
-            case EAttackType.Enemy:
-                DamageText.fontSharedMaterial = enemyMt;
-                break;
             case EAttackType.Normal:
                 DamageText.fontSharedMaterial = normalMt;
                 break;
@@ -42,7 +39,7 @@ public class DamageTextEffect : MonoBehaviour
     // 애니메이션 마지막 부분에서 호출
     // 플로팅 애니메이션 끝나면 풀에서 제거
     // 해당 스크립트의 호출 위치는 프리팹의 중간이므로 부모의 위치를 전달하도록 한다.
-    public void AnimtionEnd()
+    public void AnimationEnd()
     {
         FXPoolManager.Instance.Push(gameObject, EFXPoolType.DamageText);
     }

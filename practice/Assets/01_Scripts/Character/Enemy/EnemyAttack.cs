@@ -6,7 +6,7 @@ public class EnemyAttack : State<EnemyControl>
 {
     public override void Enter(EnemyControl entity)
     {
-        entity.LookAtTarget(entity.Target.transform.position); // 바라보는 방향 설정(공격 시작시에 설정)
+        entity.LookAtTarget(entity.Target.CenterPoint.position); // 바라보는 방향 설정(공격 시작시에 설정)
 
     }
 

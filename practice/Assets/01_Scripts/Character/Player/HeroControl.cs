@@ -1,8 +1,4 @@
-  using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -133,7 +129,7 @@ public class HeroControl : CharacterBase
         // 새로운 상태로 변경하고, 새로 바뀐 상태의 Enter() 메소드 호출
         CurrentState = States[(int)NewState];
         CurrentState.Enter(this);
-        State.CurrActName = NewState.DisplayName(); // 현재 액션 이름 업데이트
+        State.CurrActName = NewState.ToString(); // 현재 액션 이름 업데이트
     }
 
     protected new void Update()
@@ -154,8 +150,8 @@ public class HeroControl : CharacterBase
 
         State.CurrentHp -= HitInfo.Damage;
 
-        FXPoolManager.Instance.PopDamageText(this.transform.position, HitInfo);
-        FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
+        FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position, HitInfo);
+        //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
         UpdateHpBar();
 
