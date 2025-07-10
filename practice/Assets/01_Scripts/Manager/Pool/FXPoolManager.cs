@@ -6,7 +6,7 @@ public class FXPoolManager : PoolManager<FXPoolManager, EFXPoolType>
     {
         var obj = Pop(EFXPoolType.DamageText);
         obj.transform.position = position;
-        obj.GetComponent<DamageFloating>().SetDamage(attackInfo);
+        obj.GetComponent<DamageTextEffect>().SetDamage(attackInfo);
         return obj;
     }
 }

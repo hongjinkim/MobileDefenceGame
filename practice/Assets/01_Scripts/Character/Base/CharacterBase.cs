@@ -131,33 +131,9 @@ public abstract class CharacterBase : MonoBehaviour
 
 
     // 체력 초기화
-    protected virtual void InitHP(float maxHp)
+    protected virtual void InitHP(BigNum maxHp)
     { 
         State.MaxHp = maxHp;
         State.CurrentHp = maxHp;
-    }
-
-    // 체력바 갱신
-    protected void UpdateHp()
-    {
-        if (isEnemy)
-            return;
-        //if (State.CurrentHp >= State.MaxHp)
-        //{
-        //    HP_HUD_Fill.SetProgress(1f);
-        //    HP_HUD_Fill_After.SetProgress(1f);
-        //    HP_HUD_Fill_After.StopAfterSlide();
-        //}
-        //else if (State.CurrentHp <= 0 || State.CurrentHp * 1000000000 < State.MaxHp)
-        //{
-        //    HP_HUD_Fill.SetProgress(0f);
-        //    HP_HUD_Fill_After.SetProgress_After(0f);
-        //}
-        //else
-        //{
-        //    float ratio = (float)(double)(State.CurrentHp / State.MaxHp);
-        //    HP_HUD_Fill.SetProgress(ratio);
-        //    HP_HUD_Fill_After.SetProgress_After(ratio);
-        //}
     }
 }

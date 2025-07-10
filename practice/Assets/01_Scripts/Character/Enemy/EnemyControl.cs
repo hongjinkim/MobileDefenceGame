@@ -14,8 +14,8 @@ using static UnityEditor.VersionControl.Asset;
 public class EnemyInfo
 { 
     public EEnemyType EnemyType;
-    public BigNum AttackPower = 0;
-    public BigNum MaxHp = 1;
+    public BigNum AttackPower = 2;
+    public BigNum MaxHp = 100;
     public BigNum DropGold = 0;
     public int Stage;
 }
@@ -89,6 +89,7 @@ public class EnemyControl : CharacterBase
     public void Init()
     {
         ChangeState(EActType.Init);
+        InitHP(Info.MaxHp);
     }
 
 
@@ -125,10 +126,8 @@ public class EnemyControl : CharacterBase
         if (HitInfo.HitCount == 1)
         {
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(this.transform.position + new Vector3(0, 1f, 0)  , HitInfo);
-            FXPoolManager.Instance.Pop(HitInfo.EffectType, new Vector3(this.transform.position.x, this.transform.position.y + 2f, 0));
-
-            UpdateHp();
+            FXPoolManager.Instance.PopDamageText(this.transform.position  , HitInfo);
+            FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); } // 사망 처리
         }
@@ -155,10 +154,8 @@ public class EnemyControl : CharacterBase
             if (State.IsLive == false) { yield break; } //타격중에 다른타격으로 사망시 중단
 
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(this.transform.position + new Vector3(0, 0.5f + (i * 0.5f), 0), HitInfo);
-            FXPoolManager.Instance.Pop(HitInfo.EffectType, new Vector3(this.transform.position.x, this.transform.position.y + 2f, 0));
-
-            UpdateHp();
+            FXPoolManager.Instance.PopDamageText(this.transform.position, HitInfo);
+            FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); yield break; } // 사망 처리
 
@@ -224,7 +221,7 @@ public class EnemyControl : CharacterBase
         //FXPoolManager.Instance.Pop(EFXPoolType.DestroyEnemy, new Vector3(this.transform.position.x, this.transform.position.y + 1f, 0));
 
 
-        DieSound.Play();
+        //DieSound.Play();
         ChangeState(EActType.Die);
         MonsterCollider.enabled = false;
         State.IsLive = false;

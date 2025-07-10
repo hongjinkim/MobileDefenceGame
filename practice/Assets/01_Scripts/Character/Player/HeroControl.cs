@@ -1,4 +1,4 @@
-using System;
+  using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -8,6 +8,12 @@ using UnityEngine.AI;
 
 public class HeroControl : CharacterBase
 {
+
+    [SerializeField] protected RectTransform HP_HUD;
+    [SerializeField] protected RectTransform HP_HUD_After;
+    [SerializeField] protected RoundedFillUI HP_HUD_Fill;
+    [SerializeField] protected RoundedFillUI HP_HUD_Fill_After;
+
     [SerializeField] private AudioPlayerSingle DieSound;
     [SerializeField] private AudioPlayerSingle HitSound;
     [SerializeField] private AudioPlayerSingle AppearSound;
@@ -71,9 +77,43 @@ public class HeroControl : CharacterBase
         Target = null;
 
         // 초기상태 설정
-        InitHP(100f); // 체력 설정
+        InitHP(100); // 체력 설정
         AttackCollider.gameObject.SetActive(false);
         ChangeState(EActType.Init);
+    }
+
+    protected override void InitHP(BigNum maxHp)
+    {
+        HP_HUD.gameObject.SetActive(true);
+        HP_HUD_After.gameObject.SetActive(true);
+
+        base.InitHP(maxHp);
+
+        UpdateHpBar();
+    }
+
+    // 체력바 갱신
+    private void UpdateHpBar()
+    {
+        if (isEnemy)
+            return;
+        if (State.CurrentHp >= State.MaxHp)
+        {
+            HP_HUD_Fill.SetProgress(1f);
+            HP_HUD_Fill_After.SetProgress(1f);
+            HP_HUD_Fill_After.StopAfterSlide();
+        }
+        else if (State.CurrentHp <= 0 || State.CurrentHp * 1000000000 < State.MaxHp)
+        {
+            HP_HUD_Fill.SetProgress(0f);
+            HP_HUD_Fill_After.SetProgress_After(0f);
+        }
+        else
+        {
+            float ratio = (float)(double)(State.CurrentHp / State.MaxHp);
+            HP_HUD_Fill.SetProgress(ratio);
+            HP_HUD_Fill_After.SetProgress_After(ratio);
+        }
     }
 
 
@@ -114,10 +154,10 @@ public class HeroControl : CharacterBase
 
         State.CurrentHp -= HitInfo.Damage;
 
-        FXPoolManager.Instance.PopDamageText(this.transform.position + new Vector3(0, 2f, 0), HitInfo);
-        FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position + new Vector3(0, 1f, 0));
+        FXPoolManager.Instance.PopDamageText(this.transform.position, HitInfo);
+        FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
 
-        UpdateHp();
+        UpdateHpBar();
 
         // 사망 처리
         if (State.CurrentHp <= 0)

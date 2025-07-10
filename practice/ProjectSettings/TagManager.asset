@@ -15,7 +15,7 @@ TagManager:
   - UI
   - Character
   - Debug
-  - 
+  - Effect
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Character
+    uniqueID: 4240831431
     locked: 0

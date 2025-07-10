@@ -480,7 +480,7 @@ public static class PoomNumExtensions
                 cutline += multiply;
                 letterCount++;
             }
-            while (e >= cutline);
+            while (e >= cutline); 
 
             for (int i = 0; i < letterCount; i++)
             {

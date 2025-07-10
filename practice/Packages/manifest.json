@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.shlifedev.ugs": "https://github.com/shlifedev/uni-google-sheets.git?path=/src",
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",

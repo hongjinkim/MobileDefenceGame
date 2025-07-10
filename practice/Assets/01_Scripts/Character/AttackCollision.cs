@@ -34,6 +34,7 @@ public abstract class AttackCollision : MonoBehaviour
 
                 // 기본 공격
                 //AttackInfo.Damage = StatManager.Instance.FinalAttack_Melee;
+                AttackInfo.Damage = Random.Range(1, 10);    // 스탯 연결 전 임시 공격력
                 AttackInfo.AttackType = EAttackType.Normal;
                 AttackInfo.AttackerType = EAttackerType.Hero;
 
@@ -64,7 +65,7 @@ public abstract class AttackCollision : MonoBehaviour
                 if (Enemy.Target != collision.GetComponent<CharacterBase>()) { return; } //타겟만 때리기
                 if (singleTargetforEnemy) { return; } //죽는순간 다른 타겟으로 전환되어 다중타격되는것 막음
 
-                //AttackInfo.Damage = Enemy.Info.AttackPower;
+                AttackInfo.Damage = Enemy.Info.AttackPower;
                 AttackInfo.AttackType = EAttackType.Enemy;
                 //AttackInfo.EffectType = EFXPoolType.HitEffect_White;
                 AttackInfo.HitCount = 1;
