@@ -3,24 +3,24 @@ using UnityEngine;
 public class GameManager : BasicSingleton<GameManager>
 {
     [Header("¿Ã∫•∆Æ")]
-    [SerializeField] private VoidEventChannelSO dataLoaded;
+    public VoidEventChannelSO DataLoadEvent;
 
     [SerializeField] private AudioPlayerDissolve bgmSound;
     [HideInInspector] public bool dataLoadComplete = false;
 
     void OnEnable()
     {
-        if(dataLoaded != null)
+        if(DataLoadEvent != null)
 		{
-            dataLoaded.AddListener(OnDataLoaded);
+            DataLoadEvent.AddListener(OnDataLoaded);
 		}
     }
 
     void OnDisable()
     {
-        if (dataLoaded != null)
+        if (DataLoadEvent != null)
         {
-            dataLoaded.RemoveListener(OnDataLoaded);
+            DataLoadEvent.RemoveListener(OnDataLoaded);
         }
     }
 
@@ -39,7 +39,7 @@ public class GameManager : BasicSingleton<GameManager>
         bgmSound.Play();
 
         dataLoadComplete = true;
-        dataLoaded.RaiseEvent();
+        DataLoadEvent.RaiseEvent();
 	}
 
     public void ResetData() => Init();

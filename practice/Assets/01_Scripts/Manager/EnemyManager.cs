@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 public class EnemyManager : BasicSingleton<EnemyManager>
 {
 	[Header("이벤트")]
-	[SerializeField] private VoidEventChannelSO monsterGen;
+	public VoidEventChannelSO EnemyGenEvent;
 
 	
 
@@ -224,10 +224,11 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 			{
 				enemyComp.transform.position = PositionInfo.Instance.BossPos.position;
 			}
-		}
 
-        enemyComp.Init();
-        MonsterList.Add(enemyComp);
+            enemyComp.Init();
+            MonsterList.Add(enemyComp);
+			EnemyGenEvent.RaiseEvent(); // 몬스터 생성 이벤트 발생
+        } 
     }
 
     private Vector3 GetSpawnPosition(ESpawnPattern pattern, float radius, int spawnIndex, int totalSpawns)

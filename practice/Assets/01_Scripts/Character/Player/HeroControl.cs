@@ -4,15 +4,21 @@ using UnityEngine.AI;
 
 public class HeroControl : CharacterBase
 {
+    [Header("이벤트")]
+    public VoidEventChannelSO HeroDieEvent;
 
+    [Header("UI")]
     [SerializeField] protected RectTransform HP_HUD;
     [SerializeField] protected RectTransform HP_HUD_After;
     [SerializeField] protected RoundedFillUI HP_HUD_Fill;
     [SerializeField] protected RoundedFillUI HP_HUD_Fill_After;
 
+    [Header("사운드")]
     [SerializeField] private AudioPlayerSingle DieSound;
     [SerializeField] private AudioPlayerSingle HitSound;
     [SerializeField] private AudioPlayerSingle AppearSound;
+
+    [Header("캐릭터 설정")]
     [SerializeField] private CapsuleCollider BodyCollider;
 
     private State<HeroControl>[] States;
@@ -31,12 +37,22 @@ public class HeroControl : CharacterBase
 
     private void OnEnable()
     {
-            
+        AddListener();
     }
 
     private void OnDisable()
     {
-            
+        RemoveListener();
+    }
+
+    private void AddListener()
+    {
+        EnemyManager.Instance.EnemyGenEvent.AddListener(RefreshTarget);
+    }
+
+    private void RemoveListener()
+    {
+        
     }
 
     protected new void Awake()
@@ -179,7 +195,7 @@ public class HeroControl : CharacterBase
     }
 
         
-    private void RefreshTarget()
+    public void RefreshTarget(Void _)
     {
         Target = SearchTarget();
     }

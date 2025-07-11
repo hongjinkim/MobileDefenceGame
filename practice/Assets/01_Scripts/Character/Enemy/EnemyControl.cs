@@ -21,6 +21,8 @@ public class EnemyInfo
 
 public class EnemyControl : CharacterBase
 {
+
+    [Header("»ç¿îµå")]
     [SerializeField] private AudioPlayerSingle DieSound;
     [SerializeField] private AudioPlayerSingle HitSound;
     [SerializeField] public AudioPlayerSingle AttackSound_Boss;
@@ -87,7 +89,10 @@ public class EnemyControl : CharacterBase
 
     public void Init()
     {
+        State.IsInitialized = false;
+        State.InitTimer = 0;
         ChangeState(EActType.Init);
+        
         InitHP(Info.MaxHp);
     }
 
@@ -125,7 +130,6 @@ public class EnemyControl : CharacterBase
         if (HitInfo.HitCount == 1)
         {
             State.CurrentHp -= HitInfo.Damage;
-            Debug.Log($"{CenterPoint.transform.position}");
             FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position, HitInfo);
             //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 

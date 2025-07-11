@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 295416109691273276}
   - component: {fileID: 6032776271461960602}
   - component: {fileID: 364782584451208494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DamgeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
