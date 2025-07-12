@@ -166,7 +166,7 @@ public class HeroControl : CharacterBase
 
         State.CurrentHp -= HitInfo.Damage;
 
-        FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position + Vector3.down / 2, HitInfo);
+        FXPoolManager.Instance.PopDamageText(new Vector3(CenterPoint.transform.position.x, CenterPoint.transform.position.z + DamageTextOffset, CenterPoint.transform.position.z), HitInfo);
         //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
         UpdateHpBar();

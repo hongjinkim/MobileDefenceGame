@@ -140,7 +140,7 @@ public class EnemyControl : CharacterBase
         if (HitInfo.HitCount == 1)
         {
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position + Vector3.down / 2, HitInfo);
+            FXPoolManager.Instance.PopDamageText(new Vector3(CenterPoint.transform.position.x, CenterPoint.transform.position.z + DamageTextOffset, CenterPoint.transform.position.z), HitInfo);
             //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); } // »ç¸Á Ã³¸®

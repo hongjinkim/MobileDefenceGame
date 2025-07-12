@@ -248,8 +248,8 @@ public class EnemyManager : BasicSingleton<EnemyManager>
                 break;
 
             case ESpawnPattern.Line:
-                float startX = pos.x - radius;
-                float endX = pos.x + radius;
+                float startX = PositionInfo.Instance.MinPos.position.x;
+                float endX = PositionInfo.Instance.MaxPos.position.x;
                 float z = pos.z + radius;
                 float t = totalSpawns > 1 ? (float)spawnIndex / (totalSpawns - 1) : 0.5f;
                 pos = new Vector3(Mathf.Lerp(startX, endX, t), pos.y, z);

@@ -59,6 +59,8 @@ public abstract class CharacterBase : MonoBehaviour
     public Transform CenterPoint;
     public Transform Avatar;
 
+    [SerializeField]protected const float DamageTextOffset = 0.3f; // 데미지 텍스트 오프셋
+
     public CharacterState State = new CharacterState();
     protected bool isEnemy;
 
