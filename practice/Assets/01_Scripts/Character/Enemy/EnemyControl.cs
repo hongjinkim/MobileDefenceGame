@@ -15,7 +15,9 @@ public class EnemyInfo
     public EEnemyType EnemyType;
     public BigNum AttackPower = 2;
     public BigNum MaxHp = 100;
-    public BigNum DropGold = 0;
+    public BigNum DropGold = 10;
+    public BigNum DropHeroExp = 10;
+    public BigNum DropExp = 10;
     public int Stage;
 }
 
@@ -91,9 +93,17 @@ public class EnemyControl : CharacterBase
     {
         State.IsInitialized = false;
         State.InitTimer = 0;
+        State.HitTermTime = 0.5f;
+        State.HitTermTimer = 0;
+        State.InvincibleTime = 2;
+        State.InvincibleTimer = 0;     // 스폰 무적시간 타이머
+        State.IsLive = true;
+        Target = null;
+
+        // 초기상태 설정
+        InitHP(Info.MaxHp); // 체력 설정
+        AttackCollider.gameObject.SetActive(false);
         ChangeState(EActType.Init);
-        
-        InitHP(Info.MaxHp);
     }
 
 
@@ -256,7 +266,8 @@ public class EnemyControl : CharacterBase
         {
             if (Target != null)
             {
-                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward/2;
+                AttackCollider.GetComponent<CapsuleCollider>().radius = State.Range;
+                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward / 4;
             }
             AttackCollider.gameObject.SetActive(true);
         }
@@ -282,10 +293,10 @@ public class EnemyControl : CharacterBase
     void OnAnimatorMove()
     {
         // apply root motion to AI
-        Vector3 position = animator.rootPosition;
-        position.y = agent.nextPosition.y;
-        transform.position = position;
-        agent.nextPosition = transform.position;
+        //Vector3 position = animator.rootPosition;
+        //position.y = agent.nextPosition.y;
+        //transform.position = position;
+        //agent.nextPosition = transform.position;
     }
 
 }

@@ -228,7 +228,8 @@ public class HeroControl : CharacterBase
         {
             if (Target != null)
             {
-                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward / 2;
+                AttackCollider.GetComponent<CapsuleCollider>().radius = State.Range;
+                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward / 4;
             }
             AttackCollider.gameObject.SetActive(true);
         }
