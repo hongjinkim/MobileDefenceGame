@@ -140,7 +140,7 @@ public class EnemyControl : CharacterBase
         if (HitInfo.HitCount == 1)
         {
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position, HitInfo);
+            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position + Vector3.down / 2, HitInfo);
             //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); } // 荤噶 贸府
@@ -169,7 +169,7 @@ public class EnemyControl : CharacterBase
 
             State.CurrentHp -= HitInfo.Damage;
             FXPoolManager.Instance.PopDamageText(this.transform.position, HitInfo);
-            FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
+            //FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); yield break; } // 荤噶 贸府
 

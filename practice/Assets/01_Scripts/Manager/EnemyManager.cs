@@ -209,14 +209,14 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 
 	public void SpawnEnemy(ESpawnPattern spawnPattern, float patternRadius, int enemyCount)
 	{
-        var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
-        var enemyComp = newEnemy.GetComponent<EnemyControl>();
-        var enemyType = enemyComp.Info.EnemyType;
-
         for (int i = 0; i < enemyCount; i++)
 		{
-			// 몬스터 위치 및 인덱스 설정
-			if (enemyType == EEnemyType.StageMonster)
+            var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
+            var enemyComp = newEnemy.GetComponent<EnemyControl>();
+            var enemyType = enemyComp.Info.EnemyType;
+
+            // 몬스터 위치 및 인덱스 설정
+            if (enemyType == EEnemyType.StageMonster)
 			{
 				enemyComp.transform.position = GetSpawnPosition(spawnPattern, patternRadius, i, enemyCount);
 			}
