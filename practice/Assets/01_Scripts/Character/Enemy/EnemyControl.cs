@@ -130,7 +130,7 @@ public class EnemyControl : CharacterBase
         if (HitInfo.HitCount == 1)
         {
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position, HitInfo);
+            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInfo);
             //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); } // »ç¸Á Ã³¸®
@@ -282,10 +282,10 @@ public class EnemyControl : CharacterBase
     void OnAnimatorMove()
     {
         // apply root motion to AI
-        Vector3 position = animator.rootPosition;
-        position.y = agent.nextPosition.y;
-        transform.position = position;
-        agent.nextPosition = transform.position;
+        //Vector3 position = animator.rootPosition;
+        //position.y = agent.nextPosition.y;
+        //transform.position = position;
+        //agent.nextPosition = transform.position;
     }
 
 }

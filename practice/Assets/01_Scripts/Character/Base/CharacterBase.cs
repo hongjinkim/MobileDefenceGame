@@ -62,6 +62,7 @@ public abstract class CharacterBase : MonoBehaviour
     public CharacterState State = new CharacterState();
     protected bool isEnemy;
 
+    protected Vector3 damageTextOffset = new Vector3(0, 0.1f, 0);   
     protected void Awake()
     {
 
