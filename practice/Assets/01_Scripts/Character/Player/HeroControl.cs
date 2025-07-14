@@ -63,7 +63,7 @@ public class HeroControl : CharacterBase
 
     private void Start()
     {
-        Init();
+
     }
 
 
@@ -79,8 +79,10 @@ public class HeroControl : CharacterBase
         isEnemy = false;
     }
 
-    public void Init()
+    public void Init(int index)
     {
+        HeroIndex = index;
+
         State.HitTermTime = 0.5f;
         State.HitTermTimer = 0;
         State.InvincibleTime = 2;

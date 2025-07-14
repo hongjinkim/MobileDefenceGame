@@ -8,4 +8,12 @@ public class StageManager : BasicSingleton<StageManager>
     {
         return Instance._stageData;
     }
+
+    public static void StageStart()
+    {
+        // Initialize the stage data or perform any setup required for the stage
+        Debug.Log("Stage started with data: " + GetStageData());
+        
+
+    }
 }

@@ -1,9 +1,13 @@
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class PlayerData
 {
-	public PlayerData()
+	//저장할 데이터
+	public PlayerValue Value = new PlayerValue();
+
+    public PlayerData()
 	{
 
 	}
