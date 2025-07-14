@@ -7,6 +7,7 @@ public enum ESpawnPattern
     Random,         // 랜덤 위치
     Circle,         // 원형 패턴
     Line,          // 직선 패턴
+    Square,        // 정사각형 패턴
     Spiral,        // 나선형 패턴
     Grid,          // 격자 패턴
     RandomGrid,    // 랜덤 격자 패턴

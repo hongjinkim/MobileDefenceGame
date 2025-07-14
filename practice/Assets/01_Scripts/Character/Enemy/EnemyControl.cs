@@ -15,14 +15,16 @@ public class EnemyInfo
     public EEnemyType EnemyType;
     public BigNum AttackPower = 2;
     public BigNum MaxHp = 100;
-    public BigNum DropGold = 0;
+    public BigNum DropGold = 10;
+    public BigNum DropHeroExp = 10;
+    public BigNum DropExp = 10;
     public int Stage;
 }
 
 public class EnemyControl : CharacterBase
 {
 
-    [Header("»ç¿îµå")]
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private AudioPlayerSingle DieSound;
     [SerializeField] private AudioPlayerSingle HitSound;
     [SerializeField] public AudioPlayerSingle AttackSound_Boss;
@@ -38,7 +40,7 @@ public class EnemyControl : CharacterBase
     private PlayerData Player => DataBase.GetPlayerData();
     private InitialData Inital => DataBase.GetInitialData();
 
-    [Header("¾Ö´Ï¸ÞÀÌ¼Ç ¼³Á¤")]
+    [Header("ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½")]
     public Face faces;
     public GameObject SmileBody;
     public Animator animator;
@@ -91,13 +93,21 @@ public class EnemyControl : CharacterBase
     {
         State.IsInitialized = false;
         State.InitTimer = 0;
+        State.HitTermTime = 0.5f;
+        State.HitTermTimer = 0;
+        State.InvincibleTime = 2;
+        State.InvincibleTimer = 0;     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ Å¸ï¿½Ì¸ï¿½
+        State.IsLive = true;
+        Target = null;
+
+        // ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        InitHP(Info.MaxHp); // Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        AttackCollider.gameObject.SetActive(false);
         ChangeState(EActType.Init);
-        
-        InitHP(Info.MaxHp);
     }
 
 
-    //°¡±î¿î ÇÃ·¹ÀÌ¾î Å½»ö
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Å½ï¿½ï¿½
     public CharacterBase NearPlayer()
     {
         if (InGameHeroManager.IsHeroActive())
@@ -110,14 +120,14 @@ public class EnemyControl : CharacterBase
 
     public new void TakeHit(AttackInfo HitInfo)
     {
-        // ¹«Àû ¶Ç´Â ÇÇ°Ý°¡´É ¶Ç´Â »ýÁ¸ Ã¼Å©
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½Ç°Ý°ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
         if (State.Invincible == true || State.Hitable == false || State.IsLive == false)
             return;
 
         base.TakeHit(HitInfo);
 
         //HitSound.Play();
-        // ÇÇ°Ý ¾Ö´Ï¸ÞÀÌ¼ÇÀÌ Àç»ýÁßÀÎ °æ¿ì Áßº¹ ½ÇÇà ¹æÁö
+        // ï¿½Ç°ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Damage0")
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Damage1")
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Damage2")) return;
@@ -133,7 +143,7 @@ public class EnemyControl : CharacterBase
             FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInfo);
             //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
-            if (State.CurrentHp <= 0) { Die(); } // »ç¸Á Ã³¸®
+            if (State.CurrentHp <= 0) { Die(); } // ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
         }
         else
         {
@@ -150,40 +160,40 @@ public class EnemyControl : CharacterBase
         agent.updateRotation = false;
     }
 
-    // Å¸¼ö Àû¿ë
+    // Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private IEnumerator MultiHit(AttackInfo HitInfo)
     {
         for (int i = 0; i < HitInfo.HitCount; i++)
         {
-            if (State.IsLive == false) { yield break; } //Å¸°ÝÁß¿¡ ´Ù¸¥Å¸°ÝÀ¸·Î »ç¸Á½Ã Áß´Ü
+            if (State.IsLive == false) { yield break; } //Å¸ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ù¸ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß´ï¿½
 
             State.CurrentHp -= HitInfo.Damage;
             FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInfo);
             FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
 
-            if (State.CurrentHp <= 0) { Die(); yield break; } // »ç¸Á Ã³¸®
+            if (State.CurrentHp <= 0) { Die(); yield break; } // ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 
             yield return new WaitForSeconds(0.1f);
         }
     }
 
-    // »óÅÂ º¯°æ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void ChangeState(EActType NewState)
     {
-        // ¹Ù²Ù·Á´Â »óÅÂ°¡ ºñ¾îÀÖ´Â °æ¿ì
+        // ï¿½Ù²Ù·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
         if (States[(int)NewState] == null)
             return;
 
-        // ÇöÀç Àç»ýÁßÀÎ »óÅÂ°¡ Á¸ÀçÇÏ¸é ±âÁ¸ »óÅÂ Á¾·á
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (CurrentState != null)
         {
             CurrentState.Exit(this);
         }
 
-        // »õ·Î¿î »óÅÂ·Î º¯°æÇÏ°í, »õ·Î ¹Ù²ï »óÅÂÀÇ Enter() ¸Þ¼Òµå È£Ãâ
+        // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Enter() ï¿½Þ¼Òµï¿½ È£ï¿½ï¿½
         CurrentState = States[(int)NewState];
         CurrentState.Enter(this);
-        State.CurrActName = NewState.ToString(); // ÇöÀç ¾×¼Ç ÀÌ¸§ ¾÷µ¥ÀÌÆ®
+        State.CurrActName = NewState.ToString(); // ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     }
 
     public void StopAttackWhenMainHeroDie()
@@ -201,7 +211,7 @@ public class EnemyControl : CharacterBase
             CurrentState.Execute(this);
         }
 
-        // Á¤Áö(½ºÆ÷³Ê)
+        // ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
         if (State.NoneMove == true)
         {
             return;
@@ -218,10 +228,10 @@ public class EnemyControl : CharacterBase
     public override void Die()
     {
         base.Die();
-        // »ì¾ÆÀÖ´Â Àû¸¸ Ã³¸®(ÀÏ¹Ý°ø°Ý/¸ÖÆ¼°ø°Ý Áßº¹ Die Ã¼Å© ¹æÁö)
+        // ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½(ï¿½Ï¹Ý°ï¿½ï¿½ï¿½/ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ßºï¿½ Die Ã¼Å© ï¿½ï¿½ï¿½ï¿½)
         if (State.IsLive == false) return;
 
-        // ÇÇ°Ý ÀÌÆåÆ®
+        // ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
         //FXPoolManager.Instance.Pop(EFXPoolType.DestroyEnemy, new Vector3(this.transform.position.x, this.transform.position.y + 1f, 0));
 
 
@@ -231,11 +241,11 @@ public class EnemyControl : CharacterBase
         State.IsLive = false;
         EnemyManager.Instance.EnemyDeath(this);
 
-        // 1. °ñµå°ªÀ» ¿©±â¼­ ¿¬µ¿ÇÏµµ·Ï(¹èÀ²¶§¹®¿¡)
-        // 2. µå¶øÅÛ Á¶Á¤(´øÀü¸ó½ºÅÍ´Â ½ºÅ×ÀÌÁö¸ó½ºÅÍ¿Í µå¶øÅÛÀÌ ´Ù¸§)
+        // 1. ï¿½ï¿½å°ªï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+        // 2. ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½)
     }
 
-    // »ç¸Á ¾Ö´Ï¸ÞÀÌ¼ÇÀ» À§ÇÑ ½Ã°£ ÇÊ¿ä
+    // ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê¿ï¿½
     public void DieDisable()
     {
         EnemyPoolManager.Instance.Push(gameObject, EPoolType.Enemy);
@@ -256,7 +266,8 @@ public class EnemyControl : CharacterBase
         {
             if (Target != null)
             {
-                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward/2;
+                AttackCollider.GetComponent<CapsuleCollider>().radius = State.Range;
+                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward / 4;
             }
             AttackCollider.gameObject.SetActive(true);
         }
@@ -282,10 +293,10 @@ public class EnemyControl : CharacterBase
     void OnAnimatorMove()
     {
         // apply root motion to AI
-        Vector3 position = animator.rootPosition;
-        position.y = agent.nextPosition.y;
-        transform.position = position;
-        agent.nextPosition = transform.position;
+        //Vector3 position = animator.rootPosition;
+        //position.y = agent.nextPosition.y;
+        //transform.position = position;
+        //agent.nextPosition = transform.position;
     }
 
 }

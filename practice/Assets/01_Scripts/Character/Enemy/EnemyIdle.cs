@@ -17,7 +17,7 @@ public class EnemyIdle : State<EnemyControl>
         if (entity.State.NoneMove == true) return;
 
         entity.StopAgent();
-        entity.SetFace(entity.faces.Idleface);
+        //entity.SetFace(entity.faces.Idleface);
 
         //타켓이 없는 경우 타겟 서치
         if (entity.Target == null) { entity.Target = entity.NearPlayer(); }
