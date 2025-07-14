@@ -2,19 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum CameraMode
+{
+    Stage,  // 스테이지 모드
+    Lobby   // 로비 모드
+}
 public class CameraController : MonoBehaviour
 {
     [Header("Camera Settings")]
     [SerializeField] private float cameraAngleX = 60f;  // X축 회전 각도
     [Range(5f, 20f)] public float cameraDistance = 11.18f;  // 카메라와 목표 사이의 거리
-    [SerializeField] private Vector3 targetPosition = Vector3.zero;  // 바라보는 목표 위치
+    public CameraMode cameraMode = CameraMode.Stage;  // 현재 카메라 모드
+    private Vector3 targetPositionStage;     // 바라보는 목표 위치
+    private Vector3 targetPositionLobby;     // 바라보는 목표 위치
+
+
+    private void Awake()
+    {
+        targetPositionStage = PositionInfo.Instance.StageCenter.position;
+        targetPositionLobby = PositionInfo.Instance.LobbyCenter.position;
+    }
 
     private void Start()
     {
-        UpdateCameraPosition();
+        UpdateCameraPosition(cameraMode);
     }
 
-    private void UpdateCameraPosition()
+    private void UpdateCameraPosition(CameraMode cameraMode)
     {
         // 라디안으로 변환
         float angleInRadian = cameraAngleX * Mathf.Deg2Rad;
@@ -22,6 +37,22 @@ public class CameraController : MonoBehaviour
         // 각도와 거리를 이용해 Y와 Z 위치 계산
         float yOffset = cameraDistance * Mathf.Sin(angleInRadian);
         float zOffset = -cameraDistance * Mathf.Cos(angleInRadian);
+
+        Vector3 targetPosition;
+
+        switch (cameraMode)
+        {
+            case CameraMode.Stage:
+                targetPosition = targetPositionStage;
+                break;
+            case CameraMode.Lobby:
+                targetPosition = targetPositionLobby;
+                break;
+            default:
+                targetPosition = Vector3.zero;
+                break;
+        }
+            
 
         // 카메라 위치 설정
         transform.position = new Vector3(targetPosition.x, yOffset, targetPosition.z + zOffset);
@@ -33,7 +64,7 @@ public class CameraController : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        UpdateCameraPosition();
+        UpdateCameraPosition(cameraMode);
     }
 #endif
 }

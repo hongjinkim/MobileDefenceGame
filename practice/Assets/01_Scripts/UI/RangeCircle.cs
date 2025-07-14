@@ -8,7 +8,7 @@ public class RangeCircle : MonoBehaviour
 
     private void Awake()
     {
-        Center = PositionInfo.Instance.MapCenter;
+        Center = PositionInfo.Instance.StageCenter;
     }
 
     private void Start()

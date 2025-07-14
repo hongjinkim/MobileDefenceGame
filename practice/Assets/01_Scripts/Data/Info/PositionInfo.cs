@@ -8,8 +8,9 @@ using UnityEngine;
 public class PositionInfo : BasicSingleton<PositionInfo>
 {
 	public Transform MinPos, MaxPos;
-    public Transform MapCenter;
-	public Transform BossPos;
+    public Transform StageCenter;
+	public Transform LobbyCenter;
+    public Transform BossPos;
 	public Transform[] HeroPos;
 
 	

@@ -233,7 +233,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 
     private Vector3 GetSpawnPosition(ESpawnPattern pattern, float radius, int spawnIndex, int totalSpawns)
     {
-        Vector3 pos = PositionInfo.Instance.MapCenter.position; // 기본 위치는 맵 중심
+        Vector3 pos = PositionInfo.Instance.StageCenter.position; // 기본 위치는 맵 중심
 
         switch (pattern)
         {
