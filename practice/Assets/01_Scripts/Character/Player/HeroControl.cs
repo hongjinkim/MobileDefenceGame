@@ -166,7 +166,7 @@ public class HeroControl : CharacterBase
 
         State.CurrentHp -= HitInfo.Damage;
 
-        FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position, HitInfo);
+        FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInfo);
         //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
         UpdateHpBar();
@@ -218,7 +218,7 @@ public class HeroControl : CharacterBase
 
     private void SettingRange()
     {
-        State.Range = Initial.AttackRange;
+        State.AttackRange = Initial.AttackRange;
     }
 
     // Animation Event

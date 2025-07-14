@@ -145,5 +145,6 @@ public static class Extension
     // SystemLanguage 사용하지 않는다면 여기를 바꿔야함
     private static bool IsKorean => CurrentLanguage == SystemLanguage.Korean;   // 임시
 
+    public static Vector3 ProjectTo2D(this Vector3 original) => new Vector3(original.x, original.z, original.z).ProjectTo2D();
 }
 

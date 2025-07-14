@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attacker: {fileID: 7859774726252088456}
   TargetTag: 1
-  singleTargetforEnemy: 0
+  maxTargetCount: 1
 --- !u!1 &5544251145505045195
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +212,8 @@ MonoBehaviour:
     IsHaveSkill: 0
     SkillTermTimer: 0
     SkillTermTime: 3
-    Range: 1.5
+    AttackRange: 0.5
+    SkillRange: 10
     Speed: 2
     Scale: {x: 0, y: 0, z: 0}
     NoneAttack: 0
