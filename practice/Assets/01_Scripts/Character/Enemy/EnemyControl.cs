@@ -130,7 +130,7 @@ public class EnemyControl : CharacterBase
         if (HitInfo.HitCount == 1)
         {
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInfo);
+            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position, HitInfo);
             //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); } // 사망 처리
@@ -158,7 +158,7 @@ public class EnemyControl : CharacterBase
             if (State.IsLive == false) { yield break; } //타격중에 다른타격으로 사망시 중단
 
             State.CurrentHp -= HitInfo.Damage;
-            FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInfo);
+            FXPoolManager.Instance.PopDamageText(this.transform.position, HitInfo);
             FXPoolManager.Instance.Pop(HitInfo.EffectType, this.transform.position);
 
             if (State.CurrentHp <= 0) { Die(); yield break; } // 사망 처리

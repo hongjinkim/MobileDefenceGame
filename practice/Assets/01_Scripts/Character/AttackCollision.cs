@@ -4,15 +4,13 @@ using UnityEngine;
 public abstract class AttackCollision : MonoBehaviour
 {
     [SerializeField] CharacterBase Attacker;    // 공격하는 개체
-    [SerializeField] protected TargetType TargetTag;
-    [SerializeField] protected int maxTargetCount = 1; // 최대 타겟 수
-
-    protected enum TargetType { Enemy, Hero };
-    protected int currentTargetCount = 0; // 현재 타겟 수
+    [SerializeField] private TargetType TargetTag;
+    private enum TargetType { Enemy, Hero };
+    [HideInInspector] public bool singleTargetforEnemy = false;
 
     private void OnEnable()
     {
-        currentTargetCount = 0; //타겟 횟수만큼만 발동하도록 하는 설정값
+        if (TargetTag == TargetType.Hero) { singleTargetforEnemy = false; } //몬스터의 경우 단일타겟만 발동하도록 하는 설정값
     }
 
 
@@ -28,10 +26,6 @@ public abstract class AttackCollision : MonoBehaviour
 
         if (collision.CompareTag(TargetTag.ToString()) == false)
             return;
-        if (currentTargetCount >= maxTargetCount)
-            return; // 최대 타겟 수 초과 시 공격하지 않음
-
-        currentTargetCount++; // 타겟 수 증가
 
         switch (TargetTag)
         {
@@ -67,6 +61,7 @@ public abstract class AttackCollision : MonoBehaviour
 
                 if (!Enemy.Target) { return; } //딜레이 사이에 죽어서 target이 제거된경우 return
                 if (Enemy.Target != collision.GetComponent<CharacterBase>()) { return; } //타겟만 때리기
+                if (singleTargetforEnemy) { return; } //죽는순간 다른 타겟으로 전환되어 다중타격되는것 막음
 
                 AttackInfo.Damage = Enemy.Info.AttackPower;
                 AttackInfo.AttackType = EAttackType.Normal;
@@ -74,6 +69,7 @@ public abstract class AttackCollision : MonoBehaviour
                 AttackInfo.HitCount = 1;
 
                 Enemy.Target.TakeHit(AttackInfo);
+                singleTargetforEnemy = true;
 
                 break;
             default:

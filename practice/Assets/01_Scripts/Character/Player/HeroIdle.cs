@@ -29,7 +29,7 @@ public class HeroIdle : State<HeroControl>
             float Distance = Vector3.Distance(entity.CenterPoint.position, entity.Target.CenterPoint.position);
 
             //사거리 안에 있으면 공격시도
-            if (Distance < entity.State.AttackRange)
+            if (Distance < entity.State.Range)
             {
                 //스킬 가능하면 스킬발동
                 if (entity.State.SkillTermTimer >= entity.State.SkillTermTime && entity.Target.State.IsLive == true && entity.State.IsHaveSkill)
