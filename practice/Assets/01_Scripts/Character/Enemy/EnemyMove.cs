@@ -30,7 +30,7 @@ public class EnemyMove : State<EnemyControl>
             float Distance = Vector3.Distance(entity.CenterPoint.position, entity.Target.CenterPoint.position);
 
             //사거리 안에 있는 경우
-            if (Distance < entity.State.Range)
+            if (Distance < entity.State.AttackRange)
             {
                 //공격텀인 경우 공격 발동
                 if (entity.State.IsHaveSkill && entity.State.SkillTermTimer >= entity.State.SkillTermTime)

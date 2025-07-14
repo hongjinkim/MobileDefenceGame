@@ -43,7 +43,8 @@ public class CharacterState
     public float SkillTermTimer = 0f;
     public float SkillTermTime = 3f;
 
-    public float Range = 4f;
+    public float AttackRange = 4f;
+    public float SkillRange = 10f;
     public float Speed = 10f;
     public Vector3 Scale;
     public bool NoneAttack;     // 공격 유무

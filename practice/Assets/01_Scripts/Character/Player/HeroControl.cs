@@ -220,7 +220,7 @@ public class HeroControl : CharacterBase
 
     private void SettingRange()
     {
-        State.Range = Initial.AttackRange;
+        State.AttackRange = Initial.AttackRange;
     }
 
     // Animation Event
