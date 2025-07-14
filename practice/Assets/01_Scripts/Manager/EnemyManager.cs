@@ -209,14 +209,14 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 
 	public void SpawnEnemy(ESpawnPattern spawnPattern, float patternRadius, int enemyCount)
 	{
+        var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
+        var enemyComp = newEnemy.GetComponent<EnemyControl>();
+        var enemyType = enemyComp.Info.EnemyType;
+
         for (int i = 0; i < enemyCount; i++)
 		{
-            var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
-            var enemyComp = newEnemy.GetComponent<EnemyControl>();
-            var enemyType = enemyComp.Info.EnemyType;
-
-            // 몬스터 위치 및 인덱스 설정
-            if (enemyType == EEnemyType.StageMonster)
+			// 몬스터 위치 및 인덱스 설정
+			if (enemyType == EEnemyType.StageMonster)
 			{
 				enemyComp.transform.position = GetSpawnPosition(spawnPattern, patternRadius, i, enemyCount);
 			}
@@ -248,8 +248,8 @@ public class EnemyManager : BasicSingleton<EnemyManager>
                 break;
 
             case ESpawnPattern.Line:
-                float startX = PositionInfo.Instance.MinPos.position.x;
-                float endX = PositionInfo.Instance.MaxPos.position.x;
+                float startX = pos.x - radius;
+                float endX = pos.x + radius;
                 float z = pos.z + radius;
                 float t = totalSpawns > 1 ? (float)spawnIndex / (totalSpawns - 1) : 0.5f;
                 pos = new Vector3(Mathf.Lerp(startX, endX, t), pos.y, z);

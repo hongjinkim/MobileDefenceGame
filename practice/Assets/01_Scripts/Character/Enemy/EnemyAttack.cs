@@ -14,7 +14,7 @@ public class EnemyAttack : State<EnemyControl>
     {
         if (entity.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
         entity.StopAgent();
-        //entity.SetFace(entity.faces.attackFace);
+        entity.SetFace(entity.faces.attackFace);
         entity.animator.SetTrigger("Attack");
     }
 

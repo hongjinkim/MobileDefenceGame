@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class HeroControl : CharacterBase
 {
-    [Header("ï¿½Ìºï¿½Æ®")]
+    [Header("ÀÌº¥Æ®")]
     public VoidEventChannelSO HeroDieEvent;
 
     [Header("UI")]
@@ -13,12 +13,12 @@ public class HeroControl : CharacterBase
     [SerializeField] protected RoundedFillUI HP_HUD_Fill;
     [SerializeField] protected RoundedFillUI HP_HUD_Fill_After;
 
-    [Header("ï¿½ï¿½ï¿½ï¿½")]
+    [Header("»ç¿îµå")]
     [SerializeField] private AudioPlayerSingle DieSound;
     [SerializeField] private AudioPlayerSingle HitSound;
     [SerializeField] private AudioPlayerSingle AppearSound;
 
-    [Header("Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    [Header("Ä³¸¯ÅÍ ¼³Á¤")]
     [SerializeField] private CapsuleCollider BodyCollider;
 
     private State<HeroControl>[] States;
@@ -29,10 +29,10 @@ public class HeroControl : CharacterBase
     private PlayerData Player => DataBase.GetPlayerData();
     private InitialData Initial => DataBase.GetInitialData();
 
-    [Header("ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½")]
+    [Header("¾Ö´Ï¸ÞÀÌ¼Ç ¼³Á¤")]
     public Animator animator;
     private Vector3 originPos;
-    [HideInInspector]public int AttackType = 0; // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½
+    [HideInInspector]public int AttackType = 0; // °ø°Ý Å¸ÀÔ
 
 
     private void OnEnable()
@@ -84,12 +84,12 @@ public class HeroControl : CharacterBase
         State.HitTermTime = 0.5f;
         State.HitTermTimer = 0;
         State.InvincibleTime = 2;
-        State.InvincibleTimer = 0;     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ Å¸ï¿½Ì¸ï¿½
+        State.InvincibleTimer = 0;     // ½ºÆù ¹«Àû½Ã°£ Å¸ÀÌ¸Ó
         State.IsLive = true;
         Target = null;
 
-        // ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-        InitHP(100); // Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ÃÊ±â»óÅÂ ¼³Á¤
+        InitHP(100); // Ã¼·Â ¼³Á¤
         AttackCollider.gameObject.SetActive(false);
         ChangeState(EActType.Init);
     }
@@ -104,7 +104,7 @@ public class HeroControl : CharacterBase
         UpdateHpBar();
     }
 
-    // Ã¼ï¿½Â¹ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // Ã¼·Â¹Ù °»½Å
     private void UpdateHpBar()
     {
         if (isEnemy)
@@ -129,23 +129,23 @@ public class HeroControl : CharacterBase
     }
 
 
-    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    // »óÅÂ º¯°æ
     public void ChangeState(EActType NewState)
     {
-        // ï¿½Ù²Ù·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
+        // ¹Ù²Ù·Á´Â »óÅÂ°¡ ºñ¾îÀÖ´Â °æ¿ì
         if (States[(int)NewState] == null)
             return;
 
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // ÇöÀç Àç»ýÁßÀÎ »óÅÂ°¡ Á¸ÀçÇÏ¸é ±âÁ¸ »óÅÂ Á¾·á
         if (CurrentState != null)
         {
             CurrentState.Exit(this);
         }
 
-        // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Enter() ï¿½Þ¼Òµï¿½ È£ï¿½ï¿½
+        // »õ·Î¿î »óÅÂ·Î º¯°æÇÏ°í, »õ·Î ¹Ù²ï »óÅÂÀÇ Enter() ¸Þ¼Òµå È£Ãâ
         CurrentState = States[(int)NewState];
         CurrentState.Enter(this);
-        State.CurrActName = NewState.ToString(); // ï¿½ï¿½ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+        State.CurrActName = NewState.ToString(); // ÇöÀç ¾×¼Ç ÀÌ¸§ ¾÷µ¥ÀÌÆ®
     }
 
     protected new void Update()
@@ -154,11 +154,11 @@ public class HeroControl : CharacterBase
         if (CurrentState != null) CurrentState.Execute(this);
     }
 
-    // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½
+    // Ä³¸¯ÅÍ ÇÇ°Ý
     public override void TakeHit(AttackInfo HitInfo)
     {
         //Debug.Log($"{State.Invincible} / {State.Hitable} / {State.IsLive}");
-        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½Ç°Ý°ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
+        // ¹«Àû ¶Ç´Â ÇÇ°Ý°¡´É ¶Ç´Â »ýÁ¸ Ã¼Å©
         if (State.Invincible == true || State.Hitable == false || State.IsLive == false)
             return;
 
@@ -166,12 +166,12 @@ public class HeroControl : CharacterBase
 
         State.CurrentHp -= HitInfo.Damage;
 
-        FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInf o);
+        FXPoolManager.Instance.PopDamageText(CenterPoint.transform.position.ProjectTo2D(), HitInfo);
         //FXPoolManager.Instance.Pop(HitInfo.EffectType, CenterPoint.transform.position);
 
         UpdateHpBar();
 
-        // ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
+        // »ç¸Á Ã³¸®
         if (State.CurrentHp <= 0)
             Die();
     }
@@ -188,7 +188,7 @@ public class HeroControl : CharacterBase
 
 
 
-    //ï¿½ï¿½ï¿½È¿ï¿½ï¿½
+    //»ç¸ÁÈ¿°ú
     public void DieFX()
     {
         //FXPoolManager.Instance.Pop(EFXPoolType.UnitDieEffect, this.transform.position + new Vector3(0, -1, 0));
@@ -202,7 +202,7 @@ public class HeroControl : CharacterBase
 
     public EnemyControl SearchTarget() => EnemyManager.Instance.FindNearTarget(this.CenterPoint.position, HeroIndex);
 
-    // ï¿½ï¿½ï¿½ï¿½Î°ï¿½ È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î°ï¿½
+    // È÷¾î·Î°¡ È°µ¿ °¡´ÉÇÑ »óÅÂÀÎ°¡
     public bool IsHeroActive()
     {
         if (State.Invincible == true || State.IsLive == false || !gameObject.activeSelf) return false;
@@ -228,8 +228,7 @@ public class HeroControl : CharacterBase
         {
             if (Target != null)
             {
-                AttackCollider.GetComponent<CapsuleCollider>().radius = State.Range;
-                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward / 4;
+                AttackCollider.transform.localPosition = CenterPoint.localPosition + Vector3.forward / 2;
             }
             AttackCollider.gameObject.SetActive(true);
         }

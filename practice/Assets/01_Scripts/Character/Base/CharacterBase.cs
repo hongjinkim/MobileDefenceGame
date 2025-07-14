@@ -58,9 +58,7 @@ public abstract class CharacterBase : MonoBehaviour
     [SerializeField] public CharacterBase Target;
     [SerializeField] protected Collider AttackCollider;
     public Transform CenterPoint;
-    public Transform Avatar;
-
-    [SerializeField]protected const float DamageTextOffset = 0.3f; // 데미지 텍스트 오프셋
+    public Transform Anchor;
 
     public CharacterState State = new CharacterState();
     protected bool isEnemy;
@@ -115,7 +113,7 @@ public abstract class CharacterBase : MonoBehaviour
         //Debug.Log($"{TargetPos}");
 
         // 현재 위치에서 목표 위치를 향하는 방향 벡터 계산
-        Vector3 directionToTarget = (TargetPos - CenterPoint.transform.position).normalized;
+        Vector3 directionToTarget = (TargetPos - Anchor.transform.position).normalized;
 
         // 수직 회전은 제외하고 수평 방향만 고려 (y 값을 0으로)
         directionToTarget.y = 0;
@@ -129,7 +127,7 @@ public abstract class CharacterBase : MonoBehaviour
             // 부드러운 회전 적용
 
             // 캐릭터 회전 적용
-            Avatar.transform.rotation = Quaternion.Euler(0.0f, _targetRotation, 0.0f);
+            Anchor.transform.rotation = Quaternion.Euler(0.0f, _targetRotation, 0.0f);
         }
     }
 
