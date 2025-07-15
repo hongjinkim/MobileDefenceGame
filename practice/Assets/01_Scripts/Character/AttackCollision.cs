@@ -6,11 +6,12 @@ public abstract class AttackCollision : MonoBehaviour
     [SerializeField] CharacterBase Attacker;    // 공격하는 개체
     [SerializeField] private TargetType TargetTag;
     private enum TargetType { Enemy, Hero };
-    [HideInInspector] public bool singleTargetforEnemy = false;
+    public int maxTartetCount = 1; // 최대 타겟 수
+    private int currentTargetCount; // 현재 타겟 수
 
     private void OnEnable()
     {
-        if (TargetTag == TargetType.Hero) { singleTargetforEnemy = false; } //몬스터의 경우 단일타겟만 발동하도록 하는 설정값
+        currentTargetCount = 0;
     }
 
 
@@ -26,6 +27,10 @@ public abstract class AttackCollision : MonoBehaviour
 
         if (collision.CompareTag(TargetTag.ToString()) == false)
             return;
+        if (currentTargetCount >= maxTartetCount)
+            return;
+
+        currentTargetCount++;
 
         switch (TargetTag)
         {
@@ -61,7 +66,6 @@ public abstract class AttackCollision : MonoBehaviour
 
                 if (!Enemy.Target) { return; } //딜레이 사이에 죽어서 target이 제거된경우 return
                 if (Enemy.Target != collision.GetComponent<CharacterBase>()) { return; } //타겟만 때리기
-                if (singleTargetforEnemy) { return; } //죽는순간 다른 타겟으로 전환되어 다중타격되는것 막음
 
                 AttackInfo.Damage = Enemy.Info.AttackPower;
                 AttackInfo.AttackType = EAttackType.Normal;
@@ -69,7 +73,6 @@ public abstract class AttackCollision : MonoBehaviour
                 AttackInfo.HitCount = 1;
 
                 Enemy.Target.TakeHit(AttackInfo);
-                singleTargetforEnemy = true;
 
                 break;
             default:

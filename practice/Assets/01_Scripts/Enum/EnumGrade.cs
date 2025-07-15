@@ -1,8 +1,8 @@
 using GoogleSheet.Core.Type;
 using System;
 
-[UGS(typeof(ERarity))]
-public enum ERarity
+[UGS(typeof(EGrade))]
+public enum EGrade
 {
     Common,
     Rare,

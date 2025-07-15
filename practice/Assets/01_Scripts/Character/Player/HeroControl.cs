@@ -25,6 +25,7 @@ public class HeroControl : CharacterBase
     private State<HeroControl> CurrentState;
 
     public int HeroIndex;
+    [SerializeField] private SkillControl Skill;
 
     private PlayerData Player => DataBase.GetPlayerData();
     private InitialData Initial => DataBase.GetInitialData();
@@ -211,17 +212,7 @@ public class HeroControl : CharacterBase
 
         else return true;
     }
-   
-    private void SettingAttackSpeed()
-    {
-        float statSpeed = StatManager.Instance.FinalAttackSpeed;
-        State.AttackTermTime = Initial.AttackSpeed / statSpeed;
-    }
-
-    private void SettingRange()
-    {
-        State.AttackRange = Initial.AttackRange;
-    }
+  
 
     // Animation Event
     public void AlertObservers(string message)

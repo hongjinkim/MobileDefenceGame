@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class InitialData : MonoBehaviour
+[Serializable]
+public class InitialData
 {
 
     public float GamePlayingSpeed;

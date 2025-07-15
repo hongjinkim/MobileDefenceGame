@@ -57,7 +57,7 @@ namespace DataTable
 /* Fields. */
 
 		public Int32 영웅_ID;
-		public ERarity 영웅_희귀도;
+		public EGrade 영웅_희귀도;
 		public String 영웅_이름;
 		public String 영웅_설명;
 		public Int32 영웅_레벨;

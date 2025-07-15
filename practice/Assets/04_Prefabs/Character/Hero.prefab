@@ -1101,7 +1101,7 @@ MonoBehaviour:
     SkillTermTimer: 0
     SkillTermTime: 3
     AttackRange: 2
-    SkillRange: 10
+    SkillRange: 5
     Speed: 10
     Scale: {x: 0, y: 0, z: 0}
     NoneAttack: 0
