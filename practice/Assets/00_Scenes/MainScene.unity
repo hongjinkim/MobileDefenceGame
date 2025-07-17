@@ -6213,13 +6213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a11177515cc03164aa2bcbfac7df9415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerData: {}
-  _initialData:
-    GamePlayingSpeed: 0
-    StartAttack: 0
-    StartHealth: 0
-    AttackSpeed: 0
-    AttackRange: 0
 --- !u!114 &1821647096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6233,12 +6226,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DataLoadedEvent: {fileID: 11400000, guid: 10ffa8f3a4f030541bc76d05a4eea6ef, type: 2}
-  Initial:
+  PlayerData: {}
+  InitialData:
     GamePlayingSpeed: 0
     StartAttack: 0
     StartHealth: 0
     AttackSpeed: 0
     AttackRange: 0
+  HeroData:
+    HeroDict:
+      keyValuePairs:
+      - Key: 
+        Value:
+          Name: 
+          ID: 
+          Description: 
+          Grade: 0
 --- !u!1 &1824576932
 GameObject:
   m_ObjectHideFlags: 0
