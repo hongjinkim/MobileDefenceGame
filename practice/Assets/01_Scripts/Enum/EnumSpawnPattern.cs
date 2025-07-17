@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using GoogleSheet.Core.Type;
+using System.Collections;
 using UnityEngine;
 
-
+[UGS(typeof(ESpawnPattern))]
 public enum ESpawnPattern
 {
+    Boss,          // 보스 위치
     Random,         // 랜덤 위치
     Circle,         // 원형 패턴
     Line,          // 직선 패턴

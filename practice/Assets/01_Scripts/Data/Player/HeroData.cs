@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class HeroData
 {
-    public Dictionary<int, HeroValue> HeroDict = new Dictionary<int, HeroValue>();
+    public Dictionary<string, HeroValue> HeroDict = new Dictionary<string, HeroValue>();
 
     private int heroCount;
 

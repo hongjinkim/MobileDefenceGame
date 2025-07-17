@@ -21,10 +21,12 @@ public class InitialData
 
     private void LoadData()
     {
-        GamePlayingSpeed = DataTable.시작값.시작값List[0].게임진행속도;
-        StartAttack = DataTable.시작값.시작값List[0].기본_공격력;
-        StartHealth = DataTable.시작값.시작값List[0].기본_체력;
-        AttackSpeed = DataTable.시작값.시작값List[0].기본_공속;
-        AttackRange = DataTable.시작값.시작값List[0].기본_사거리;
+        var InitialData = DataTable.시작값.시작값List;
+
+        GamePlayingSpeed = InitialData[0].게임진행속도;
+        StartAttack = InitialData[0].기본_공격력;
+        StartHealth = InitialData[0].기본_체력;
+        AttackSpeed = InitialData[0].기본_공속;
+        AttackRange = InitialData[0].기본_사거리;
     }
 }

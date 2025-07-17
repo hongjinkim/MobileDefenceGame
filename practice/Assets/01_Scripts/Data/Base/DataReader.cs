@@ -12,6 +12,7 @@ public class DataReader : MonoBehaviour
     public PlayerData PlayerData;
     public InitialData InitialData;
     public HeroData HeroData;
+    public StageData StageDAta;
 
 
     private void Awake()

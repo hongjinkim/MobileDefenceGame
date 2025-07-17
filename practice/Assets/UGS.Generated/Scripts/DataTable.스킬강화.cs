@@ -17,52 +17,52 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class 영웅 : ITable
+    public partial class 스킬강화 : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<영웅> loadedList, Dictionary<string, 영웅> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<스킬강화> loadedList, Dictionary<string, 스킬강화> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
-        static string sheetID = "1399143667"; // it is sheet id
+        static string sheetID = "113599436"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, 영웅> 영웅Map = new Dictionary<string, 영웅>();  
-        public static List<영웅> 영웅List = new List<영웅>();   
+        public static Dictionary<string, 스킬강화> 스킬강화Map = new Dictionary<string, 스킬강화>();  
+        public static List<스킬강화> 스킬강화List = new List<스킬강화>();   
 
         /// <summary>
-        /// Get 영웅 List 
+        /// Get 스킬강화 List 
         /// Auto Load
         /// </summary>
-        public static List<영웅> GetList()
+        public static List<스킬강화> GetList()
         {{
            if (isLoaded == false) Load();
-           return 영웅List;
+           return 스킬강화List;
         }}
 
         /// <summary>
-        /// Get 영웅 Dictionary, keyType is your sheet A1 field type.
+        /// Get 스킬강화 Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, 영웅>  GetDictionary()
+        public static Dictionary<string, 스킬강화>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return 영웅Map;
+           return 스킬강화Map;
         }}
 
     
 
 /* Fields. */
 
-		public String 영웅_ID;
-		public EGrade 영웅_희귀도;
-		public String 영웅_이름;
-		public String 영웅_설명;
-		public String 영웅_스킬ID;
-		public String 영웅_스킬이름;
-		public String 영웅_스킬설명;
+		public String 스킬강화_스킬ID;
+		public String 스킬강화_이름;
+		public String 스킬강화_설명;
+		public ESkillUpgradeTier 스킬강화_단계;
+		public ESkillBehaviorType 스킬강화_발동조건;
+		public ESkillUpgradeType 스킬강화_강화타입;
+		public Single 스킬강화_값;
   
 
 #region fuctions
@@ -73,7 +73,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("영웅 is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("스킬강화 is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -89,7 +89,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<영웅>, Dictionary<string, 영웅>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<스킬강화>, Dictionary<string, 스킬강화>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -117,14 +117,14 @@ namespace DataTable
                
 
 
-    public static (List<영웅> list, Dictionary<string, 영웅> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<string, 영웅> Map = new Dictionary<string, 영웅>();
-            List<영웅> List = new List<영웅>();     
+    public static (List<스킬강화> list, Dictionary<string, 스킬강화> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, 스킬강화> Map = new Dictionary<string, 스킬강화>();
+            List<스킬강화> List = new List<스킬강화>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(영웅).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(스킬강화).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["영웅"];
+            var sheet = jsonObject["스킬강화"];
 
             foreach (var column in sheet.Keys)
             {
@@ -143,7 +143,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            영웅 instance = new 영웅();
+                            스킬강화 instance = new 스킬강화();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -180,12 +180,12 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.영웅_ID, instance);
+                            Map.Add(instance.스킬강화_스킬ID, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            영웅List = List;
-                            영웅Map = Map;
+                            스킬강화List = List;
+                            스킬강화Map = Map;
                             isLoaded = true;
                         }
                     } 
@@ -195,10 +195,10 @@ namespace DataTable
 
  
 
-        public static void Write(영웅 data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(스킬강화 data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(영웅).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(스킬강화).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

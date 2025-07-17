@@ -7,15 +7,4 @@ using UnityEngine;
 public class PlayerValue : BaseSaveData<PlayerValue>
 {
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
