@@ -149,6 +149,5 @@ public static class Extension
     {
         return new Vector3(vector3.x, vector3.z, vector3.z);
     }
-
 }
 

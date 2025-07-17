@@ -27,7 +27,7 @@ public enum ESkillBehaviorType
 [UGS(typeof(ESkillUpgradeTier))]
 public enum ESkillUpgradeTier // 스킬 업그레이드 단계
 {
-    Acquisition,            // 처음 획득
+    Summon,            // 소환으로 시작
     Normal,       // 일반 강화
     Advanced,    // 고급 강화
     EvolveRequirement,// 돌파 조건
@@ -37,7 +37,7 @@ public enum ESkillUpgradeTier // 스킬 업그레이드 단계
 [UGS(typeof(ESkillUpgradeType))]
 public enum ESkillUpgradeType // 스킬 업그레이드 타입
 { 
-    DamageUP,          // 데미지 증가
+    DamageUp,          // 데미지 증가
     ProjectileUp,      // 투사체 개수 증가
     PierceUp,         // 관통 증가
     AreaUp,           // 범위 증가

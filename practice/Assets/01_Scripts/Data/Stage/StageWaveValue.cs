@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+
+[Serializable]
+public class EnemySpawnData
+{
+    public string EnemyID { get; set; } // ID of the enemy to spawn
+    public int SpawnCount { get; set; } // Number of enemies to spawn
+    public float SpawnDelay { get; set; } // Delay before spawning the next enemy
+}
+[Serializable]
 public class StageWaveValue
 {
-    public ESpawnPattern SpawnPattern { get; set; } // 적 소환 패턴
-    public StageEnemyValue EnemyValue { get; set; } // 적의 스탯 정보
-
+    public int ID { get; set; } // Wave ID 
+    public List<EnemySpawnData> spawnDatas = new List<EnemySpawnData>();
 }

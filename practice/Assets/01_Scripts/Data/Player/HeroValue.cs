@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class HeroValue
 {
-    public string Name { get; set; }
-    public string ID { get; set; }
-    public string Description { get; set; }
-    public EGrade Grade { get; set; }
+    public string Name;
+    public string ID;
+    public string Description;
+    public EGrade Grade;
 
 }

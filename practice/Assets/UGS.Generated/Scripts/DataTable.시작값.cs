@@ -20,7 +20,7 @@ namespace DataTable
     public partial class 시작값 : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<시작값> loadedList, Dictionary<float, 시작값> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<시작값> loadedList, Dictionary<int, 시작값> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<float, 시작값> 시작값Map = new Dictionary<float, 시작값>();  
+        public static Dictionary<int, 시작값> 시작값Map = new Dictionary<int, 시작값>();  
         public static List<시작값> 시작값List = new List<시작값>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get 시작값 Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<float, 시작값>  GetDictionary()
+        public static Dictionary<int, 시작값>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return 시작값Map;
@@ -56,6 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
+		public Int32 idx;
 		public Single 게임진행속도;
 		public Int32 기본_공격력;
 		public Int32 기본_체력;
@@ -87,7 +88,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<시작값>, Dictionary<float, 시작값>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<시작값>, Dictionary<int, 시작값>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -115,8 +116,8 @@ namespace DataTable
                
 
 
-    public static (List<시작값> list, Dictionary<float, 시작값> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<float, 시작값> Map = new Dictionary<float, 시작값>();
+    public static (List<시작값> list, Dictionary<int, 시작값> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, 시작값> Map = new Dictionary<int, 시작값>();
             List<시작값> List = new List<시작값>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(시작값).GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -178,7 +179,7 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.게임진행속도, instance);
+                            Map.Add(instance.idx, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 

@@ -1,14 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-
+[Serializable]
 public class StageValue
 {
     public int StageNum { get; private set; }
 
-    public StageWaveValue[] Waves { get; set; } // 스테이지의 웨이브 정보
+    public StageEnemyValue EnemyInfo = new StageEnemyValue(); // Enemy stats for this spawn
 
-    public StageEnemyValue[] Boss { get; set; } // 스테이지의 보스 정보
+    public Dictionary<int, StageWaveValue> WaveValueDict = new Dictionary<int, StageWaveValue>();
 
     public StageValue(int stageNum)
     {

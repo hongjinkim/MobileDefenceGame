@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class HeroData
 {
-    public Dictionary<string, HeroValue> HeroDict = new Dictionary<string, HeroValue>();
+    public HeroValueDictionary HeroDict;
 
     private int heroCount;
 
     public HeroData()
     {
         LoadData();
-    }
+    }   
 
     private void LoadData()
     {
@@ -27,7 +29,7 @@ public class HeroData
             heroData.Description = heroList[i].영웅_설명;
             //HeroIcon = Resources.Load<Sprite>($"Icons/Heroes/{hero.아이콘}");
 
-            HeroDict.Add(heroData.ID, heroData);
+            HeroDict.ToDictionary().Add(heroData.ID, heroData);
         }
     }
 }

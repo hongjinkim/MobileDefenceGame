@@ -12,7 +12,7 @@ public class DataReader : MonoBehaviour
     public PlayerData PlayerData;
     public InitialData InitialData;
     public HeroData HeroData;
-    public StageData StageDAta;
+    public StageData StageData;
 
 
     private void Awake()
@@ -21,27 +21,29 @@ public class DataReader : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-
-            UnityGoogleSheet.LoadAllData();
-
-            Initialize();
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
-
+        UnityGoogleSheet.LoadAllData();
+        Initialize();
     }
 
     // 시작 시 데이터 초기화
     private void Initialize()
     {
-        // 각 생성자에서 데이터 로드
-        PlayerData = new PlayerData();
+        LoadData();
+        DataLoadedEvent.RaiseEvent();
+    }
+
+    private void LoadData()
+    {
+        // 각 데이터 클래스의 데이터를 로드
+        //PlayerData.LoadData();
         InitialData = new InitialData();
         HeroData = new HeroData();
-
-        DataLoadedEvent.RaiseEvent();
+        StageData = new StageData();
     }
 
 }

@@ -20,7 +20,7 @@ namespace DataTable
     public partial class 스킬강화 : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<스킬강화> loadedList, Dictionary<string, 스킬강화> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<스킬강화> loadedList, Dictionary<int, 스킬강화> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, 스킬강화> 스킬강화Map = new Dictionary<string, 스킬강화>();  
+        public static Dictionary<int, 스킬강화> 스킬강화Map = new Dictionary<int, 스킬강화>();  
         public static List<스킬강화> 스킬강화List = new List<스킬강화>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get 스킬강화 Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, 스킬강화>  GetDictionary()
+        public static Dictionary<int, 스킬강화>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return 스킬강화Map;
@@ -56,6 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
+		public Int32 idx;
 		public String 스킬강화_스킬ID;
 		public String 스킬강화_이름;
 		public String 스킬강화_설명;
@@ -89,7 +90,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<스킬강화>, Dictionary<string, 스킬강화>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<스킬강화>, Dictionary<int, 스킬강화>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -117,8 +118,8 @@ namespace DataTable
                
 
 
-    public static (List<스킬강화> list, Dictionary<string, 스킬강화> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<string, 스킬강화> Map = new Dictionary<string, 스킬강화>();
+    public static (List<스킬강화> list, Dictionary<int, 스킬강화> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, 스킬강화> Map = new Dictionary<int, 스킬강화>();
             List<스킬강화> List = new List<스킬강화>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(스킬강화).GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -180,7 +181,7 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.스킬강화_스킬ID, instance);
+                            Map.Add(instance.idx, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 

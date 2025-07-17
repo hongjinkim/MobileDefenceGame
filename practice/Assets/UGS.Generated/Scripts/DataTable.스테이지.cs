@@ -56,7 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
-		public Int32 스테이지_최대스테이지;
+		public Int32 idx;
 		public Int32 스테이지_스테이지ID;
 		public Int32 스테이지_웨이브ID;
 		public ESpawnPattern 스테이지_패턴;
@@ -180,7 +180,7 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.스테이지_최대스테이지, instance);
+                            Map.Add(instance.idx, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 

@@ -20,7 +20,7 @@ namespace DataTable
     public partial class 영웅 : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<영웅> loadedList, Dictionary<string, 영웅> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<영웅> loadedList, Dictionary<int, 영웅> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,7 +29,7 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, 영웅> 영웅Map = new Dictionary<string, 영웅>();  
+        public static Dictionary<int, 영웅> 영웅Map = new Dictionary<int, 영웅>();  
         public static List<영웅> 영웅List = new List<영웅>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get 영웅 Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, 영웅>  GetDictionary()
+        public static Dictionary<int, 영웅>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return 영웅Map;
@@ -56,6 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
+		public Int32 idx;
 		public String 영웅_ID;
 		public EGrade 영웅_희귀도;
 		public String 영웅_이름;
@@ -89,7 +90,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<영웅>, Dictionary<string, 영웅>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<영웅>, Dictionary<int, 영웅>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -117,8 +118,8 @@ namespace DataTable
                
 
 
-    public static (List<영웅> list, Dictionary<string, 영웅> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<string, 영웅> Map = new Dictionary<string, 영웅>();
+    public static (List<영웅> list, Dictionary<int, 영웅> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, 영웅> Map = new Dictionary<int, 영웅>();
             List<영웅> List = new List<영웅>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(영웅).GetFields(BindingFlags.Public | BindingFlags.Instance);
@@ -180,7 +181,7 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.영웅_ID, instance);
+                            Map.Add(instance.idx, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 
