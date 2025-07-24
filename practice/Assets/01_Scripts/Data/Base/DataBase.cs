@@ -1,34 +1,77 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UGS;
 using UnityEngine;
 
-public class DataBase : BasicSingleton<DataBase>
+
+public class DataBase : SerializedMonoBehaviour
 {
-    private DataReader data;
+    public VoidEventChannelSO DataLoadedEvent;
+
+    public static DataBase Instance { get; private set; } = null;
+    private bool isDataLoaded = false;
+
+
+
+    // data 클래스들을 여기에 선언
+
+    [TabGroup("Tabs", "Player"), HideLabel][InlineProperty][SerializeField] private PlayerData playerData;
+    [TabGroup("Tabs", "Initial"), HideLabel][InlineProperty][SerializeField] private InitialData initialData;
+    [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData;
+    [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private StageData stageData;
+
 
     private void Awake()
     {
-        data = DataReader.Instance;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        UnityGoogleSheet.LoadAllData();
+        Initialize();
     }
+
+    // 시작 시 데이터 초기화
+    private void Initialize()
+    {
+        LoadData();
+        isDataLoaded = true;
+        DataLoadedEvent.RaiseEvent();
+    }
+
+    private void LoadData()
+    {
+        // 각 데이터 클래스의 데이터를 로드
+        //PlayerData.LoadData();
+        initialData = new InitialData();
+        heroData = new HeroData();
+        stageData = new StageData();
+    }
+
 
     public static PlayerData GetPlayerData()
     {
-        return Instance.data.PlayerData;
+        if(Instance == null || Instance.playerData == null || !Instance.isDataLoaded)
+        {
+            Debug.LogError("DataReader instance or playerData is not initialized.");
+            return null;
+        }
+        return Instance.playerData;
     }
 
     public static InitialData GetInitialData()
     {
-        return Instance.data.InitialData;
+        if (Instance == null || Instance.initialData == null || !Instance.isDataLoaded)
+        {
+            Debug.LogError("DataReader instance or initialData is not initialized.");
+            return null;
+        }
+        return Instance.initialData;
     }
-
-    // Uncomment the following lines to debug the data loading
-
-    //foreach (var value in DefaultTable.Data.DataList)
-    //       {
-    //           Debug.Log(value.index + "," + value.intValue + "," + value.strValue);
-    //       }
-    //var dataFromMap = DefaultTable.Data.DataMap[0];
-    //Debug.Log("dataFromMap : " + dataFromMap.index + ", " + dataFromMap.intValue + "," + dataFromMap.strValue);
-
 }

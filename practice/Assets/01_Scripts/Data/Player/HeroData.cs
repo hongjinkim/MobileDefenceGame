@@ -1,11 +1,15 @@
-﻿using System.Collections;
-using UnityEngine;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class HeroData
 {
+    [ShowInInspector]
+    [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.ExpandedFoldout, KeyLabel = "Hero ID", ValueLabel = "Info")]
     public Dictionary<string, HeroValue> HeroDict = new Dictionary<string, HeroValue>();
 
     private int heroCount;
