@@ -32,7 +32,7 @@ public class StageData
 
     private void LoadData()
     {
-        MaxStage = DataTable.스테이지.스테이지List.Max(stage => stage.스테이지_스테이지ID);
+        MaxStage = 2;//DataTable.스테이지.스테이지List.Max(stage => stage.스테이지_스테이지ID);
 
         for (int i = 1; i <= this.MaxStage; i++)
         {
@@ -41,33 +41,33 @@ public class StageData
 
             // 스테이지 적 스탯
             // 적 체력
-            Stage.EnemyInfo.EnemyHP.Start = DataTable.적.적Map["적스탯_시작값"].적_체력;
-            Stage.EnemyInfo.EnemyHP.Constant = DataTable.적.적Map["적스탯_상수곱"].적_체력;
-            Stage.EnemyInfo.EnemyHP.Exponent = (double)DataTable.적.적Map["적스탯_지수곱"].적_체력;
+            Stage.EnemyInfo.EnemyHP.Start = DataTable.적.적Map["Start"].적_체력;
+            Stage.EnemyInfo.EnemyHP.Constant = DataTable.적.적Map["Constant"].적_체력;
+            Stage.EnemyInfo.EnemyHP.Exponent = (double)DataTable.적.적Map["Exponent"].적_체력;
             Stage.EnemyInfo.EnemyHP.SetEnemyStat(i);
 
             // 적 공격력
-            Stage.EnemyInfo.EnemyAttack.Start = DataTable.적.적Map["적스탯_시작값"].적_공격력;
-            Stage.EnemyInfo.EnemyAttack.Constant = DataTable.적.적Map["적스탯_상수곱"].적_공격력;
-            Stage.EnemyInfo.EnemyAttack.Exponent = (double)DataTable.적.적Map["적스탯_상수곱"].적_공격력;
+            Stage.EnemyInfo.EnemyAttack.Start = DataTable.적.적Map["Start"].적_공격력;
+            Stage.EnemyInfo.EnemyAttack.Constant = DataTable.적.적Map["Constant"].적_공격력;
+            Stage.EnemyInfo.EnemyAttack.Exponent = (double)DataTable.적.적Map["Exponent"].적_공격력;
             Stage.EnemyInfo.EnemyAttack.SetEnemyStat(i);
 
             // 적 골드
-            Stage.EnemyInfo.EnemyGold.Start = DataTable.적.적Map["적스탯_시작값"].적_골드드랍;
-            Stage.EnemyInfo.EnemyGold.Constant = DataTable.적.적Map["적스탯_시작값"].적_골드드랍;
-            Stage.EnemyInfo.EnemyGold.Exponent = (double)DataTable.적.적Map["적스탯_시작값"].적_골드드랍;
+            Stage.EnemyInfo.EnemyGold.Start = DataTable.적.적Map["Start"].적_골드드랍;
+            Stage.EnemyInfo.EnemyGold.Constant = DataTable.적.적Map["Start"].적_골드드랍;
+            Stage.EnemyInfo.EnemyGold.Exponent = (double)DataTable.적.적Map["Exponent"].적_골드드랍;
             Stage.EnemyInfo.EnemyGold.SetEnemyStat(i);
 
             // 적 보스 공격력 배수
-            Stage.EnemyInfo.BossAttackMultiplier.Start = DataTable.적.적Map["적스탯_시작값"].적_보스공격력배수;
-            Stage.EnemyInfo.BossAttackMultiplier.Constant = DataTable.적.적Map["적스탯_시작값"].적_보스공격력배수;
-            Stage.EnemyInfo.BossAttackMultiplier.Exponent = (double)DataTable.적.적Map["적스탯_시작값"].적_보스공격력배수;
+            Stage.EnemyInfo.BossAttackMultiplier.Start = DataTable.적.적Map["Start"].적_보스공격력배수;
+            Stage.EnemyInfo.BossAttackMultiplier.Constant = DataTable.적.적Map["Start"].적_보스공격력배수;
+            Stage.EnemyInfo.BossAttackMultiplier.Exponent = (double)DataTable.적.적Map["Start"].적_보스공격력배수;
             Stage.EnemyInfo.BossAttackMultiplier.SetEnemyStat(i);
 
             // 적 보스 체력 배수
-            Stage.EnemyInfo.BossHPMultiplier.Start = DataTable.적.적Map["적스탯_시작값"].적_보스체력배수;
-            Stage.EnemyInfo.BossHPMultiplier.Constant = DataTable.적.적Map["적스탯_시작값"].적_보스체력배수;
-            Stage.EnemyInfo.BossHPMultiplier.Exponent = (double)DataTable.적.적Map["적스탯_시작값"].적_보스체력배수;
+            Stage.EnemyInfo.BossHPMultiplier.Start = DataTable.적.적Map["Start"].적_보스체력배수;
+            Stage.EnemyInfo.BossHPMultiplier.Constant = DataTable.적.적Map["Start"].적_보스체력배수;
+            Stage.EnemyInfo.BossHPMultiplier.Exponent = (double)DataTable.적.적Map["Start"].적_보스체력배수;
             Stage.EnemyInfo.BossHPMultiplier.SetEnemyStat(i);
 
             // 웨이브 정보

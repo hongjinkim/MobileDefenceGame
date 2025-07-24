@@ -56,12 +56,12 @@ namespace DataTable
 
 /* Fields. */
 
-		public Int32 idx;
-		public Single 게임진행속도;
-		public Int32 기본_공격력;
-		public Int32 기본_체력;
-		public Single 기본_공속;
-		public Single 기본_사거리;
+		public System.Int32 idx;
+		public System.Single 게임진행속도;
+		public System.Int32 기본_공격력;
+		public System.Int32 기본_체력;
+		public System.Single 기본_공속;
+		public System.Single 기본_사거리;
   
 
 #region fuctions

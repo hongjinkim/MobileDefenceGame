@@ -56,14 +56,14 @@ namespace DataTable
 
 /* Fields. */
 
-		public Int32 idx;
-		public String 스킬강화_스킬ID;
-		public String 스킬강화_이름;
-		public String 스킬강화_설명;
+		public System.Int32 idx;
+		public System.String 스킬강화_스킬ID;
+		public System.String 스킬강화_이름;
+		public System.String 스킬강화_설명;
 		public ESkillUpgradeTier 스킬강화_단계;
 		public ESkillBehaviorType 스킬강화_발동조건;
 		public ESkillUpgradeType 스킬강화_강화타입;
-		public Single 스킬강화_값;
+		public System.Single 스킬강화_값;
   
 
 #region fuctions

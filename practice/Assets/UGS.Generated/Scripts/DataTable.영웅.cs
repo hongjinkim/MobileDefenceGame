@@ -56,14 +56,14 @@ namespace DataTable
 
 /* Fields. */
 
-		public Int32 idx;
-		public String 영웅_ID;
+		public System.Int32 idx;
+		public System.String 영웅_ID;
 		public EGrade 영웅_희귀도;
-		public String 영웅_이름;
-		public String 영웅_설명;
-		public String 영웅_스킬ID;
-		public String 영웅_스킬이름;
-		public String 영웅_스킬설명;
+		public System.String 영웅_이름;
+		public System.String 영웅_설명;
+		public System.String 영웅_스킬ID;
+		public System.String 영웅_스킬이름;
+		public System.String 영웅_스킬설명;
   
 
 #region fuctions

@@ -56,7 +56,7 @@ namespace DataTable
 
 /* Fields. */
 
-		public String 적_구분;
+		public System.String 적_구분;
 		public BigNum 적_체력;
 		public BigNum 적_공격력;
 		public BigNum 적_골드드랍;

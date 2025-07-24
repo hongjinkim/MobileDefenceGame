@@ -56,13 +56,13 @@ namespace DataTable
 
 /* Fields. */
 
-		public Int32 idx;
-		public Int32 스테이지_스테이지ID;
-		public Int32 스테이지_웨이브ID;
+		public System.Int32 idx;
+		public System.Int32 스테이지_스테이지ID;
+		public System.Int32 스테이지_웨이브ID;
 		public ESpawnPattern 스테이지_패턴;
-		public String 스테이지_적ID;
-		public Int32 스테이지_적수;
-		public Single 스테이지_딜레이;
+		public System.String 스테이지_적ID;
+		public System.Int32 스테이지_적수;
+		public System.Single 스테이지_딜레이;
   
 
 #region fuctions
