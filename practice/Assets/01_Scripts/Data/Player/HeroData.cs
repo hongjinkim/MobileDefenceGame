@@ -6,7 +6,7 @@ using System;
 [Serializable]
 public class HeroData
 {
-    public HeroValueDictionary HeroDict;
+    public Dictionary<string, HeroValue> HeroDict = new Dictionary<string, HeroValue>();
 
     private int heroCount;
 
@@ -29,7 +29,7 @@ public class HeroData
             heroData.Description = heroList[i].영웅_설명;
             //HeroIcon = Resources.Load<Sprite>($"Icons/Heroes/{hero.아이콘}");
 
-            HeroDict.ToDictionary().Add(heroData.ID, heroData);
+            HeroDict.Add(heroData.ID, heroData);
         }
     }
 }
