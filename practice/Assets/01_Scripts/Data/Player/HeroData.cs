@@ -28,6 +28,10 @@ public class HeroData
             heroData.Description = heroList[i].Hero_Description;
             //HeroIcon = Resources.Load<Sprite>($"Icons/Heroes/{hero.아이콘}");
 
+            heroData.SkillUpgradeDict = new Dictionary<string, SkillUpgradeValue>();
+            var skillID = heroList[i].Skill_ID;
+            var SkillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Skill_ID == skillID);
+
             HeroDict.Add(heroData.ID, heroData);
         }
     }

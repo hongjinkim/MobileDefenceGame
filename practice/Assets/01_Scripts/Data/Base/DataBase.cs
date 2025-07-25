@@ -21,7 +21,6 @@ public class DataBase : SerializedMonoBehaviour
     [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData = new HeroData();
     [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private StageData stageData = new StageData();
 
-
     private void Awake()
     {
         if (Instance == null)
