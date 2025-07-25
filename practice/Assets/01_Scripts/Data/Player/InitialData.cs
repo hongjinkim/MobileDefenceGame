@@ -14,14 +14,9 @@ public class InitialData
     public float AttackSpeed;
     public float AttackRange;
 
-    public InitialData()
+    public void LoadData()
     {
-        LoadData();
-    }
-
-    private void LoadData()
-    {
-        var InitialData = DataTable.INITIAL.INITIALList[0];
+        var InitialData = DataTable.Initial.GetList()[0];
 
         GamePlayingSpeed = InitialData.GameSpeed;
         StartAttack = InitialData.Attack;

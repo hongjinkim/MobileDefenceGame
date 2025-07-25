@@ -8,10 +8,12 @@ using UnityEngine;
 [Serializable]
 public class StageValue
 {
-    [ShowInInspector]
     public int StageNum { get; private set; }
 
     public StageEnemyValue EnemyInfo = new StageEnemyValue(); // Enemy stats for this spawn
+
+    [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Wave ID", ValueLabel = "Info")]
+    public Dictionary<int, StageWaveValue> WaveValueDict = new Dictionary<int, StageWaveValue>(); //몬스터 등장정보
 
     public StageValue(int stageNum)
     {

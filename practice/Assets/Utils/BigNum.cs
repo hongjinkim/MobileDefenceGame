@@ -569,22 +569,11 @@ public class BigNumType : IType
    
     public object Read(string value)
     {
-        if (string.IsNullOrEmpty(value))
-            throw new UGSValueParseException("Parse Faield => " + value + " To " + GetType().Name);
-
-        BigNum @bigNum = new BigNum(0);
-        var b = BigNum.TryParse(value, out @bigNum);
-        if (b == false)
-        {
-            throw new UGSValueParseException("Parse Faield => " + value + " To " + this.GetType().Name);
-
-        }
-        return @bigNum;
+        return new BigNum(double.Parse(value));
     }
     public string Write(object value)
     {
-        BigNum num = (BigNum)value;
-        return $"[{num}]";
+        return "";
     }
 }
 

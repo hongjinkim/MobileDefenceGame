@@ -17,10 +17,10 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class INITIAL : ITable
+    public partial class Initial : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<INITIAL> loadedList, Dictionary<int, INITIAL> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Initial> loadedList, Dictionary<int, Initial> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,27 +29,27 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, INITIAL> INITIALMap = new Dictionary<int, INITIAL>();  
-        public static List<INITIAL> INITIALList = new List<INITIAL>();   
+        public static Dictionary<int, Initial> InitialMap = new Dictionary<int, Initial>();  
+        public static List<Initial> InitialList = new List<Initial>();   
 
         /// <summary>
-        /// Get INITIAL List 
+        /// Get Initial List 
         /// Auto Load
         /// </summary>
-        public static List<INITIAL> GetList()
+        public static List<Initial> GetList()
         {{
            if (isLoaded == false) Load();
-           return INITIALList;
+           return InitialList;
         }}
 
         /// <summary>
-        /// Get INITIAL Dictionary, keyType is your sheet A1 field type.
+        /// Get Initial Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, INITIAL>  GetDictionary()
+        public static Dictionary<int, Initial>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return INITIALMap;
+           return InitialMap;
         }}
 
     
@@ -72,7 +72,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("INITIAL is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Initial is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -88,7 +88,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<INITIAL>, Dictionary<int, INITIAL>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Initial>, Dictionary<int, Initial>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -116,14 +116,14 @@ namespace DataTable
                
 
 
-    public static (List<INITIAL> list, Dictionary<int, INITIAL> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, INITIAL> Map = new Dictionary<int, INITIAL>();
-            List<INITIAL> List = new List<INITIAL>();     
+    public static (List<Initial> list, Dictionary<int, Initial> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, Initial> Map = new Dictionary<int, Initial>();
+            List<Initial> List = new List<Initial>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(INITIAL).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Initial).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["INITIAL"];
+            var sheet = jsonObject["Initial"];
 
             foreach (var column in sheet.Keys)
             {
@@ -142,7 +142,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            INITIAL instance = new INITIAL();
+                            Initial instance = new Initial();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -183,8 +183,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            INITIALList = List;
-                            INITIALMap = Map;
+                            InitialList = List;
+                            InitialMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -194,10 +194,10 @@ namespace DataTable
 
  
 
-        public static void Write(INITIAL data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Initial data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(INITIAL).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Initial).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

@@ -17,10 +17,10 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class ENEMY : ITable
+    public partial class Enemy : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<ENEMY> loadedList, Dictionary<string, ENEMY> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Enemy> loadedList, Dictionary<string, Enemy> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,27 +29,27 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, ENEMY> ENEMYMap = new Dictionary<string, ENEMY>();  
-        public static List<ENEMY> ENEMYList = new List<ENEMY>();   
+        public static Dictionary<string, Enemy> EnemyMap = new Dictionary<string, Enemy>();  
+        public static List<Enemy> EnemyList = new List<Enemy>();   
 
         /// <summary>
-        /// Get ENEMY List 
+        /// Get Enemy List 
         /// Auto Load
         /// </summary>
-        public static List<ENEMY> GetList()
+        public static List<Enemy> GetList()
         {{
            if (isLoaded == false) Load();
-           return ENEMYList;
+           return EnemyList;
         }}
 
         /// <summary>
-        /// Get ENEMY Dictionary, keyType is your sheet A1 field type.
+        /// Get Enemy Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, ENEMY>  GetDictionary()
+        public static Dictionary<string, Enemy>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return ENEMYMap;
+           return EnemyMap;
         }}
 
     
@@ -72,7 +72,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("ENEMY is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Enemy is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -88,7 +88,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<ENEMY>, Dictionary<string, ENEMY>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Enemy>, Dictionary<string, Enemy>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -116,14 +116,14 @@ namespace DataTable
                
 
 
-    public static (List<ENEMY> list, Dictionary<string, ENEMY> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<string, ENEMY> Map = new Dictionary<string, ENEMY>();
-            List<ENEMY> List = new List<ENEMY>();     
+    public static (List<Enemy> list, Dictionary<string, Enemy> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, Enemy> Map = new Dictionary<string, Enemy>();
+            List<Enemy> List = new List<Enemy>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(ENEMY).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Enemy).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["ENEMY"];
+            var sheet = jsonObject["Enemy"];
 
             foreach (var column in sheet.Keys)
             {
@@ -142,7 +142,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            ENEMY instance = new ENEMY();
+                            Enemy instance = new Enemy();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -183,8 +183,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            ENEMYList = List;
-                            ENEMYMap = Map;
+                            EnemyList = List;
+                            EnemyMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -194,10 +194,10 @@ namespace DataTable
 
  
 
-        public static void Write(ENEMY data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Enemy data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(ENEMY).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Enemy).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

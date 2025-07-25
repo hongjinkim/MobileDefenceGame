@@ -8,19 +8,15 @@ using UnityEngine;
 [Serializable]
 public class HeroData
 {
-    [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.ExpandedFoldout, KeyLabel = "Hero ID", ValueLabel = "Info")]
+    [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Hero ID", ValueLabel = "Info")]
     public Dictionary<string, HeroValue> HeroDict = new Dictionary<string, HeroValue>();
 
     private int heroCount;
 
-    public HeroData()
-    {
-        LoadData();
-    }   
 
-    private void LoadData()
+    public void LoadData()
     {
-        var heroList = DataTable.HERO.HEROList;
+        var heroList = DataTable.Hero.HeroList;
         heroCount = heroList.Count;
 
         for (int i = 0; i < heroCount; i++)

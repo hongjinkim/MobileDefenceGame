@@ -4061,50 +4061,6 @@ MonoBehaviour:
   PoolType: 0
   m_List: []
   m_AwakeCreateCount: 50
---- !u!1 &1321806856
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1321806858}
-  - component: {fileID: 1321806857}
-  m_Layer: 0
-  m_Name: DataLoadTest
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1321806857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321806856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed56433f6ca4f04488080830ba9ed6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1321806858
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321806856}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.59021235, y: 1.0000033, z: 0.22503233}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1328514010 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6425929453810843285, guid: 907b278a7d3eede48ac3da3286160283, type: 3}
@@ -8136,7 +8092,6 @@ SceneRoots:
   - {fileID: 1843182858}
   - {fileID: 1716982770}
   - {fileID: 1755106813}
-  - {fileID: 1321806858}
   - {fileID: 835732952}
   - {fileID: 1821647094}
   - {fileID: 1901885000}

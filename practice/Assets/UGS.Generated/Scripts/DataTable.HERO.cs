@@ -17,10 +17,10 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class HERO : ITable
+    public partial class Hero : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<HERO> loadedList, Dictionary<int, HERO> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Hero> loadedList, Dictionary<int, Hero> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,27 +29,27 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, HERO> HEROMap = new Dictionary<int, HERO>();  
-        public static List<HERO> HEROList = new List<HERO>();   
+        public static Dictionary<int, Hero> HeroMap = new Dictionary<int, Hero>();  
+        public static List<Hero> HeroList = new List<Hero>();   
 
         /// <summary>
-        /// Get HERO List 
+        /// Get Hero List 
         /// Auto Load
         /// </summary>
-        public static List<HERO> GetList()
+        public static List<Hero> GetList()
         {{
            if (isLoaded == false) Load();
-           return HEROList;
+           return HeroList;
         }}
 
         /// <summary>
-        /// Get HERO Dictionary, keyType is your sheet A1 field type.
+        /// Get Hero Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, HERO>  GetDictionary()
+        public static Dictionary<int, Hero>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return HEROMap;
+           return HeroMap;
         }}
 
     
@@ -74,7 +74,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("HERO is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Hero is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -90,7 +90,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<HERO>, Dictionary<int, HERO>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Hero>, Dictionary<int, Hero>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -118,14 +118,14 @@ namespace DataTable
                
 
 
-    public static (List<HERO> list, Dictionary<int, HERO> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, HERO> Map = new Dictionary<int, HERO>();
-            List<HERO> List = new List<HERO>();     
+    public static (List<Hero> list, Dictionary<int, Hero> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, Hero> Map = new Dictionary<int, Hero>();
+            List<Hero> List = new List<Hero>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(HERO).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Hero).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["HERO"];
+            var sheet = jsonObject["Hero"];
 
             foreach (var column in sheet.Keys)
             {
@@ -144,7 +144,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            HERO instance = new HERO();
+                            Hero instance = new Hero();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -185,8 +185,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            HEROList = List;
-                            HEROMap = Map;
+                            HeroList = List;
+                            HeroMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -196,10 +196,10 @@ namespace DataTable
 
  
 
-        public static void Write(HERO data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Hero data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(HERO).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Hero).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

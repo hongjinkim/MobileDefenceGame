@@ -16,10 +16,10 @@ public class DataBase : SerializedMonoBehaviour
 
     // data 클래스들을 여기에 선언
 
-    [TabGroup("Tabs", "Player"), HideLabel][InlineProperty][SerializeField] private PlayerData playerData;
-    [TabGroup("Tabs", "Initial"), HideLabel][InlineProperty][SerializeField] private InitialData initialData;
-    [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData;
-    [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private StageData stageData;
+    [TabGroup("Tabs", "Player"), HideLabel][InlineProperty][SerializeField] private PlayerData playerData = new PlayerData();
+    [TabGroup("Tabs", "Initial"), HideLabel][InlineProperty][SerializeField] private InitialData initialData = new InitialData();
+    [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData = new HeroData();
+    [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private StageData stageData = new StageData();
 
 
     private void Awake()
@@ -28,13 +28,13 @@ public class DataBase : SerializedMonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            UnityGoogleSheet.LoadAllData();
+            Initialize();
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
-        UnityGoogleSheet.LoadAllData();
-        Initialize();
     }
 
     // 시작 시 데이터 초기화
@@ -48,10 +48,10 @@ public class DataBase : SerializedMonoBehaviour
     private void LoadData()
     {
         // 각 데이터 클래스의 데이터를 로드
-        playerData = new PlayerData();
-        initialData = new InitialData();
-        heroData = new HeroData();
-        stageData = new StageData();
+        playerData.LoadData();
+        initialData.LoadData();
+        heroData.LoadData();
+        stageData.LoadData();
     }
 
 

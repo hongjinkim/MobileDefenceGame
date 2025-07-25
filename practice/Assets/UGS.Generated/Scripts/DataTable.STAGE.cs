@@ -17,10 +17,10 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class STAGE : ITable
+    public partial class Stage : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<STAGE> loadedList, Dictionary<int, STAGE> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Stage> loadedList, Dictionary<int, Stage> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,27 +29,27 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, STAGE> STAGEMap = new Dictionary<int, STAGE>();  
-        public static List<STAGE> STAGEList = new List<STAGE>();   
+        public static Dictionary<int, Stage> StageMap = new Dictionary<int, Stage>();  
+        public static List<Stage> StageList = new List<Stage>();   
 
         /// <summary>
-        /// Get STAGE List 
+        /// Get Stage List 
         /// Auto Load
         /// </summary>
-        public static List<STAGE> GetList()
+        public static List<Stage> GetList()
         {{
            if (isLoaded == false) Load();
-           return STAGEList;
+           return StageList;
         }}
 
         /// <summary>
-        /// Get STAGE Dictionary, keyType is your sheet A1 field type.
+        /// Get Stage Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, STAGE>  GetDictionary()
+        public static Dictionary<int, Stage>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return STAGEMap;
+           return StageMap;
         }}
 
     
@@ -73,7 +73,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("STAGE is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Stage is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -89,7 +89,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<STAGE>, Dictionary<int, STAGE>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Stage>, Dictionary<int, Stage>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -117,14 +117,14 @@ namespace DataTable
                
 
 
-    public static (List<STAGE> list, Dictionary<int, STAGE> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, STAGE> Map = new Dictionary<int, STAGE>();
-            List<STAGE> List = new List<STAGE>();     
+    public static (List<Stage> list, Dictionary<int, Stage> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, Stage> Map = new Dictionary<int, Stage>();
+            List<Stage> List = new List<Stage>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(STAGE).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Stage).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["STAGE"];
+            var sheet = jsonObject["Stage"];
 
             foreach (var column in sheet.Keys)
             {
@@ -143,7 +143,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            STAGE instance = new STAGE();
+                            Stage instance = new Stage();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -184,8 +184,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            STAGEList = List;
-                            STAGEMap = Map;
+                            StageList = List;
+                            StageMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -195,10 +195,10 @@ namespace DataTable
 
  
 
-        public static void Write(STAGE data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Stage data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(STAGE).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Stage).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {
