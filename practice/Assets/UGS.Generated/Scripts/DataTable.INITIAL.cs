@@ -17,52 +17,51 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class 스테이지 : ITable
+    public partial class INITIAL : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<스테이지> loadedList, Dictionary<int, 스테이지> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<INITIAL> loadedList, Dictionary<int, INITIAL> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
-        static string sheetID = "1740150166"; // it is sheet id
+        static string sheetID = "0"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, 스테이지> 스테이지Map = new Dictionary<int, 스테이지>();  
-        public static List<스테이지> 스테이지List = new List<스테이지>();   
+        public static Dictionary<int, INITIAL> INITIALMap = new Dictionary<int, INITIAL>();  
+        public static List<INITIAL> INITIALList = new List<INITIAL>();   
 
         /// <summary>
-        /// Get 스테이지 List 
+        /// Get INITIAL List 
         /// Auto Load
         /// </summary>
-        public static List<스테이지> GetList()
+        public static List<INITIAL> GetList()
         {{
            if (isLoaded == false) Load();
-           return 스테이지List;
+           return INITIALList;
         }}
 
         /// <summary>
-        /// Get 스테이지 Dictionary, keyType is your sheet A1 field type.
+        /// Get INITIAL Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, 스테이지>  GetDictionary()
+        public static Dictionary<int, INITIAL>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return 스테이지Map;
+           return INITIALMap;
         }}
 
     
 
 /* Fields. */
 
-		public System.Int32 idx;
-		public System.Int32 스테이지_스테이지ID;
-		public System.Int32 스테이지_웨이브ID;
-		public ESpawnPattern 스테이지_패턴;
-		public System.String 스테이지_적ID;
-		public System.Int32 스테이지_적수;
-		public System.Single 스테이지_딜레이;
+		public System.Int32 Key;
+		public System.Single GameSpeed;
+		public System.Int32 Attack;
+		public System.Int32 HP;
+		public System.Single AttackSpeed;
+		public System.Single AttackRange;
   
 
 #region fuctions
@@ -73,7 +72,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("스테이지 is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("INITIAL is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -89,7 +88,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<스테이지>, Dictionary<int, 스테이지>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<INITIAL>, Dictionary<int, INITIAL>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -117,14 +116,14 @@ namespace DataTable
                
 
 
-    public static (List<스테이지> list, Dictionary<int, 스테이지> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, 스테이지> Map = new Dictionary<int, 스테이지>();
-            List<스테이지> List = new List<스테이지>();     
+    public static (List<INITIAL> list, Dictionary<int, INITIAL> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, INITIAL> Map = new Dictionary<int, INITIAL>();
+            List<INITIAL> List = new List<INITIAL>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(스테이지).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(INITIAL).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["스테이지"];
+            var sheet = jsonObject["INITIAL"];
 
             foreach (var column in sheet.Keys)
             {
@@ -143,7 +142,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            스테이지 instance = new 스테이지();
+                            INITIAL instance = new INITIAL();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -180,12 +179,12 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.idx, instance);
+                            Map.Add(instance.Key, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            스테이지List = List;
-                            스테이지Map = Map;
+                            INITIALList = List;
+                            INITIALMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -195,10 +194,10 @@ namespace DataTable
 
  
 
-        public static void Write(스테이지 data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(INITIAL data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(스테이지).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(INITIAL).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

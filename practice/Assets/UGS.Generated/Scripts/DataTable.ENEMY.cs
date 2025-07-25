@@ -17,10 +17,10 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class 적 : ITable
+    public partial class ENEMY : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<적> loadedList, Dictionary<string, 적> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<ENEMY> loadedList, Dictionary<string, ENEMY> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,39 +29,39 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, 적> 적Map = new Dictionary<string, 적>();  
-        public static List<적> 적List = new List<적>();   
+        public static Dictionary<string, ENEMY> ENEMYMap = new Dictionary<string, ENEMY>();  
+        public static List<ENEMY> ENEMYList = new List<ENEMY>();   
 
         /// <summary>
-        /// Get 적 List 
+        /// Get ENEMY List 
         /// Auto Load
         /// </summary>
-        public static List<적> GetList()
+        public static List<ENEMY> GetList()
         {{
            if (isLoaded == false) Load();
-           return 적List;
+           return ENEMYList;
         }}
 
         /// <summary>
-        /// Get 적 Dictionary, keyType is your sheet A1 field type.
+        /// Get ENEMY Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, 적>  GetDictionary()
+        public static Dictionary<string, ENEMY>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return 적Map;
+           return ENEMYMap;
         }}
 
     
 
 /* Fields. */
 
-		public System.String 적_구분;
-		public BigNum 적_체력;
-		public BigNum 적_공격력;
-		public BigNum 적_골드드랍;
-		public BigNum 적_보스체력배수;
-		public BigNum 적_보스공격력배수;
+		public System.String Key;
+		public BigNum Monster_HP;
+		public BigNum Monster_Attack;
+		public BigNum Monster_GoldDrop;
+		public BigNum Boss_HPMultiply;
+		public BigNum Boss_AttackMultiply;
   
 
 #region fuctions
@@ -72,7 +72,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("적 is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("ENEMY is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -88,7 +88,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<적>, Dictionary<string, 적>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<ENEMY>, Dictionary<string, ENEMY>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -116,14 +116,14 @@ namespace DataTable
                
 
 
-    public static (List<적> list, Dictionary<string, 적> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<string, 적> Map = new Dictionary<string, 적>();
-            List<적> List = new List<적>();     
+    public static (List<ENEMY> list, Dictionary<string, ENEMY> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, ENEMY> Map = new Dictionary<string, ENEMY>();
+            List<ENEMY> List = new List<ENEMY>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(적).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(ENEMY).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["적"];
+            var sheet = jsonObject["ENEMY"];
 
             foreach (var column in sheet.Keys)
             {
@@ -142,7 +142,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            적 instance = new 적();
+                            ENEMY instance = new ENEMY();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -179,12 +179,12 @@ namespace DataTable
                               
                             }
                             List.Add(instance); 
-                            Map.Add(instance.적_구분, instance);
+                            Map.Add(instance.Key, instance);
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            적List = List;
-                            적Map = Map;
+                            ENEMYList = List;
+                            ENEMYMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -194,10 +194,10 @@ namespace DataTable
 
  
 
-        public static void Write(적 data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(ENEMY data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(적).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(ENEMY).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

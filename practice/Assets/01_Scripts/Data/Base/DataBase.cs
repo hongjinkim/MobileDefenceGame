@@ -48,7 +48,7 @@ public class DataBase : SerializedMonoBehaviour
     private void LoadData()
     {
         // 각 데이터 클래스의 데이터를 로드
-        //PlayerData.LoadData();
+        playerData = new PlayerData();
         initialData = new InitialData();
         heroData = new HeroData();
         stageData = new StageData();
