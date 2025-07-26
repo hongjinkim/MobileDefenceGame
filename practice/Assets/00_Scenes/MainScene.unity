@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9d482625a10a24aba720f8fd9b8108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPattern: 0
+  spawnPattern: 1
   patternRadius: 10
   enemyCount: 1
 --- !u!1 &207284367
@@ -4058,7 +4058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameObj: {fileID: 6206542200335207978, guid: 4cc35e81f9569e941986b150aee427b5, type: 3}
-  PoolType: 0
+  PoolType: 1
   m_List: []
   m_AwakeCreateCount: 50
 --- !u!224 &1328514010 stripped
@@ -6168,15 +6168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d0d6e297a2f9d438e8a2824156aa0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
   DataLoadedEvent: {fileID: 11400000, guid: 10ffa8f3a4f030541bc76d05a4eea6ef, type: 2}
   playerData: {}
   initialData:
@@ -6819,6 +6810,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1901885000}
   - component: {fileID: 1901884999}
+  - component: {fileID: 1901885001}
   m_Layer: 0
   m_Name: '[BUILD CONTROLLER]'
   m_TagString: Untagged
@@ -6856,6 +6848,19 @@ Transform:
   - {fileID: 2092135142}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1901885001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901884998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180397cfdf4a9f34c96442361cba5679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  odinExists: 1
 --- !u!1 &1925980180
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
-﻿using Sirenix.OdinInspector;
+﻿
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -63,7 +65,7 @@ public class StageData
             // 웨이브 정보
             var waveDict = Stage.WaveValueDict;
             var lastWave = DataTable.Stage.StageList.Max(wave => wave.Wave_ID);
-            for(int j = 1; j <= lastWave; j++)
+            for (int j = 1; j <= lastWave; j++)
             {
                 var waves = DataTable.Stage.StageList.Where(wave => wave.Wave_ID == i).ToList();
                 foreach (var wave in waves)
@@ -77,7 +79,7 @@ public class StageData
                         SpawnDelay = wave.Wave_Delay
                     };
                     waveDict[j].SpawnDatas.Add(enemySpawnData);
-                 }
+                }
             }
             StageDict[i] = Stage;
         }

@@ -1,10 +1,9 @@
-﻿#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Sirenix.Serialization;
-#endif
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [Serializable]
@@ -32,7 +31,8 @@ public class HeroData
 
             heroData.SkillUpgradeDict = new Dictionary<string, SkillUpgradeValue>();
             var skillID = heroList[i].Skill_ID;
-            var SkillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Skill_ID == skillID);
+            var SkillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Skill_ID == skillID).ToList();
+
 
             HeroDict.Add(heroData.ID, heroData);
         }
