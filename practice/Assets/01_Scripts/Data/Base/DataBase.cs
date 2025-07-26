@@ -1,6 +1,7 @@
-
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+#endif
 using UGS;
 using UnityEngine;
 
