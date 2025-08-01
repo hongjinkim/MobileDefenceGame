@@ -18,7 +18,7 @@ public class HeroControl : CharacterBase
     [Header("캐릭터 설정")]
     [SerializeField] private CapsuleCollider BodyCollider;
     [SerializeField] private int HeroIndex;
-    [SerializeField] private HeroValue Value;
+    public HeroValue Value;
 
     private State<HeroControl>[] States;
     private State<HeroControl> CurrentState;
@@ -75,10 +75,10 @@ public class HeroControl : CharacterBase
         isEnemy = false;
     }
 
-    public void Init(string ID, int index)
+    public void LoadData()
     {
-        HeroIndex = index;
-        if(DataBase.TryGetHeroValue(ID, out var heroValue))
+
+        if (DataBase.TryGetHeroValue(ID, out var heroValue))
         {
             Value = heroValue;
         }
@@ -86,6 +86,10 @@ public class HeroControl : CharacterBase
         {
             Debug.Log($"id : {ID}에 해당하는 데이터를 불러오는데 실패");
         }
+    }
+
+    public void Init()
+    {
 
         State.HitTermTime = 0.5f;
         State.HitTermTimer = 0;

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Newtonsoft.Json.Linq;
+using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using System;
 using System.Collections;
@@ -30,7 +31,23 @@ public class HeroData
 
             heroData.SkillUpgradeDict = new Dictionary<string, SkillUpgradeValue>();
             var skillID = heroList[i].Skill_ID;
-            var SkillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Skill_ID == skillID).ToList();
+            var skillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Skill_ID == skillID).ToList();
+
+            foreach(var skillUpgrade in skillUpgradeList)
+            {
+                var value = new SkillUpgradeValue();
+
+                value.ID = skillUpgrade.Upgrade_Name;
+                value.Description = skillUpgrade.Upgrade_Descption;
+                value.Tier = skillUpgrade.Upgrade_Tier;
+                value.Behavior = skillUpgrade.Skill_Behavior;
+                value.value = skillUpgrade.Upgrade_Value;
+
+
+                heroData.SkillUpgradeDict[skillUpgrade.Upgrade_Name] = value;
+                
+            }
+
 
 
             HeroDict.Add(heroList[i].Hero_ID, heroData);
