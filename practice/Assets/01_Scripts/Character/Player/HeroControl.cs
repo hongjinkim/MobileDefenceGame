@@ -4,9 +4,6 @@ using UnityEngine.AI;
 
 public class HeroControl : CharacterBase
 {
-    [Header("이벤트")]
-    public VoidEventChannelSO HeroDieEvent;
-
     [Header("UI")]
     [SerializeField] protected RectTransform HP_HUD;
     [SerializeField] protected RectTransform HP_HUD_After;
@@ -20,15 +17,11 @@ public class HeroControl : CharacterBase
 
     [Header("캐릭터 설정")]
     [SerializeField] private CapsuleCollider BodyCollider;
+    [SerializeField] private int HeroIndex;
+    [SerializeField] private HeroValue Value;
 
     private State<HeroControl>[] States;
     private State<HeroControl> CurrentState;
-
-    public int HeroIndex;
-    [SerializeField] private SkillControl Skill;
-
-    private PlayerData Player => DataBase.GetPlayerData();
-    private InitialData Initial => DataBase.GetInitialData();
 
     [Header("애니메이션 설정")]
     public Animator animator;
@@ -48,13 +41,15 @@ public class HeroControl : CharacterBase
 
     private void AddListener()
     {
-        EnemyManager.Instance.EnemyGenEvent.AddListener(RefreshTarget);
+        
     }
 
     private void RemoveListener()
     {
         
     }
+
+
 
     protected new void Awake()
     {
@@ -80,9 +75,17 @@ public class HeroControl : CharacterBase
         isEnemy = false;
     }
 
-    public void Init(int index)
+    public void Init(string ID, int index)
     {
         HeroIndex = index;
+        if(DataBase.TryGetHeroValue(ID, out var heroValue))
+        {
+            Value = heroValue;
+        }
+        else
+        {
+            Debug.Log($"id : {ID}에 해당하는 데이터를 불러오는데 실패");
+        }
 
         State.HitTermTime = 0.5f;
         State.HitTermTimer = 0;

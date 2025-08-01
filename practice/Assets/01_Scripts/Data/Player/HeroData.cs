@@ -23,7 +23,6 @@ public class HeroData
         for (int i = 0; i < heroCount; i++)
         {
             var heroData = new HeroValue();
-            heroData.ID = heroList[i].Hero_ID;
             heroData.Grade = heroList[i].Hero_Grade;
             heroData.Name = heroList[i].Hero_Name;
             heroData.Description = heroList[i].Hero_Description;
@@ -34,7 +33,7 @@ public class HeroData
             var SkillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Skill_ID == skillID).ToList();
 
 
-            HeroDict.Add(heroData.ID, heroData);
+            HeroDict.Add(heroList[i].Hero_ID, heroData);
         }
     }
 }

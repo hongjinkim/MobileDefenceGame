@@ -8,7 +8,6 @@ using UnityEngine;
 public class HeroValue
 {
     public string Name;
-    public string ID;
     public string Description;
     public EGrade Grade;
 

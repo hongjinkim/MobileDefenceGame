@@ -1,19 +1,26 @@
 
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class StageManager : BasicSingleton<StageManager>
 {
-    [SerializeField]private ChapterData _stageData;
-    public static ChapterData GetStageData()
-    {
-        return Instance._stageData;
-    }
 
-    public static void StageStart()
-    {
-        // Initialize the stage data or perform any setup required for the stage
-        Debug.Log("Stage started with data: " + GetStageData());
-        
+    [ReadOnly] private int currentStage;
 
+    [ShowInInspector]
+    private StageValue stageValue;
+
+    public void StageStart()
+    {
+        currentStage = PlayerManager.Instance.currentStage;
+        Debug.Log($"stage {currentStage} started");
+        if (DataBase.TryGetStageValue(currentStage, out var value))
+        {
+            stageValue = value;
+        }
+        else
+        {
+            Debug.Log($"id : {currentStage}에 해당하는 데이터를 불러오는데 실패");
+        }
     }
 }

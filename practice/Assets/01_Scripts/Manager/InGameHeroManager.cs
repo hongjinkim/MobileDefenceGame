@@ -1,9 +1,11 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InGameHeroManager : BasicSingleton<InGameHeroManager>
 {
+    [SerializeField] private GameObject heroPrefab;
     [SerializeField] private List<HeroControl> SummonedHeroList;
 
     public static HeroControl FindNearTarget(Vector3 pos)
@@ -33,18 +35,24 @@ public class InGameHeroManager : BasicSingleton<InGameHeroManager>
   
 
     //소환처리
-    public void SummonHero()
+    public void SummonHero(int idx)
     {
-        var newHero = HeroPoolManager.Instance.Pop(EPoolType.Hero);
+        var newHero = Instantiate(heroPrefab);
         var heroComp = newHero.GetComponent<HeroControl>();
 
-        heroComp.Init(SummonedHeroList.Count);
+        if(PlayerManager.Instance.HeroDeck.TryGetValue(idx, out var id))
+        {
+            string heroID = id;
+            heroComp.Init(heroID, SummonedHeroList.Count);
 
-        // 영웅 위치 및 인덱스 설정
-        heroComp.transform.position =  PositionInfo.Instance.HeroPos[SummonedHeroList.Count].position;
+            // 영웅 위치 및 인덱스 설정
+            heroComp.transform.position = PositionInfo.Instance.HeroPos[SummonedHeroList.Count].position;
 
-
-        
-        SummonedHeroList.Add(heroComp);
+            SummonedHeroList.Add(heroComp);
+        }
+        else
+        {
+            Debug.Log($"현재 덱에 {idx}번째에 할당된 영웅이 없음.");
+        }
     }
 }

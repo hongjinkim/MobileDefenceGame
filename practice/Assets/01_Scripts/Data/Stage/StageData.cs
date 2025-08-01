@@ -16,7 +16,7 @@ public class StageData
 
     // 스테이지 정보 사전
     [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Stage ID", ValueLabel = "Info")]
-    public Dictionary<int, StageValue> StageDict = new Dictionary<int, StageValue>();
+    public Dictionary<string, StageValue> StageDict = new Dictionary<string, StageValue>();
 
     public Dictionary<int, string> StageNameDict = new Dictionary<int, string>(); // 스테이지 배경명
                                                                                   //private int mapCount = 0;
@@ -28,7 +28,8 @@ public class StageData
 
         for (int i = 1; i <= MaxStage; i++)
         {
-            StageValue Stage = new StageValue(i);
+            StageValue Stage = new StageValue();
+            Stage.StageNum = i;
             var EnemyDict = DataTable.Enemy.GetDictionary();
 
             // 스테이지 적 스탯
@@ -81,7 +82,7 @@ public class StageData
                     waveDict[j].SpawnDatas.Add(enemySpawnData);
                 }
             }
-            StageDict[i] = Stage;
+            StageDict[i.ToString()] = Stage;
         }
     }
 }

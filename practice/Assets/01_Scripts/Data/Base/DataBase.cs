@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class DataBase : MonoBehaviour
 {
-    public VoidEventChannelSO DataLoadedEvent;
-
     public static DataBase Instance { get; private set; } = null;
     private bool isDataLoaded = false;
 
@@ -41,7 +39,7 @@ public class DataBase : MonoBehaviour
     {
         LoadData();
         isDataLoaded = true;
-        DataLoadedEvent.RaiseEvent();
+        EventManager.Raise(EEventType.DataLoaded);
     }
 
     private void LoadData()
@@ -54,23 +52,12 @@ public class DataBase : MonoBehaviour
     }
 
 
-    public static PlayerData GetPlayerData()
+    public static bool TryGetHeroValue(string id, out HeroValue value)
     {
-        if(Instance == null || Instance.playerData == null || !Instance.isDataLoaded)
-        {
-            Debug.LogError("DataReader instance or playerData is not initialized.");
-            return null;
-        }
-        return Instance.playerData;
+        return Instance.heroData.HeroDict.TryGetValue(id, out value);
     }
-
-    public static InitialData GetInitialData()
+    public static bool TryGetStageValue(int id, out StageValue value)
     {
-        if (Instance == null || Instance.initialData == null || !Instance.isDataLoaded)
-        {
-            Debug.LogError("DataReader instance or initialData is not initialized.");
-            return null;
-        }
-        return Instance.initialData;
+        return Instance.stageData.StageDict.TryGetValue(id.ToString(), out value);
     }
 }

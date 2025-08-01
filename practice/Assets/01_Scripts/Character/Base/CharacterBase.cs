@@ -1,5 +1,7 @@
+using Sirenix.OdinInspector;
 using System;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Windows;
 using static UnityEngine.GraphicsBuffer;
@@ -7,6 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 [Serializable]
 public class CharacterState
 {
+
     //public EActType CurrentAct;
     public BigNum MaxHp;
     public BigNum CurrentHp;
@@ -55,18 +58,34 @@ public class CharacterState
 
 public abstract class CharacterBase : MonoBehaviour
 {
+    [ReadOnly]public string ID;
+
     [SerializeField] public CharacterBase Target;
     [SerializeField] protected Collider AttackCollider;
     public Transform CenterPoint;
     public Transform Anchor;
 
+    [Header("캐릭터 상태")]
     public CharacterState State = new CharacterState();
+
+
     protected bool isEnemy;
 
-    protected Vector3 damageTextOffset = new Vector3(0, 0.1f, 0);   
+    protected Vector3 damageTextOffset = new Vector3(0, 0.1f, 0);
+
     protected void Awake()
     {
+        
+    }
 
+    private void OnValidate()
+    {
+        // Prefab 에셋일 때만 동작하게
+        if (PrefabUtility.IsPartOfPrefabAsset(this))
+        {
+            ID = gameObject.name;
+            EditorUtility.SetDirty(this); // 변경 사항 저장
+        }
     }
 
     protected void Update()

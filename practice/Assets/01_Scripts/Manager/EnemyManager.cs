@@ -11,14 +11,8 @@ using Random = UnityEngine.Random;
 // 몬스터 및 보스의 관리
 public class EnemyManager : BasicSingleton<EnemyManager>
 {
-	[Header("이벤트")]
-	public VoidEventChannelSO EnemyGenEvent;
-
 	
-
 	private List<EnemyControl> MonsterList = new List<EnemyControl>();
-	private PlayerData Player => DataBase.GetPlayerData();
-	private ChapterData Chapter => StageManager.GetStageData();
 	//private WaveData[] waves;
 	//private int _currentWaveIndex = 0;
 
@@ -227,7 +221,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 
             enemyComp.Init();
             MonsterList.Add(enemyComp);
-			EnemyGenEvent.RaiseEvent(); // 몬스터 생성 이벤트 발생
+			//EnemyGenEvent.RaiseEvent(); // 몬스터 생성 이벤트 발생
         } 
     }
 

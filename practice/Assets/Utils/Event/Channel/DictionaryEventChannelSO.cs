@@ -1,8 +1,0 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Events/Dictionary Event Channel")]
-public class DictionaryEventChannelSO : EventChannelSO<Dictionary<string, object>>
-{
-    // 추가적인 로직이나 필드를 필요에 따라 여기에 정의할 수 있습니다.
-}

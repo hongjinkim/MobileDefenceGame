@@ -9,7 +9,7 @@ public class DebugStageStart : UIButton
 #if DEBUG_ON
     protected override void OnClicked()
     {
-        
+        StageManager.Instance.StageStart();
     }
 #endif
 

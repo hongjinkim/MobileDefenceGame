@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attacker: {fileID: 7859774726252088456}
   TargetTag: 1
-  singleTargetforEnemy: 0
+  maxTartetCount: 1
 --- !u!1 &5544251145505045195
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf785b5400a9264b8bbfc0b0daa234a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: Enemy
   Target: {fileID: 0}
   AttackCollider: {fileID: 169867243587923507}
   CenterPoint: {fileID: 8973040327272973435}
