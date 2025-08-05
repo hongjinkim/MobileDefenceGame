@@ -87,3 +87,8 @@ crashlytics-build.properties
 # Odin Inspector (Sirenix 폴더 전체 제외)
 Assets/Sirenix/
 Assets/Plugins/Sirenix/
+
+# devOnly
+practice/Assets/02_Data/DevOnly.meta
+practice/Assets/02_Data/DevOnly/GoogleSheet.txt
+practice/Assets/02_Data/DevOnly/GoogleSheet.txt.meta
