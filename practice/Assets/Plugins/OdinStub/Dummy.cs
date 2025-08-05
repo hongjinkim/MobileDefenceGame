@@ -307,7 +307,7 @@ namespace Sirenix.OdinInspector
 namespace Sirenix.Serialization
 {
 #if ODIN_INSPECTOR
-        // Odin Serializer가 존재할 경우 생략
+    // Odin Serializer가 존재할 경우 생략
 #else
     // 🔹 직렬화 관련
     public class OdinSerialize : Attribute { }
