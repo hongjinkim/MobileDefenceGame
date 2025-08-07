@@ -48,12 +48,12 @@ public class StageManager : BasicSingleton<StageManager>
     public void RequestLevelUp()
     {
         levelUpQueue.Enqueue(new LevelUpRequest());
-        TryStartNextLevelUp(); // 이름을 명확하게 바꿔봄
+        TryStartNextLevelUp(); 
     }
 
     private void TryStartNextLevelUp()
     {
-        // 오직 선택이 진행중이 아닐 때만 시작!
+        // 선택이 진행중이 아닐 때
         if (isLevelUpChoiceActive || levelUpQueue.Count == 0)
             return;
 

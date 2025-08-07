@@ -1,12 +1,13 @@
-﻿using System;
+﻿#if !ODIN_INSPECTOR
+    // Odin이 존재하면 아무것도 정의하지 않음
+using System;
 
 namespace Sirenix.OdinInspector
 {
-#if ODIN_INSPECTOR
-    // Odin이 존재하면 아무것도 정의하지 않음
-#else
-    // 🔹 인스펙터 표시/비표시
-    public class ShowInInspector : Attribute { }
+
+
+// 🔹 인스펙터 표시/비표시
+public class ShowInInspector : Attribute { }
     public class HideInInspector : Attribute { }
 
     // 🔹 라벨 제어
@@ -301,14 +302,11 @@ namespace Sirenix.OdinInspector
     {
         public TableColumnWidth(int width) { }
     }
-#endif
+
 }
 
 namespace Sirenix.Serialization
 {
-#if ODIN_INSPECTOR
-    // Odin Serializer가 존재할 경우 생략
-#else
     // 🔹 직렬화 관련
     public class OdinSerialize : Attribute { }
 
@@ -317,5 +315,6 @@ namespace Sirenix.Serialization
     public class HideInInspector : Attribute { } // 충돌 방지
 
     // ShowInInspector는 Sirenix.OdinInspector만 정의 (충돌 방지 목적)
-#endif
+
 }
+#endif

@@ -24,6 +24,12 @@ public abstract class UIButton : MonoBehaviour
 	}
   
 
+    public Button.ButtonClickedEvent onClick
+    {
+        get { return button.onClick; }
+        set { button.onClick = value; }
+    }
+
     protected virtual void OnEnable()
     {
         button.onClick.AddListener(OnClicked);

@@ -1,13 +1,13 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillChoiceUI : MonoBehaviour
 {
-    public List<Button> optionButtons; 
-    public List<Text> optionLabels;   
-    private System.Action<SkillUpgradeValue> onChosenCallback;
+    public List<SkillOptionButtonUI> optionButtons; 
+    private Action<SkillUpgradeValue> onChosenCallback;
     private List<SkillUpgradeValue> currentChoices;
 
     private void Start()
@@ -15,21 +15,20 @@ public class SkillChoiceUI : MonoBehaviour
         Hide();
     }
 
-    public void Show(List<SkillUpgradeValue> choices, System.Action<SkillUpgradeValue> onChosen)
+    public void Show(List<SkillUpgradeValue> choices, Action<SkillUpgradeValue> onChosen)
     {
+        this.onChosenCallback = onChosen;
         gameObject.SetActive(true);
-        currentChoices = choices;
-        onChosenCallback = onChosen;
 
         for (int i = 0; i < optionButtons.Count; i++)
         {
             if (i < choices.Count)
             {
-                optionButtons[i].gameObject.SetActive(true);
-                optionLabels[i].text = choices[i].Description;
-                int idx = i;
-                optionButtons[i].onClick.RemoveAllListeners();
-                optionButtons[i].onClick.AddListener(() => OnClicked(idx));
+                SkillUpgradeValue currentChoice = choices[i];
+                SkillOptionButtonUI button = optionButtons[i];
+
+                button.gameObject.SetActive(true);
+                button.onClick.AddListener(() => OnOptionSelected(currentChoice));
             }
             else
             {
@@ -38,9 +37,10 @@ public class SkillChoiceUI : MonoBehaviour
         }
     }
 
-    void OnClicked(int idx)
+    private void OnOptionSelected(SkillUpgradeValue chosenUpgrade)
     {
-        onChosenCallback?.Invoke(currentChoices[idx]);
+        onChosenCallback?.Invoke(chosenUpgrade);
+        Hide();
     }
 
     public void Hide()
