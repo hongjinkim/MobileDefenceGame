@@ -8,7 +8,6 @@ public class SkillChoiceUI : MonoBehaviour
 {
     public List<SkillOptionButtonUI> optionButtons; 
     private Action<SkillUpgradeValue> onChosenCallback;
-    private List<SkillUpgradeValue> currentChoices;
 
     private void Start()
     {
@@ -27,6 +26,7 @@ public class SkillChoiceUI : MonoBehaviour
                 SkillUpgradeValue currentChoice = choices[i];
                 SkillOptionButtonUI button = optionButtons[i];
 
+                button.Setup(currentChoice);
                 button.gameObject.SetActive(true);
                 button.onClick.AddListener(() => OnOptionSelected(currentChoice));
             }

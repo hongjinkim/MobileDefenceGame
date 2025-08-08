@@ -16,6 +16,6 @@ public class SkillOptionButtonUI : UIButton
 
     protected override void OnClicked()
     {
-        
+       
     }
 }
