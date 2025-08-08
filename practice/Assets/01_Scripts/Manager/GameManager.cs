@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : BasicSingleton<GameManager>
 {
-    [SerializeField] private AudioPlayerDissolve bgmSound;
+    //[SerializeField] private AudioPlayerDissolve bgmSound;
     [HideInInspector] public bool dataLoadComplete = false;
 
     void OnEnable()
@@ -23,7 +23,7 @@ public class GameManager : BasicSingleton<GameManager>
         Application.targetFrameRate = 60;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
-        bgmSound.Play();
+        //bgmSound.Play();
 	}
 
     public void ResetData() => Init();

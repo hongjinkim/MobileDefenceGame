@@ -12,7 +12,7 @@ public class DebugSpawnEnemy : UIButton
 #if DEBUG_ON
     protected override void OnClicked()
     {
-        EnemyManager.Instance.SpawnEnemy(spawnPattern, patternRadius, enemyCount);
+        EnemyManager.Instance.SpawnEnemy(spawnPattern, enemyCount);
     }
 #endif
 

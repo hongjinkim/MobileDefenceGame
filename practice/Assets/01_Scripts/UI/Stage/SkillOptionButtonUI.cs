@@ -10,7 +10,7 @@ public class SkillOptionButtonUI : UIButton
 
     public void Setup(SkillUpgradeValue value)
     {
-        skillNameText.text = value.ID; // Assuming ID is the skill name
+        skillNameText.text = value.SkillID; // Assuming ID is the skill name
         skillDescriptionText.text = value.Description; // Assuming Description is the skill description
     }
 

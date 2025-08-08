@@ -84,4 +84,28 @@ public class InGameHeroManager : BasicSingleton<InGameHeroManager>
 
         hero.gameObject.SetActive(true);
     }
+
+    public void SummonHero(string ID)
+    {
+        var summonHero = HeroDeckList.Find(x => x.ID == ID);
+
+        if (summonHero.gameObject.activeSelf)
+        {
+            Debug.Log("Hero Already Summoned");
+            return;
+        }
+
+        if (summonHero == null)
+        {
+            Debug.LogError($"Hero with ID {ID} not found in deck.");
+            return;
+        }
+
+        summonHero.transform.position = PositionInfo.Instance.HeroPos[currentSummonedHeroCount].position;
+        currentSummonedHeroCount++;
+        summonHero.Init();
+        HeroSummonedIDs.Add(summonHero.ID);
+
+        summonHero.gameObject.SetActive(true);
+    }
 }

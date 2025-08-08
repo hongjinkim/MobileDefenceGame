@@ -37,7 +37,8 @@ public class HeroData
             {
                 var value = new SkillUpgradeValue();
 
-                value.ID = skillUpgrade.Upgrade_Name;
+                value.HeroID = heroList[i].Hero_ID;
+                value.SkillID = skillUpgrade.Upgrade_Name;
                 value.Description = skillUpgrade.Upgrade_Descption;
                 value.Tier = skillUpgrade.Upgrade_Tier;
                 value.Behavior = skillUpgrade.Skill_Behavior;

@@ -11,7 +11,8 @@ using Random = UnityEngine.Random;
 // 몬스터 및 보스의 관리
 public class EnemyManager : BasicSingleton<EnemyManager>
 {
-	
+	public float patternRadius = 5f;
+
 	private List<EnemyControl> MonsterList = new List<EnemyControl>();
 	//private WaveData[] waves;
 	//private int _currentWaveIndex = 0;
@@ -201,16 +202,19 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 
 	
 
-	public void SpawnEnemy(ESpawnPattern spawnPattern, float patternRadius, int enemyCount)
+	public void SpawnEnemy(ESpawnPattern spawnPattern, int enemyCount, string enemyID = null)
 	{
-        var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
-        var enemyComp = newEnemy.GetComponent<EnemyControl>();
-        var enemyType = enemyComp.Info.EnemyType;
-
         for (int i = 0; i < enemyCount; i++)
 		{
-			// 몬스터 위치 및 인덱스 설정
-			if (enemyType == EEnemyType.StageMonster)
+            var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
+            /*
+             적 데이터 적용 구현 필요
+             */
+            var enemyComp = newEnemy.GetComponent<EnemyControl>();
+            var enemyType = enemyComp.Info.EnemyType;
+
+            // 몬스터 위치 및 인덱스 설정
+            if (enemyType == EEnemyType.StageMonster)
 			{
 				enemyComp.transform.position = GetSpawnPosition(spawnPattern, patternRadius, i, enemyCount);
 			}

@@ -188,7 +188,6 @@ public class ReferenceImageManager : MonoBehaviour
         {
             canvasGroup.alpha = showReference ? referenceAlpha : 0f;
             canvasGroup.interactable = showReference;
-            canvasGroup.blocksRaycasts = showReference;
         }
 
 #if UNITY_EDITOR

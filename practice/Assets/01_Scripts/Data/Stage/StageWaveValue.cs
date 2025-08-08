@@ -9,6 +9,7 @@ using UnityEngine;
 [Serializable]
 public class EnemySpawnData
 {
+    public ESpawnPattern SpawnPattern; // Pattern of enemy spawning (e.g., random, sequential)
     public string EnemyID;// ID of the enemy to spawn
     public int SpawnCount; // Number of enemies to spawn
     public float SpawnDelay; // Delay before spawning the next enemy
@@ -16,6 +17,5 @@ public class EnemySpawnData
 [Serializable]
 public class StageWaveValue
 {
-    public ESpawnPattern SpawnPattern; // Pattern of enemy spawning (e.g., random, sequential)
     public List<EnemySpawnData> SpawnDatas = new List<EnemySpawnData>();
 }

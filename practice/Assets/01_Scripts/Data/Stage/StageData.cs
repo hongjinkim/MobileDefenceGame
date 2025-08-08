@@ -64,24 +64,32 @@ public class StageData
             Stage.EnemyInfo.BossHPMultiplier.SetEnemyStat(i);
 
             // 웨이브 정보
-            var waveDict = Stage.WaveValueDict;
-            var lastWave = DataTable.Stage.StageList.Max(wave => wave.Wave_ID);
-            for (int j = 1; j <= lastWave; j++)
+            var stageRows = DataTable.Stage.StageList
+            .Where(row => row.Stage_ID == i)   // 스테이지 단위 필터
+            .ToList();
+
+            var newDict = new Dictionary<int, StageWaveValue>();
+
+            foreach (var group in stageRows.GroupBy(r => r.Wave_ID)) // Wave_ID로 묶기
             {
-                var waves = DataTable.Stage.StageList.Where(wave => wave.Wave_ID == i).ToList();
-                foreach (var wave in waves)
+                var stageWave = new StageWaveValue();
+
+                foreach (var row in group)
                 {
-                    waveDict[j] = new StageWaveValue();
-                    waveDict[j].SpawnPattern = wave.Wave_Pattern;
-                    var enemySpawnData = new EnemySpawnData
+                    stageWave.SpawnDatas.Add(new EnemySpawnData
                     {
-                        EnemyID = wave.Wave_EnemyID,
-                        SpawnCount = wave.Wave_EnemyCount,
-                        SpawnDelay = wave.Wave_Delay
-                    };
-                    waveDict[j].SpawnDatas.Add(enemySpawnData);
+                        SpawnPattern = row.Wave_Pattern,
+                        EnemyID = row.Wave_EnemyID,
+                        SpawnCount = row.Wave_EnemyCount,
+                        SpawnDelay = row.Wave_Delay,
+                    });
                 }
+
+                newDict[group.Key] = stageWave; // Wave_ID -> StageWaveValue
             }
+
+            Stage.WaveValueDict = newDict;
+
             StageDict[i.ToString()] = Stage;
         }
     }

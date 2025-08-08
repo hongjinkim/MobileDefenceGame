@@ -57,6 +57,7 @@ namespace DataTable
 /* Fields. */
 
 		public System.String Key;
+		public System.String Hero_ID;
 		public System.String Skill_ID;
 		public System.String Upgrade_Name;
 		public System.String Upgrade_Descption;
