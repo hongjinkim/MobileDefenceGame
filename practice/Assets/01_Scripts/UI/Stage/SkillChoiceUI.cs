@@ -21,18 +21,15 @@ public class SkillChoiceUI : MonoBehaviour
 
         for (int i = 0; i < optionButtons.Count; i++)
         {
+            var btn = optionButtons[i];
+
+            btn.onClick.RemoveAllListeners();
+
             if (i < choices.Count)
             {
-                SkillUpgradeValue currentChoice = choices[i];
-                SkillOptionButtonUI button = optionButtons[i];
-
-                button.Setup(currentChoice);
-                button.gameObject.SetActive(true);
-                button.onClick.AddListener(() => OnOptionSelected(currentChoice));
-            }
-            else
-            {
-                optionButtons[i].gameObject.SetActive(false);
+                var choice = choices[i];  // 로컬에 캡처 (for-closure 버그 방지)
+                btn.Setup(choice);
+                btn.onClick.AddListener(() => OnOptionSelected(choice));
             }
         }
     }

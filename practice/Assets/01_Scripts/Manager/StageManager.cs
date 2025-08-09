@@ -142,8 +142,8 @@ public class StageManager : BasicSingleton<StageManager>
         if (_choiceConsumed) return;
         _choiceConsumed = true;
 
+        Debug.Log($"Chosen upgrade: {chosen.SkillID} for Hero: {chosen.HeroID}");
         ApplyUpgrade(chosen);
-        Debug.Log($"{chosen.HeroID} 에 {chosen.SkillID} 적용됨");
 
         // 이번 요청 1개 소모
         if (levelUpQueue.Count > 0)
