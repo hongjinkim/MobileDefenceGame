@@ -1,8 +1,10 @@
 ﻿namespace Gpm.Ui
 {
+    using DG.Tweening;
     using Internal;
     using UnityEngine;
     using UnityEngine.Events;
+    using UnityEngine.UI;
 
     public interface ITabData
     {
@@ -26,6 +28,19 @@
         public TabEvent onBlocked = new TabEvent();
 
         private ITabData data = null;
+
+        [Header("Layout")]
+        private Vector3 defaultScale = Vector3.one;
+        private LayoutElement le;
+        private RectTransform rt;
+
+        private void Awake()
+        {
+            le = GetComponent<LayoutElement>();
+            rt = GetComponent<RectTransform>();
+        }
+
+
         public ITabData GetData()
         {
             return data;
@@ -165,6 +180,30 @@
                 onBlocked.Invoke(this);
             }
         }
+
+        public void HighlightSelectedTab()
+        {
+            if (le == null)
+            {
+                le = GetComponent<LayoutElement>();
+            }
+
+            
+            float targetFlexibleWidth = selected ? 1.4f : 1f;
+            DOTween.To(() => le.flexibleWidth,
+                       v => le.flexibleWidth = v,
+                       targetFlexibleWidth,
+                       0.2f)
+                   .SetEase(Ease.OutCubic);
+
+            float targetHeight = selected ? 190f : 170f; // 원하는 높이 값으로 변경
+            DOTween.To(() => rt.sizeDelta.y,
+                       v => rt.sizeDelta = new Vector2(rt.sizeDelta.x, v),
+                       targetHeight,
+                       0.2f)
+                   .SetEase(Ease.OutCubic);
+        }
+
 
 #if UNITY_EDITOR
         private void OnValidate()

@@ -26,6 +26,7 @@ namespace Gpm.Ui.Sample
             for (int i = 0; i < activeObjs.Length; i++)
             {
                 activeObjs[i].SetActive(selected == true);
+
             }
 
             for (int i = 0; i < deactiveObjs.Length; i++)
