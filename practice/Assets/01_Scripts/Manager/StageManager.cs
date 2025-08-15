@@ -25,6 +25,7 @@ public class StageManager : BasicSingleton<StageManager>
 
     public void StageStart()
     {
+        
         InitStage();
         _spawnStarted = false;
         StartCoroutine(StartAfterTwoLevelUpsOnce());
