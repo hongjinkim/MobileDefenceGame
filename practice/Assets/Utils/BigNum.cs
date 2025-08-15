@@ -2,6 +2,8 @@ using System;
 using System.Text;
 using UnityEngine;
 using GoogleSheet.Type;
+using System.ComponentModel;
+using Sirenix.OdinInspector;
 
 [Serializable]
 public struct BigNum
@@ -31,8 +33,16 @@ public struct BigNum
         return new BigNum(m, e - 8, refine: false);
     }
 
-    public long M;
-    public long E;
+    [HideInInspector]public long M;
+    [HideInInspector]public long E;
+
+#if ODIN_INSPECTOR
+
+    [ShowInInspector]
+    private string Num => new BigNum(M, E, false).ToWideFormat();
+
+#endif
+
 
     public BigNum(BigNum x)
     {

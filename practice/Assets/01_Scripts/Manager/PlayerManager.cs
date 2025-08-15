@@ -46,13 +46,13 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     public static void CheckEnergyToStart()
     {
         // 에너지가 충분한지 확인하고, 충분하다면 스테이지 시작
-        if (/*에너지 체크*/ true)
+        if (/*에너지 체크*/ false)
         {
             UIManager.Instance.StartStageTransition();
         }
         else
         {
-            Debug.LogWarning("에너지가 부족하여 스테이지를 시작할 수 없습니다.");
+            ToastManager.Show("에너지가 충분하지 않습니다", 2.0f, ToastPosition.Center);
         }
     }
 
