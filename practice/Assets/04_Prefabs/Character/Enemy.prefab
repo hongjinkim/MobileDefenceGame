@@ -224,6 +224,17 @@ MonoBehaviour:
   HitSound: {fileID: 0}
   AttackSound_Boss: {fileID: 0}
   AttackSound_Monster: {fileID: 0}
+  Info:
+    EnemyType: 0
+    AttackPower:
+      M: 200000000
+      E: -8
+    MaxHp:
+      M: 100000000
+      E: -6
+    DropGold:
+      M: 0
+      E: 0
   faces: {fileID: 11400000, guid: dd00c346f8a903144b328dbe5273795d, type: 2}
   SmileBody: {fileID: 3357852365247116174}
   animator: {fileID: 9129478150078242583}

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 [DisallowMultipleComponent]
 public class CircleTransition : MonoBehaviour
 {
     [Header("Overlay Image (full-screen panel)")]
-    [SerializeField] private Image overlayImage;        // 전체 화면 덮는 Image (Material에 UI/CircleWipePixel)
+    [SerializeField] private Image overlayImage;        // 전체 화면 덮는 Image (Material= UI/CircleWipePixel)
     [SerializeField] private string radiusProp = "_Radius";
     [SerializeField] private string centerProp = "_Center";
     [SerializeField] private string featherProp = "_Feather";
@@ -22,18 +23,27 @@ public class CircleTransition : MonoBehaviour
 
     [Header("Circle Params (normalized by rect height)")]
     [SerializeField] private float startRadius = 1.5f;     // 화면 밖에서 시작
-    [SerializeField] private float endRadius = 0.00f;     // 거의 완전 닫힘
+    [SerializeField] private float endRadius = 0.00f;    // 거의 완전 닫힘
     [SerializeField] private float feather = 0.20f;
     [SerializeField] private Color overlayColor = new(0, 0, 0, 0.85f);
     [SerializeField, Tooltip("Rect 기준 0~1")] private Vector2 center01 = new(0.5f, 0.5f);
+
+    [Header("Toggle at Dark (optional)")]
+    [SerializeField] private List<GameObject> enableOnDark = new();   // 어두울 때 켤 패널들
+    [SerializeField] private List<GameObject> disableOnDark = new();  // 어두울 때 끌 패널들
+
+    [Header("Input Blocking")]
+    [SerializeField] private bool blockPointerDuringTransition = true;         // 마우스/터치
+    [SerializeField] private bool blockNavigationDuringTransition = true;      // 키보드/패드 Submit/Cancel 등
+    [SerializeField] private EventSystem eventSystem;                           // 선택: 지정 없으면 EventSystem.current 사용
 
     Material mat;
     int _radiusId, _centerId, _featherId, _rectId, _colorId;
     Tweener tweenClose, tweenOpen;
 
-    [Header("Toggle at Dark (optional)")]
-    [SerializeField] private List<GameObject> enableOnDark = new();   // 어두울 때 켤 패널들
-    [SerializeField] private List<GameObject> disableOnDark = new();  // 어두울 때 끌 패널들
+    // 복원용 저장
+    bool _prevRaycastTarget;
+    bool _prevSendNavigationEvents;
 
     void Awake()
     {
@@ -56,6 +66,9 @@ public class CircleTransition : MonoBehaviour
 
         ApplyStaticParams();
         overlayImage.enabled = false;
+
+        // 입력 차단 기본값 팁: Overlay Image에는 스프라이트 없음(단색) 추천
+        // (스프라이트 알파 히트 테스트를 사용하면 구멍 부분이 통과될 수 있어요)
     }
 
     void OnDestroy()
@@ -95,6 +108,42 @@ public class CircleTransition : MonoBehaviour
             if (go) go.SetActive(true);
     }
 
+    // ---------- 입력 차단 ----------
+    void BeginBlockInput()
+    {
+        // 포인터(클릭/터치) 차단: 오버레이가 레이캐스트를 흡수하게
+        if (blockPointerDuringTransition)
+        {
+            _prevRaycastTarget = overlayImage.raycastTarget;
+            overlayImage.raycastTarget = true; // 전체 Rect가 클릭 흡수
+        }
+
+        // 키보드/패드 네비게이션 차단
+        if (blockNavigationDuringTransition)
+        {
+            var es = eventSystem != null ? eventSystem : EventSystem.current;
+            if (es != null)
+            {
+                _prevSendNavigationEvents = es.sendNavigationEvents;
+                es.sendNavigationEvents = false; // Submit/Cancel/Move 등 막기
+            }
+        }
+    }
+
+    void EndBlockInput()
+    {
+        if (blockPointerDuringTransition)
+        {
+            overlayImage.raycastTarget = _prevRaycastTarget;
+        }
+        if (blockNavigationDuringTransition)
+        {
+            var es = eventSystem != null ? eventSystem : EventSystem.current;
+            if (es != null) es.sendNavigationEvents = _prevSendNavigationEvents;
+        }
+    }
+    // ------------------------------
+
     /// <summary>
     /// 범용 트랜지션 재생. 끝난 뒤 onFinished(선택)를 호출.
     /// </summary>
@@ -107,6 +156,9 @@ public class CircleTransition : MonoBehaviour
 
         UpdateRectSize();
         overlayImage.enabled = true;
+
+        // ★ 입력 차단 시작
+        BeginBlockInput();
 
         float r = startRadius;
         mat.SetFloat(_radiusId, r);
@@ -137,7 +189,11 @@ public class CircleTransition : MonoBehaviour
                 .OnComplete(() =>
                 {
                     overlayImage.enabled = false;
-                    onFinished?.Invoke(); // ★ 트랜지션 “완료 후”만 호출
+
+                    // ★ 입력 차단 해제
+                    EndBlockInput();
+
+                    onFinished?.Invoke(); // 트랜지션 완주 후
                 });
             }, true); // true = unscaled
         });

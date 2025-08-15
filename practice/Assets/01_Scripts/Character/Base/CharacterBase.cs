@@ -9,7 +9,6 @@ using static UnityEngine.GraphicsBuffer;
 [Serializable]
 public class CharacterState
 {
-
     //public EActType CurrentAct;
     public BigNum MaxHp;
     public BigNum CurrentHp;

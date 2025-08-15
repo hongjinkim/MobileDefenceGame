@@ -12,7 +12,7 @@ public class PlayerManager : BasicSingleton<PlayerManager>
 {
     [ShowInInspector, DictionaryDrawerSettings(KeyLabel = "Order", ValueLabel = "Hero ID")]
     public Dictionary<int, string> HeroDeck = new Dictionary<int, string>();
-    public int currentStage;
+    public int CurrentStage;
 
     private void OnEnable()
     {

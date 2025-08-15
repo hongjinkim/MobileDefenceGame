@@ -25,7 +25,6 @@ public class StageManager : BasicSingleton<StageManager>
 
     public void StageStart()
     {
-        
         InitStage();
         _spawnStarted = false;
         StartCoroutine(StartAfterTwoLevelUpsOnce());
@@ -35,7 +34,7 @@ public class StageManager : BasicSingleton<StageManager>
     {
         InGameHeroManager.Instance.InstantiateHero();
 
-        currentStage = PlayerManager.Instance.currentStage;
+        currentStage = PlayerManager.Instance.CurrentStage;
         Debug.Log($"stage {currentStage} started");
         if (DataBase.TryGetStageValue(currentStage, out var value))
         {
@@ -93,7 +92,7 @@ public class StageManager : BasicSingleton<StageManager>
             Debug.Log($"[Wave {waveId}] {i}/{list.Count - 1} Spawn start: id={sd.EnemyID}, count={sd.SpawnCount}, delay={sd.SpawnDelay}");
 
             // fire-and-forget 스타일 (SpawnEnemy가 즉시 리턴하는 버전)
-            EnemyManager.Instance.SpawnEnemy(sd.SpawnPattern, sd.SpawnCount, sd.EnemyID);
+            EnemyManager.Instance.SpawnEnemy(sd.SpawnPattern, sd.SpawnCount, stageValue.EnemyInfo, sd.EnemyID);
 
             // 혹시 EnemyManager가 busy 플래그로 중복 호출을 무시한다면 한 프레임 양보해보세요
             yield return null;

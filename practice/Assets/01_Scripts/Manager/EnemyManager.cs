@@ -14,6 +14,8 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 	public float patternRadius = 5f;
 
 	private List<EnemyControl> MonsterList = new List<EnemyControl>();
+
+	private int _currentStage;
 	//private WaveData[] waves;
 	//private int _currentWaveIndex = 0;
 
@@ -29,8 +31,9 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 	private void InitStage()
 	{
 		ClearAllEnemy();
-		//waves = Stage.GetWaveData();
-	}
+		_currentStage = PlayerManager.Instance.CurrentStage;
+        //waves = Stage.GetWaveData();
+    }
 
 	private void ClearAllEnemy()
 	{
@@ -152,66 +155,18 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 		return MonsterList.Count;
 	}
 
-	//Wave 정보에 맞게 적을 스폰
-	//private IEnumerator SpawnAllWaves()
-	//{
-	//	// 모든 웨이브를 순서대로 진행
-	//	while (_currentWaveIndex < waves.Length)
-	//	{
-	//		WaveData currentWave = waves[_currentWaveIndex];
-	//		yield return StartCoroutine(SpawnWave(currentWave));
-	//		_currentWaveIndex++;
-	//	}
-
-	//	Debug.Log("모든 웨이브가 종료되었습니다!");
-	//}
-
-	//private IEnumerator SpawnWave(WaveData wave)
-	//{
-	//	Debug.Log($"--- {wave.waveName} 웨이브 시작 ---");
-
-	//	for (int i = 0; i < wave.enemyCount; i++)
-	//	{
-	//		var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
-	//		var enemyComp = newEnemy.GetComponent<EnemyControl>();
-	//		var enemyType = enemyComp.EnemyType;
-
-	//		// 몬스터 위치 및 인덱스 설정
-	//		if (enemyType == EEnemyType.StageMonster)
-	//		{
-	//			enemyComp.transform.position = GetSpawnPosition(wave.spawnPattern, wave.patternRadius, i, wave.enemyCount);
-	//		}
-	//		else if (enemyType == EEnemyType.Boss)
-	//		{
-	//			enemyComp.transform.position = PositionInfo.Instance.BossPos.position;
-	//		}
-
-
-	//		//enemyComp.InitEnemy();
-	//		MonsterList.Add(enemyComp);
-
-	//		// 다음 적 소환까지 대기
-	//		yield return new WaitForSeconds(wave.timeBetweenSpawns);
-	//	}
-
-	//	Debug.Log($"--- {wave.waveName} 웨이브 종료 ---");
-
-	//	// 다음 웨이브까지 대기
-	//	yield return new WaitForSeconds(wave.waveDelay);
-	//}
-
-	
-
-	public void SpawnEnemy(ESpawnPattern spawnPattern, int enemyCount, string enemyID = null)
+	public void SpawnEnemy(ESpawnPattern spawnPattern, int enemyCount, StageEnemyValue enemyInfo, string enemyID = null)
 	{
         for (int i = 0; i < enemyCount; i++)
 		{
             var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
+            var enemyComp = newEnemy.GetComponent<EnemyControl>();
+            var enemyType = enemyComp.Info.EnemyType;
             /*
              적 데이터 적용 구현 필요
              */
-            var enemyComp = newEnemy.GetComponent<EnemyControl>();
-            var enemyType = enemyComp.Info.EnemyType;
+            
+            
 
             // 몬스터 위치 및 인덱스 설정
             if (enemyType == EEnemyType.StageMonster)
@@ -223,7 +178,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 				enemyComp.transform.position = PositionInfo.Instance.BossPos.position;
 			}
 
-            enemyComp.Init();
+            enemyComp.Init(enemyInfo);
             MonsterList.Add(enemyComp);
 			//EnemyGenEvent.RaiseEvent(); // 몬스터 생성 이벤트 발생
         } 

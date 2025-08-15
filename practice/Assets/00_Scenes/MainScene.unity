@@ -1182,7 +1182,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!222 &122642527
 CanvasRenderer:
@@ -1239,6 +1239,9 @@ MonoBehaviour:
   center01: {x: 0.5, y: 0.5}
   enableOnDark: []
   disableOnDark: []
+  blockPointerDuringTransition: 1
+  blockNavigationDuringTransition: 1
+  eventSystem: {fileID: 0}
 --- !u!1 &141245167
 GameObject:
   m_ObjectHideFlags: 0
@@ -12532,27 +12535,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909454443}
   m_CullTransparentMesh: 1
---- !u!1 &1913489416 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8875480963481338901, guid: d3b87b4f5d47b7940b809715cd18cda2, type: 3}
-  m_PrefabInstance: {fileID: 5305840443767819979}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1913489417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913489416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb2f548519e796e45a05d9502f803379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroPrefab: {fileID: 6206542200335207978, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
-  HeroDeckList: []
-  HeroSummonedIDs: []
-  allSkillUpgrades: []
 --- !u!1 &1917345679
 GameObject:
   m_ObjectHideFlags: 0
@@ -15205,10 +15187,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8875480963481338901, guid: d3b87b4f5d47b7940b809715cd18cda2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1913489417}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3b87b4f5d47b7940b809715cd18cda2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

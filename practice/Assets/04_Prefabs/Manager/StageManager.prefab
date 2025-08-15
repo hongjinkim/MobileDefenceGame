@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3456705373337134298}
   - component: {fileID: 7282745762481049268}
+  - component: {fileID: 7969782638047637333}
   m_Layer: 0
   m_Name: StageManager
   m_TagString: Untagged
@@ -44,3 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb2c450744c5354091e97f59ddd929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStage: 0
+  level: 0
+  exp: 0
+  skillChoiceUI: {fileID: 0}
+--- !u!114 &7969782638047637333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8875480963481338901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2f548519e796e45a05d9502f803379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroPrefab: {fileID: 6206542200335207978, guid: ad4e3485dec522e4aa04d5b7490c5bed, type: 3}
+  HeroDeckList: []
+  HeroSummonedIDs: []
+  allSkillUpgrades: []

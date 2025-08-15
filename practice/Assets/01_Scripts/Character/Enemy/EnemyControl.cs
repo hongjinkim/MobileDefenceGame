@@ -10,13 +10,13 @@ using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 using static UnityEditor.VersionControl.Asset;
 
+[Serializable]
 public class EnemyInfo
 { 
     public EEnemyType EnemyType;
-    public BigNum AttackPower = 2;
-    public BigNum MaxHp = 100;
-    public BigNum DropGold = 0;
-    public int Stage;
+    public BigNum AttackPower;
+    public BigNum MaxHp;
+    public BigNum DropGold;
 }
 
 public class EnemyControl : CharacterBase
@@ -85,13 +85,30 @@ public class EnemyControl : CharacterBase
         isEnemy = true;
     }
 
-    public void Init()
+    public void Init(StageEnemyValue enemyInfo)
     {
         State.IsInitialized = false;
         State.InitTimer = 0;
         ChangeState(EActType.Init);
-        
+
+        InitStat(enemyInfo);
         InitHP(Info.MaxHp);
+    }
+
+    private void InitStat(StageEnemyValue enemyInfo)
+    {
+        Info.AttackPower = enemyInfo.EnemyAttack.Stat;
+        Info.MaxHp = enemyInfo.EnemyHP.Stat;
+        Info.DropGold = enemyInfo.EnemyGold.Stat;
+
+        if(Info.EnemyType == EEnemyType.Boss)
+        {
+            gameObject.transform.localScale = Vector3.one * 5f; // 보스 크기 조정
+            Info.AttackPower *= enemyInfo.BossAttackMultiplier.Stat;
+            Info.MaxHp *= enemyInfo.BossHPMultiplier.Stat;
+        }
+
+        Debug.Log($"Enemy Info - Type: {Info.EnemyType}, Attack: {Info.AttackPower.ToABC()}, Max HP: {Info.MaxHp.ToABC()}, Drop Gold: {Info.DropGold.ToABC()}");
     }
 
 
