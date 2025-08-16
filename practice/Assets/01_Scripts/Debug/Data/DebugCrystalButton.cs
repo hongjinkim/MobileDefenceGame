@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DebugCrystalButton : UIButton
 {
+    public int CrystalAmount = 100;
 
 #if DEBUG_ON
     private void Awake()
@@ -12,7 +13,7 @@ public class DebugCrystalButton : UIButton
     }
     protected override void OnClicked()
     {
-        DataBase.PlayerData.Value.UpdateCrystal(100);
+        DataBase.PlayerData.Value.UpdateCrystal(CrystalAmount);
     }
 #endif
 }

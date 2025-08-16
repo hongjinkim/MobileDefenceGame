@@ -5,6 +5,8 @@ using UnityEngine;
 public class DebugGoldButton : UIButton
 {
 
+    public int GoldAmount = 500;
+
 #if DEBUG_ON
     private void Awake()
     {
@@ -12,7 +14,7 @@ public class DebugGoldButton : UIButton
     }
     protected override void OnClicked()
     {
-        DataBase.PlayerData.Value.UpdateGold(500);
+        DataBase.PlayerData.Value.UpdateGold(GoldAmount);
     }
 #endif
 }

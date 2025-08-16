@@ -6,7 +6,7 @@ public enum EEventType
     HeroDied,
     LevelUp,
     MonsterGenerated,
-    EnerygyUpdated,
+    EnergyUpdated,
     GoldUpdated,
     CrystalUpdated,
 }

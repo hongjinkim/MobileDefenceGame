@@ -12,10 +12,16 @@ public class MainPageUI : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Subscribe(EEventType.DataLoaded, OnDataLoaded);
+        EventManager.Subscribe(EEventType.EnergyUpdated, UpdateEnergyText);
+        EventManager.Subscribe(EEventType.GoldUpdated, UpdateGoldText);
+        EventManager.Subscribe(EEventType.CrystalUpdated, UpdateCrystalText);
     }
     private void OnDisable()
     {
         EventManager.Unsubscribe(EEventType.DataLoaded, OnDataLoaded);
+        EventManager.Unsubscribe(EEventType.EnergyUpdated, UpdateEnergyText);
+        EventManager.Unsubscribe(EEventType.GoldUpdated, UpdateGoldText);
+        EventManager.Unsubscribe(EEventType.CrystalUpdated, UpdateCrystalText);
     }
 
     private void OnDataLoaded()
@@ -31,10 +37,24 @@ public class MainPageUI : MonoBehaviour
     }
     private void UpdateGoldText()
     {
-        goldText.text = DataBase.PlayerData.Value.Gold.ToBCD();
+        string finalStr = DataBase.PlayerData.Value.Gold.ToBCD();
+
+        TextRoller.Roll(
+        host: this,
+        text: goldText,
+        finalText: finalStr,
+        mode: TextRoller.Mode.CountUp
+        );
     }
     private void UpdateCrystalText()
     {
-        crystalText.text = DataBase.PlayerData.Value.Crystal.ToBCD();
+        string finalStr = DataBase.PlayerData.Value.Crystal.ToBCD();
+
+        TextRoller.Roll(
+        host: this,
+        text: crystalText,
+        finalText: finalStr,
+        mode: TextRoller.Mode.CountUp
+        );
     }
 }

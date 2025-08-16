@@ -16,7 +16,7 @@ public class PlayerValue : BaseSaveData<PlayerValue>
         CurrentEnergy += amount;
         if (CurrentEnergy > MaxEnergy) CurrentEnergy = MaxEnergy; // 최대 에너지 초과 방지
         if (CurrentEnergy < 0) CurrentEnergy = 0; // 에너지가 음수가 되지 않도록
-        EventManager.Raise(EEventType.EnerygyUpdated); // 에너지 업데이트 이벤트 발생
+        EventManager.Raise(EEventType.EnergyUpdated); // 에너지 업데이트 이벤트 발생
     }
     public void UpdateGold(BigNum amount)
     {
