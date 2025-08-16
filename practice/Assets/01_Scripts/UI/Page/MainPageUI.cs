@@ -9,6 +9,8 @@ public class MainPageUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI crystalText;
 
+    private PlayerValue playerValue;
+
     private void OnEnable()
     {
         EventManager.Subscribe(EEventType.DataLoaded, OnDataLoaded);
@@ -26,6 +28,8 @@ public class MainPageUI : MonoBehaviour
 
     private void OnDataLoaded()
     {
+        playerValue = DataBase.PlayerData.Value;
+
         UpdateEnergyText();
         UpdateGoldText();
         UpdateCrystalText();
@@ -33,11 +37,11 @@ public class MainPageUI : MonoBehaviour
 
     private void UpdateEnergyText()
     {
-        enerygyText.text = $"{DataBase.PlayerData.Value.CurrentEnergy}/{DataBase.PlayerData.Value.MaxEnergy}";
+        enerygyText.text = $"{playerValue.CurrentEnergy}/{playerValue.MaxEnergy}";
     }
     private void UpdateGoldText()
     {
-        string finalStr = DataBase.PlayerData.Value.Gold.ToBCD();
+        string finalStr = playerValue.Gold.ToBCD();
 
         TextRoller.Roll(
         host: this,
@@ -48,7 +52,7 @@ public class MainPageUI : MonoBehaviour
     }
     private void UpdateCrystalText()
     {
-        string finalStr = DataBase.PlayerData.Value.Crystal.ToBCD();
+        string finalStr = playerValue.Crystal.ToBCD();
 
         TextRoller.Roll(
         host: this,
