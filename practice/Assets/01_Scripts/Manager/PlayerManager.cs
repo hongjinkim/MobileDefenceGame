@@ -46,8 +46,9 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     public static void CheckEnergyToStart()
     {
         // 에너지가 충분한지 확인하고, 충분하다면 스테이지 시작
-        if (/*에너지 체크*/ false)
+        if (DataBase.PlayerData.Value.CurrentEnergy >= 5)
         {
+            DataBase.PlayerData.Value.UpdateEnergy(-5); // 에너지 소모
             UIManager.Instance.StartStageTransition();
         }
         else

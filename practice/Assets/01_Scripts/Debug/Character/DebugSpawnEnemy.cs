@@ -10,9 +10,11 @@ public class DebugSpawnEnemy : UIButton
     public int enemyCount;
 
 #if DEBUG_ON
+    private StageEnemyValue stageEnemyValue = new StageEnemyValue();
+
     protected override void OnClicked()
     {
-        EnemyManager.Instance.SpawnEnemy(spawnPattern, enemyCount);
+        EnemyManager.Instance.SpawnEnemy(spawnPattern, enemyCount, stageEnemyValue);
     }
 #endif
 

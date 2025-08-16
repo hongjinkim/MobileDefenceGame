@@ -39,7 +39,7 @@ public struct BigNum
 #if ODIN_INSPECTOR
 
     [ShowInInspector]
-    private string Num => new BigNum(M, E, false).ToWideFormat();
+    private string Num => new BigNum(M, E, false).ToBCD();
 
 #endif
 

@@ -60,4 +60,6 @@ public class DataBase : MonoBehaviour
     {
         return Instance.stageData.StageDict.TryGetValue(id.ToString(), out value);
     }
+
+    public static PlayerData PlayerData => Instance.playerData;
 }

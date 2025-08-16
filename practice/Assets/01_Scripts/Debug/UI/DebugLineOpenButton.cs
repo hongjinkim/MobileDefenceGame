@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebugLineOpenButton : UIButton
 {
-    private bool IsOpen = true;
+    private bool IsOpen = false;
     List<GameObject> Buttons = new List<GameObject>();
 
 #if DEBUG_ON
