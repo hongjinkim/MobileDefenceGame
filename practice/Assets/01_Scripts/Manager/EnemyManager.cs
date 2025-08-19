@@ -164,6 +164,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
             var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
             var enemyComp = newEnemy.GetComponent<EnemyControl>();
             var enemyType = enemyComp.Info.EnemyType;
+
             /*
              적 데이터 적용 구현 필요
              */
@@ -185,6 +186,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
 	{
         var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
         bossEnemy = newEnemy.GetComponent<EnemyControl>();
+		bossEnemy.Info.EnemyType = EEnemyType.Boss;
         var enemyType = bossEnemy.Info.EnemyType;
         /*
          적 데이터 적용 구현 필요
