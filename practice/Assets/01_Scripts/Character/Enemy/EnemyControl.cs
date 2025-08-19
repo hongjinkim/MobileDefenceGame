@@ -104,8 +104,8 @@ public class EnemyControl : CharacterBase
         if(Info.EnemyType == EEnemyType.Boss)
         {
             gameObject.transform.localScale = Vector3.one * 5f; // 보스 크기 조정
-            Info.AttackPower = enemyInfo.BossAttackMultiplier.Stat;
-            Info.MaxHp = enemyInfo.BossHPMultiplier.Stat;
+            Info.AttackPower *= enemyInfo.BossAttackMultiplier.Stat;
+            Info.MaxHp *= enemyInfo.BossHPMultiplier.Stat;
         }
 
         Debug.Log($"Enemy Info - Type: {Info.EnemyType}, Attack: {Info.AttackPower.ToABC()}, Max HP: {Info.MaxHp.ToABC()}, Drop Gold: {Info.DropGold.ToABC()}");

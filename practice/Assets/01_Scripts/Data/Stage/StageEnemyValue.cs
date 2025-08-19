@@ -18,7 +18,11 @@ public class EnemyStatValue
     public double Exponent;
     public BigNum Stat;
 
-    public void SetEnemyStat(int stage) => Stat = Start + Constant * (BigNum.Exp(Exponent * stage) - 1);
+    public void SetEnemyStat(int stage)
+    {
+        int s = Math.Max(stage, 1); // 1부터 설계 가정
+        Stat = Start + Constant * (BigNum.Exp(Exponent * s) - 1.0);
+    }
 }
 
 public class DoubleEnemyStatValue
@@ -30,6 +34,8 @@ public class DoubleEnemyStatValue
 
     public void SetEnemyStat(int stage)
     {
-        Stat = (double)(Start + Constant * (double)(BigNum.Exp(Exponent * stage) - 1));
+        int s = Math.Max(stage, 1);
+
+        Stat = (double)(Start + Constant * (Math.Exp(Exponent * s) - 1.0));
     }
 }

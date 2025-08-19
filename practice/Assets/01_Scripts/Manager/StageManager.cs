@@ -92,7 +92,6 @@ public class StageManager : BasicSingleton<StageManager>
 
     private IEnumerator RunOneWave(int waveId, List<EnemySpawnData> waveList)
     {
-        Debug.Log($"Wave {waveId} started, count:{waveList?.Count}");
 
         // 불변 리스트로 복사해서 안전하게 순회
         var list = new List<EnemySpawnData>(waveList ?? new List<EnemySpawnData>());
@@ -100,7 +99,6 @@ public class StageManager : BasicSingleton<StageManager>
         for (int i = 0; i < list.Count; i++)
         {
             var sd = list[i];
-            Debug.Log($"[Wave {waveId}] {i}/{list.Count - 1} Spawn start: id={sd.EnemyID}, count={sd.SpawnCount}, delay={sd.SpawnDelay}");
 
             if (sd.SpawnPattern == ESpawnPattern.Boss /*|| sd.SpawnPattern == ESpawnPattern.LastBoss*/)
             {
@@ -121,8 +119,6 @@ public class StageManager : BasicSingleton<StageManager>
                     yield return new WaitForSecondsRealtime(sd.SpawnDelay);
             }
         }
-
-        Debug.Log($"Wave {waveId} done.");
     }
 
     public void RequestLevelUp()
