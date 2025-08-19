@@ -60,8 +60,8 @@ namespace DataTable
 		public BigNum Monster_HP;
 		public BigNum Monster_Attack;
 		public BigNum Monster_GoldDrop;
-		public BigNum Boss_HPMultiply;
-		public BigNum Boss_AttackMultiply;
+		public System.Double Boss_HPMultiply;
+		public System.Double Boss_AttackMultiply;
   
 
 #region fuctions

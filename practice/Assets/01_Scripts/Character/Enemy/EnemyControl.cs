@@ -97,6 +97,8 @@ public class EnemyControl : CharacterBase
 
     private void InitStat(StageEnemyValue enemyInfo)
     {
+
+
         Info.AttackPower = enemyInfo.EnemyAttack.Stat;
         Info.MaxHp = enemyInfo.EnemyHP.Stat;
         Info.DropGold = enemyInfo.EnemyGold.Stat;
