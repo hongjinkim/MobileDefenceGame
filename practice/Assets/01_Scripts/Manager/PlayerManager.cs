@@ -12,7 +12,7 @@ public class PlayerManager : BasicSingleton<PlayerManager>
 {
     [ShowInInspector, DictionaryDrawerSettings(KeyLabel = "Order", ValueLabel = "Hero ID")]
     public Dictionary<int, string> HeroDeck = new Dictionary<int, string>();
-    public int CurrentStage;
+    public int CurrentStage = 1; // 추후 서버에서 진행상황 받아서 설정
 
     private void OnEnable()
     {
@@ -32,6 +32,12 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     public void GainExp(BigNum GetExp)
     {
         
+    }
+
+    public void ProceedToNextStage()
+    {
+        CurrentStage++;
+        EventManager.Raise(EEventType.StageChanged, CurrentStage);
     }
 
     private void TestDeck()

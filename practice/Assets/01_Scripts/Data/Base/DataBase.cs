@@ -17,6 +17,7 @@ public class DataBase : MonoBehaviour
     [TabGroup("Tabs", "Player"), HideLabel][InlineProperty][SerializeField] private PlayerData playerData = new PlayerData();
     [TabGroup("Tabs", "Initial"), HideLabel][InlineProperty][SerializeField] private InitialData initialData = new InitialData();
     [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData = new HeroData();
+    [TabGroup("Tabs", "HeroUpgrade"), HideLabel][InlineProperty][SerializeField] private HeroUpgradeData heroUpgradeData = new HeroUpgradeData();
     [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private StageData stageData = new StageData();
 
     private void Awake()
@@ -39,6 +40,7 @@ public class DataBase : MonoBehaviour
     {
         LoadData();
         isDataLoaded = true;
+        Debug.Log("DataBase Initialized and Data Loaded Successfully.");
         EventManager.Raise(EEventType.DataLoaded);
     }
 
@@ -48,6 +50,7 @@ public class DataBase : MonoBehaviour
         playerData.LoadData();
         initialData.LoadData();
         heroData.LoadData();
+        heroUpgradeData.LoadData();
         stageData.LoadData();
     }
 

@@ -11,14 +11,15 @@ public class MainPageUI : MonoBehaviour
 
     private PlayerValue playerValue;
 
-    private void OnEnable()
+    private void Awake()
     {
         EventManager.Subscribe(EEventType.DataLoaded, OnDataLoaded);
         EventManager.Subscribe(EEventType.EnergyUpdated, UpdateEnergyText);
         EventManager.Subscribe(EEventType.GoldUpdated, UpdateGoldText);
         EventManager.Subscribe(EEventType.CrystalUpdated, UpdateCrystalText);
     }
-    private void OnDisable()
+
+    private void OnApplicationQuit()
     {
         EventManager.Unsubscribe(EEventType.DataLoaded, OnDataLoaded);
         EventManager.Unsubscribe(EEventType.EnergyUpdated, UpdateEnergyText);
@@ -28,6 +29,7 @@ public class MainPageUI : MonoBehaviour
 
     private void OnDataLoaded()
     {
+        Debug.Log("MainPageUI: Data Loaded");
         playerValue = DataBase.PlayerData.Value;
 
         UpdateEnergyText();

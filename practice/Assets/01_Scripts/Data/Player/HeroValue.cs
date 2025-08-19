@@ -10,6 +10,9 @@ public class HeroValue
     public string Name;
     public string Description;
     public EGrade Grade;
+    public BigNum AttackPower;
+    public BigNum Health;
+    public float AttackSpeed;
 
     [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Upgrade ID", ValueLabel = "Info")]
     public Dictionary<string, SkillUpgradeValue> SkillUpgradeDict = new Dictionary<string, SkillUpgradeValue>();

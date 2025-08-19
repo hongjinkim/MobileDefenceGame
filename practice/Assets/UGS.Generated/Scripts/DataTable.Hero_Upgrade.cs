@@ -17,39 +17,39 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class Hero : ITable
+    public partial class Hero_Upgrade : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Hero> loadedList, Dictionary<int, Hero> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Hero_Upgrade> loadedList, Dictionary<int, Hero_Upgrade> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
-        static string sheetID = "1399143667"; // it is sheet id
+        static string sheetID = "1914207167"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, Hero> HeroMap = new Dictionary<int, Hero>();  
-        public static List<Hero> HeroList = new List<Hero>();   
+        public static Dictionary<int, Hero_Upgrade> Hero_UpgradeMap = new Dictionary<int, Hero_Upgrade>();  
+        public static List<Hero_Upgrade> Hero_UpgradeList = new List<Hero_Upgrade>();   
 
         /// <summary>
-        /// Get Hero List 
+        /// Get Hero_Upgrade List 
         /// Auto Load
         /// </summary>
-        public static List<Hero> GetList()
+        public static List<Hero_Upgrade> GetList()
         {{
            if (isLoaded == false) Load();
-           return HeroList;
+           return Hero_UpgradeList;
         }}
 
         /// <summary>
-        /// Get Hero Dictionary, keyType is your sheet A1 field type.
+        /// Get Hero_Upgrade Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, Hero>  GetDictionary()
+        public static Dictionary<int, Hero_Upgrade>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return HeroMap;
+           return Hero_UpgradeMap;
         }}
 
     
@@ -57,16 +57,15 @@ namespace DataTable
 /* Fields. */
 
 		public System.Int32 Key;
-		public System.String Hero_ID;
-		public EGrade Hero_Grade;
-		public System.String Hero_Name;
-		public System.String Hero_Description;
-		public System.String Skill_ID;
-		public System.String Skill_Name;
-		public System.String Skill_Description;
-		public System.Int32 Initial_Attack;
-		public System.Int32 Initial_Health;
-		public System.Single AttackSpeed;
+		public System.Int32 Initial_MaxLevel;
+		public System.Int32 Initial_MaxPromotionLevel;
+		public System.Int32 MaxLevel;
+		public System.Int32 AttackPowerIncrease;
+		public System.Int32 HealthIncrease;
+		public System.Int32 Initial_UpgradeStoneCost;
+		public System.Single UpgradeStoneIncrease;
+		public System.Int32 Initial_UpgradeGoldCost;
+		public System.Single UpgradeGoldIncrease;
   
 
 #region fuctions
@@ -77,7 +76,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("Hero is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Hero_Upgrade is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -93,7 +92,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Hero>, Dictionary<int, Hero>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Hero_Upgrade>, Dictionary<int, Hero_Upgrade>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -121,14 +120,14 @@ namespace DataTable
                
 
 
-    public static (List<Hero> list, Dictionary<int, Hero> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, Hero> Map = new Dictionary<int, Hero>();
-            List<Hero> List = new List<Hero>();     
+    public static (List<Hero_Upgrade> list, Dictionary<int, Hero_Upgrade> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, Hero_Upgrade> Map = new Dictionary<int, Hero_Upgrade>();
+            List<Hero_Upgrade> List = new List<Hero_Upgrade>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Hero).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Hero_Upgrade).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["Hero"];
+            var sheet = jsonObject["Hero_Upgrade"];
 
             foreach (var column in sheet.Keys)
             {
@@ -147,7 +146,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            Hero instance = new Hero();
+                            Hero_Upgrade instance = new Hero_Upgrade();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -188,8 +187,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            HeroList = List;
-                            HeroMap = Map;
+                            Hero_UpgradeList = List;
+                            Hero_UpgradeMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -199,10 +198,10 @@ namespace DataTable
 
  
 
-        public static void Write(Hero data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Hero_Upgrade data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Hero).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Hero_Upgrade).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

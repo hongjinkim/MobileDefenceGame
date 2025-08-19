@@ -1121,6 +1121,13 @@ MonoBehaviour:
     Name: 
     Description: 
     Grade: 0
+    AttackPower:
+      M: 0
+      E: 0
+    Health:
+      M: 0
+      E: 0
+    AttackSpeed: 0
   animator: {fileID: 8288952950936567541}
   AttackType: 0
 --- !u!95 &8288952950936567541
