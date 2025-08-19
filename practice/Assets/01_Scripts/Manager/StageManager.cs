@@ -23,6 +23,17 @@ public class StageManager : BasicSingleton<StageManager>
     private Queue<LevelUpRequest> levelUpQueue = new Queue<LevelUpRequest>();
     private bool isLevelUpFlowActive = false;
 
+    private bool bossDead = false; // 보스가 죽었는지 확인
+
+    private void OnEnable()
+    {
+        EventManager.Subscribe(EEventType.BossDead, () => bossDead = true);
+    }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(EEventType.BossDead, () => bossDead = true);
+    }
+
     public void StageStart()
     {
         InitStage();
@@ -91,14 +102,24 @@ public class StageManager : BasicSingleton<StageManager>
             var sd = list[i];
             Debug.Log($"[Wave {waveId}] {i}/{list.Count - 1} Spawn start: id={sd.EnemyID}, count={sd.SpawnCount}, delay={sd.SpawnDelay}");
 
-            // fire-and-forget 스타일 (SpawnEnemy가 즉시 리턴하는 버전)
-            EnemyManager.Instance.SpawnEnemy(sd.SpawnPattern, sd.SpawnCount, stageValue.EnemyInfo, sd.EnemyID);
+            if (sd.SpawnPattern == ESpawnPattern.Boss /*|| sd.SpawnPattern == ESpawnPattern.LastBoss*/)
+            {
+               EnemyManager.Instance.SpawnBoss(stageValue.EnemyInfo, sd.EnemyID);
 
-            // 혹시 EnemyManager가 busy 플래그로 중복 호출을 무시한다면 한 프레임 양보해보세요
-            yield return null;
+                // 보스가 죽을 때까지 대기
+                bossDead = false;
+                yield return new WaitUntil(() => bossDead);
+            }
+            else
+            {
+                EnemyManager.Instance.SpawnEnemy(sd.SpawnPattern, sd.SpawnCount, stageValue.EnemyInfo, sd.EnemyID);
 
-            if (sd.SpawnDelay > 0f)
-                yield return new WaitForSecondsRealtime(sd.SpawnDelay);
+                // 혹시 EnemyManager가 busy 플래그로 중복 호출을 무시한다면 한 프레임 양보해보세요
+                yield return null;
+
+                if (sd.SpawnDelay > 0f)
+                    yield return new WaitForSecondsRealtime(sd.SpawnDelay);
+            }
         }
 
         Debug.Log($"Wave {waveId} done.");

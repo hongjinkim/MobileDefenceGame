@@ -17,14 +17,14 @@ public class StageData
     // 스테이지 정보 사전
     [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Stage ID", ValueLabel = "Info")]
     public Dictionary<string, StageValue> StageDict = new Dictionary<string, StageValue>();
-
+    [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Stage ID", ValueLabel = "Stage Name")]
     public Dictionary<int, string> StageNameDict = new Dictionary<int, string>(); // 스테이지 배경명
                                                                                   //private int mapCount = 0;
 
 
     public void LoadData()
     {
-        MaxStage = 2;//DataTable.스테이지.스테이지List.Max(stage => stage.스테이지_스테이지ID);
+        MaxStage = DataTable.StageInfo.StageInfoList.Count;
 
         for (int i = 1; i <= MaxStage; i++)
         {
@@ -91,6 +91,11 @@ public class StageData
             Stage.WaveValueDict = newDict;
 
             StageDict[i.ToString()] = Stage;
+        }
+
+        for (int i = 1; i <= MaxStage; i++)
+        {
+            StageNameDict[i] = DataTable.StageInfo.StageInfoMap[i-1].StageName; // 스테이지 배경명
         }
     }
 }

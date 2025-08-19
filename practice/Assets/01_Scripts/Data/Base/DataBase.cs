@@ -8,9 +8,6 @@ using UnityEngine;
 public class DataBase : MonoBehaviour
 {
     public static DataBase Instance { get; private set; } = null;
-    private bool isDataLoaded = false;
-
-
 
     // data 클래스들을 여기에 선언
 
@@ -39,7 +36,6 @@ public class DataBase : MonoBehaviour
     private void Initialize()
     {
         LoadData();
-        isDataLoaded = true;
         Debug.Log("DataBase Initialized and Data Loaded Successfully.");
         EventManager.Raise(EEventType.DataLoaded);
     }
@@ -62,6 +58,10 @@ public class DataBase : MonoBehaviour
     public static bool TryGetStageValue(int id, out StageValue value)
     {
         return Instance.stageData.StageDict.TryGetValue(id.ToString(), out value);
+    }
+    public static bool TryGetStageName(int id, out string name)
+    {
+        return Instance.stageData.StageNameDict.TryGetValue(id, out name);
     }
 
     public static PlayerData PlayerData => Instance.playerData;

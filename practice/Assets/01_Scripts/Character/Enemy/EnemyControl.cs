@@ -245,6 +245,12 @@ public class EnemyControl : CharacterBase
         MonsterCollider.enabled = false;
         State.IsLive = false;
         EnemyManager.Instance.EnemyDeath(this);
+        EventManager.Raise(EEventType.EnemyDead, this);
+        if(Info.EnemyType == EEnemyType.Boss)
+        {
+            // 보스 사망시 이벤트 발생
+            EventManager.Raise(EEventType.BossDead);
+        }
 
         // 1. 골드값을 여기서 연동하도록(배율때문에)
         // 2. 드랍템 조정(던전몬스터는 스테이지몬스터와 드랍템이 다름)

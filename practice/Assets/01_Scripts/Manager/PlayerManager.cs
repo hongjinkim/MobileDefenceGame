@@ -16,12 +16,12 @@ public class PlayerManager : BasicSingleton<PlayerManager>
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()
     {
-        
+
     }
 
     private void Start()
@@ -37,7 +37,7 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     public void ProceedToNextStage()
     {
         CurrentStage++;
-        EventManager.Raise(EEventType.StageChanged, CurrentStage);
+        EventManager.Raise(EEventType.StageCleared);
     }
 
     private void TestDeck()
