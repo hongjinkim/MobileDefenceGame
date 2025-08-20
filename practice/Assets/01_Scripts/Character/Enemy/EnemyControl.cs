@@ -30,6 +30,12 @@ public class EnemyControl : CharacterBase
 
 
     public EnemyInfo Info = new EnemyInfo();
+    public bool IsLastBoss { get; private set; }
+
+    public void MarkAsLastBoss(bool isLastBoss)
+    {
+        IsLastBoss = isLastBoss;
+    }
 
     private State<EnemyControl>[] States;
     private State<EnemyControl> CurrentState;
@@ -252,6 +258,9 @@ public class EnemyControl : CharacterBase
         {
             // 보스 사망시 이벤트 발생
             EventManager.Raise(EEventType.BossDead);
+
+            if(IsLastBoss)
+                EventManager.Raise(EEventType.LastBossDead);
         }
 
         // 1. 골드값을 여기서 연동하도록(배율때문에)

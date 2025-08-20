@@ -22,7 +22,8 @@ public enum ESpawnPattern
     RandomSpiralRandomCircle, // 랜덤 나선형 랜덤 원형 패턴
     RandomSpiralRandomLine,   // 랜덤 나선형 랜덤 직선 패턴
     RandomSpiralRandomGrid,   // 랜덤 나선형 랜덤 격자 패턴
-    RandomSpiralRandomAroundTarget // 랜덤 나선형 랜덤 타겟 주위 패턴
-                                   // 추가적인 패턴이 필요하면 여기에 정의
+    RandomSpiralRandomAroundTarget, // 랜덤 나선형 랜덤 타겟 주위 패턴
+    LastBoss,     // 마지막 보스
+                  // 추가적인 패턴이 필요하면 여기에 정의
 
 }

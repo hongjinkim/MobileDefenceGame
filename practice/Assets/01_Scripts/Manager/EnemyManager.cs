@@ -37,7 +37,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
         //waves = Stage.GetWaveData();
     }
 
-	private void ClearAllEnemy()
+	public void ClearAllEnemy()
 	{
 		for (int i = 0; i < MonsterList.Count; i++)
 		{
@@ -164,11 +164,6 @@ public class EnemyManager : BasicSingleton<EnemyManager>
             var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
             var enemyComp = newEnemy.GetComponent<EnemyControl>();
             var enemyType = enemyComp.Info.EnemyType;
-
-            /*
-             적 데이터 적용 구현 필요
-             */
-            
             
 
             // 몬스터 위치 및 인덱스 설정
@@ -187,16 +182,28 @@ public class EnemyManager : BasicSingleton<EnemyManager>
         var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
         bossEnemy = newEnemy.GetComponent<EnemyControl>();
 		bossEnemy.Info.EnemyType = EEnemyType.Boss;
+        bossEnemy.MarkAsLastBoss(false);
         var enemyType = bossEnemy.Info.EnemyType;
-        /*
-         적 데이터 적용 구현 필요
-         */
 
         // 몬스터 위치 및 인덱스 설정
-		if (enemyType == EEnemyType.Boss)
-        {
-            bossEnemy.transform.position = PositionInfo.Instance.BossPos.position;
-        }
+		bossEnemy.transform.position = PositionInfo.Instance.BossPos.position;
+        
+
+        bossEnemy.Init(enemyInfo);
+        MonsterList.Add(bossEnemy);
+        EventManager.Raise(EEventType.EnemyGenerated); // 몬스터 생성 이벤트 발생
+    }
+    public void SpawnLastBoss(StageEnemyValue enemyInfo, string enemyID = null)
+    {
+        var newEnemy = EnemyPoolManager.Instance.Pop(EPoolType.Enemy);
+        bossEnemy = newEnemy.GetComponent<EnemyControl>();
+        bossEnemy.Info.EnemyType = EEnemyType.Boss;
+		bossEnemy.MarkAsLastBoss(true); // 마지막 보스로 표시
+        var enemyType = bossEnemy.Info.EnemyType;
+
+        // 몬스터 위치 및 인덱스 설정
+        bossEnemy.transform.position = PositionInfo.Instance.BossPos.position;
+
 
         bossEnemy.Init(enemyInfo);
         MonsterList.Add(bossEnemy);

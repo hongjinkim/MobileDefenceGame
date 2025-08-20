@@ -28,10 +28,12 @@ public class StageManager : BasicSingleton<StageManager>
     private void OnEnable()
     {
         EventManager.Subscribe(EEventType.BossDead, () => bossDead = true);
+        EventManager.Subscribe(EEventType.LastBossDead, OnLastBossDead);
     }
     private void OnDisable()
     {
         EventManager.Unsubscribe(EEventType.BossDead, () => bossDead = true);
+        EventManager.Unsubscribe(EEventType.LastBossDead, OnLastBossDead);
     }
 
     public void StageStart()
@@ -100,13 +102,18 @@ public class StageManager : BasicSingleton<StageManager>
         {
             var sd = list[i];
 
-            if (sd.SpawnPattern == ESpawnPattern.Boss /*|| sd.SpawnPattern == ESpawnPattern.LastBoss*/)
+            if (sd.SpawnPattern == ESpawnPattern.Boss || sd.SpawnPattern == ESpawnPattern.LastBoss)
             {
                EnemyManager.Instance.SpawnBoss(stageValue.EnemyInfo, sd.EnemyID);
 
                 // 보스가 죽을 때까지 대기
                 bossDead = false;
                 yield return new WaitUntil(() => bossDead);
+            }
+            else if (sd.SpawnPattern == ESpawnPattern.LastBoss)
+            {
+                EnemyManager.Instance.SpawnLastBoss(stageValue.EnemyInfo, sd.EnemyID);
+                yield break;
             }
             else
             {
@@ -246,6 +253,24 @@ public class StageManager : BasicSingleton<StageManager>
     {
         RequestLevelUp();
     }
+
+    public void OnLastBossDead()
+    {
+        // 마지막 보스 클리어 시 처리
+        Debug.Log("Last boss defeated! Stage cleared.");
+        EnemyManager.Instance.ClearAllEnemy(); // 모든 몬스터 제거
+        // TODO: 타이머 정지
+        // StageTimer.Instance.Stop();
+
+        // TODO: 보상 처리
+        // RewardManager.Instance.GrantStageReward(currentStageId);
+
+        // TODO: UI 연출
+        // UIManager.Instance.ShowStageClearPopup();
+
+        EventManager.Raise(EEventType.StageCleared); // 스테이지 클리어 이벤트 발생
+    }
+
 
     // 선택지 타입 등 확장할 때 아래 구조 활용 가능
     public class LevelUpRequest { /* 확장 가능: 어떤 원인으로 레벨업? 등 정보 추가 가능 */ }

@@ -12,4 +12,5 @@ public enum EEventType
     GoldUpdated, // 골드 업데이트 이벤트
     CrystalUpdated, //  크리스탈 업데이트 이벤트
     StageCleared, // 스테이지 변경 이벤트
+    LastBossDead, // 마지막 보스 클리어 이벤트
 }
