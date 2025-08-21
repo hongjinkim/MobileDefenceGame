@@ -10,7 +10,8 @@ public class MainPageUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enerygyText;
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI crystalText;
-    [SerializeField] private TextMeshProUGUI stageText;
+    [SerializeField] private TextMeshProUGUI stageNumText;
+    [SerializeField] private TextMeshProUGUI stageNameText;
     [SerializeField] private TextMeshProUGUI waveText;
 
     private PlayerValue playerValue;
@@ -86,7 +87,8 @@ public class MainPageUI : MonoBehaviour
             out string name
         ) ? name : "Unknown Stage";
 
-        stageText.text = $"{currentStage}.{stageName}";
+        stageNumText.text = $"{currentStage.ToString("D2")}.";
+        stageNameText.text = stageName;
         waveText.text = $"0/20"; // 클리어 정보 받고 수정
     }
 }
