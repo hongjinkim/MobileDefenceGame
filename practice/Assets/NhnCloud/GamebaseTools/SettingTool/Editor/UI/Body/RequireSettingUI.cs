@@ -10,7 +10,7 @@ namespace NhnCloud.GamebaseTools.SettingTool.Ui
 
         public void Draw(SettingOption settingData)
         {
-            InstallCheckInfo installCheckInfo = DataManager.GetData<InstallCheckInfo>(DataKey.INSTALL_CHECK);
+            InstallCheckInfo installCheckInfo = Data.DataManager.GetData<InstallCheckInfo>(DataKey.INSTALL_CHECK);
 
             bool hasStatus = false;
             foreach (var platform in AdapterSettings.GetAllPlatforms())

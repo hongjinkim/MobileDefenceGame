@@ -14,7 +14,7 @@ public class DebugGoldButton : UIButton
     }
     protected override void OnClicked()
     {
-        DataBase.PlayerData.Value.UpdateGold(GoldAmount);
+        GameDataManager.PlayerData.Value.UpdateGold(GoldAmount);
     }
 #endif
 }

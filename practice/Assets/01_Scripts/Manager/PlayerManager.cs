@@ -12,7 +12,10 @@ public class PlayerManager : BasicSingleton<PlayerManager>
 {
     [ShowInInspector, DictionaryDrawerSettings(KeyLabel = "Order", ValueLabel = "Hero ID")]
     public Dictionary<int, string> HeroDeck = new Dictionary<int, string>();
+
     public int CurrentStage = 1; // 추후 서버에서 진행상황 받아서 설정
+
+    public PlayerData playerData { get; private set; }
 
     private void OnEnable()
     {
@@ -22,6 +25,12 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     private void OnDisable()
     {
 
+    }
+
+    private void Awake()
+    {
+        // PlayerData 초기화
+        playerData = GameDataManager.PlayerData;
     }
 
     private void Start()
@@ -52,9 +61,9 @@ public class PlayerManager : BasicSingleton<PlayerManager>
     public static void CheckEnergyToStart()
     {
         // 에너지가 충분한지 확인하고, 충분하다면 스테이지 시작
-        if (DataBase.PlayerData.Value.CurrentEnergy >= 5)
+        if (GameDataManager.PlayerData.Value.CurrentEnergy >= 5)
         {
-            DataBase.PlayerData.Value.UpdateEnergy(-5); // 에너지 소모
+            GameDataManager.PlayerData.Value.UpdateEnergy(-5); // 에너지 소모
             UIManager.Instance.StartStageTransition();
         }
         else

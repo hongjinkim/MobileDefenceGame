@@ -24,7 +24,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         public void Initialize()
         {
-            var data = DataManager.GetData<SettingToolResponse.LaunchingData>(DataKey.LAUNCHING);
+            var data = Data.DataManager.GetData<SettingToolResponse.LaunchingData>(DataKey.LAUNCHING);
 
             if (data.header.isSuccessful == false)
             {

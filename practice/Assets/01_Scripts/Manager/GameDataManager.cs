@@ -1,17 +1,17 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(DataBase))]
-public class GameDataManager : MonoBehaviour
+
+public class GameDataManager : BasicSingleton<GameDataManager>
 {
-    public DataBase DataBase;
+    // 서버에서 불러오는 플레이어 데이터
+    public PlayerData playerData = new PlayerData();
 
-    private void Awake()
-    {
-        if (DataBase == null)
-            DataBase = GetComponent<DataBase>();
-    }
 
- 
+
+    public static DataBase DataBase => DataBase.Instance;
+    public static PlayerData PlayerData => Instance.playerData;
+
 }

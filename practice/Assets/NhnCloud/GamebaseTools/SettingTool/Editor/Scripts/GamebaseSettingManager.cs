@@ -82,8 +82,8 @@ namespace NhnCloud.GamebaseTools.SettingTool
             }
 
             state = State.INITIALING;
-            
-            DataManager.Initialize();
+
+            Data.DataManager.Initialize();
             
             loader = new DataLoader();
             loader.LoadData(processInfo, (loadError) =>
@@ -127,8 +127,8 @@ namespace NhnCloud.GamebaseTools.SettingTool
         private static void AdInitialize()
         {
             const string ADVERTISEMENT_XML_NAME = "Advertisement.xml";
-            var imageDownloadPath = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).ad.downloadPath;
-            var remoteUrl = Path.Combine(DataManager.GetData<SettingToolResponse.Cdn>(DataKey.CDN).url, "GamebaseSettingTool/Ad/");
+            var imageDownloadPath = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).ad.downloadPath;
+            var remoteUrl = Path.Combine(Data.DataManager.GetData<SettingToolResponse.Cdn>(DataKey.CDN).url, "GamebaseSettingTool/Ad/");
 
             Advertisement.Initialize(
                 new AdvertisementConfigurations(
@@ -177,7 +177,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
             }
             
             Multilanguage.Destroy();
-            DataManager.Destroy();
+            Data.DataManager.Destroy();
             Advertisement.Destroy();
 
             state = State.NONE;

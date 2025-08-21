@@ -104,7 +104,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
         {
             this.processInfo = processInfo;
 
-            var sdkPath = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).gamebaseSdk;
+            var sdkPath = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).gamebaseSdk;
             gamebaseSdkPath = sdkPath.path;
             gamebaseSdkVersionPath = sdkPath.versionPath;
 

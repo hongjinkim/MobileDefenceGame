@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ public class PlayerHeroState
 }
 
 // UI/네트워크 전송용 뷰(마스터 이름/속성을 붙여서 제공)
+[Serializable]
 public class PlayerHeroView
 {
     public string HeroId;
@@ -38,12 +40,15 @@ public class PlayerHeroView
 public class PlayerHeroValue : BaseSaveData<PlayerHeroValue>
 {
     // 보유 상태: heroId -> 성장정보
+    [ShowInInspector]
     public Dictionary<string, PlayerHeroState> Owned = new();
 
     // 도감 상태: heroId -> Hidden/Seen/Owned
+    [ShowInInspector]
     public Dictionary<string, EHeroDiscoveryState> Codex = new();
 
     // 덱(팀): deckId -> heroId 리스트
+    [ShowInInspector]
     public Dictionary<string, List<string>> Decks = new(); // 예: "Team1"  등
 
     // ── 기본 쿼리 ─────────────────────────────────────────────

@@ -13,7 +13,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
     {
         public static GamebaseVersion GetInstalledVersion()
         {
-            return DataManager.GetData<GamebaseVersion>(DataKey.INSTALLED_VERSION);
+            return Data.DataManager.GetData<GamebaseVersion>(DataKey.INSTALLED_VERSION);
         }
         
         public static string GetCurrentVersion(string platform)
@@ -45,7 +45,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         public bool CheckInstalledGamebaseSdk()
         {
-            var data = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO);
+            var data = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO);
             if (data == null)
             {
                 return false;
@@ -79,7 +79,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
             data.android = androidVersion;
             data.ios = iosVersion;
             
-            string filePath = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).installedVersion.path;
+            string filePath = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).installedVersion.path;
             File.WriteAllText(filePath, JsonMapper.ToJson(data));
         }
     }

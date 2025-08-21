@@ -21,8 +21,8 @@ namespace NhnCloud.GamebaseTools.SettingTool.Ui
                 selectHistory = 0;
                 historyNames = null;
                 historyVersionList.Clear();
-                
-                history = DataManager.GetData<SettingHistory>(DataKey.SETTING_HISTORY);
+
+                history = Data.DataManager.GetData<SettingHistory>(DataKey.SETTING_HISTORY);
                 if (history != null)
                 {
                     List<string> nameList = new List<string>();
@@ -94,7 +94,7 @@ namespace NhnCloud.GamebaseTools.SettingTool.Ui
         public VersionSelectorUI()
         {
             installedVersion = GamebaseInfo.GetInstalledVersion();
-            supportVersion = DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
+            supportVersion = Data.DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
 
             historyVersionUI = new HistoryVersionUI();
 

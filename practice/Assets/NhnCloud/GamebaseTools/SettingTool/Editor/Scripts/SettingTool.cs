@@ -62,8 +62,8 @@ namespace NhnCloud.GamebaseTools.SettingTool
             SettingToolCallback.ErrorDelegate callback)
         {
             this.processInfo = processInfo;
-            var adapterData = DataManager.GetData<AdapterData>(DataKey.ADAPTER_DATA);
-            var savedSelection = DataManager.GetData<AdapterSelection>(DataKey.ADAPTER_SELECTION);
+            var adapterData = Data.DataManager.GetData<AdapterData>(DataKey.ADAPTER_DATA);
+            var savedSelection = Data.DataManager.GetData<AdapterSelection>(DataKey.ADAPTER_SELECTION);
             AdapterSettings.Initialize(adapterData, savedSelection);
 
             gamebaseInfo = new GamebaseInfo();
@@ -78,7 +78,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
             versionStatus = new VersionStatus();
 
-            DataManager.SetData(DataKey.SETTING_TOOL, this);
+            Data.DataManager.SetData(DataKey.SETTING_TOOL, this);
 
             callback(null);
         }
@@ -198,9 +198,9 @@ namespace NhnCloud.GamebaseTools.SettingTool
         
         public void UpdateAllSettings(SettingOption settingOption, SettingToolCallback.ErrorDelegate callback)
         {
-            SettingHistory history = DataManager.GetData<SettingHistory>(DataKey.SETTING_HISTORY);
+            SettingHistory history = Data.DataManager.GetData<SettingHistory>(DataKey.SETTING_HISTORY);
 
-            var installedVersion = DataManager.GetData<GamebaseVersion>(DataKey.INSTALLED_VERSION);
+            var installedVersion = Data.DataManager.GetData<GamebaseVersion>(DataKey.INSTALLED_VERSION);
             
             SettingToolLog.Debug("UpdateSettings STEP1. Update gamebaseAllDependencies.xml.", GetType(), "UpdateGamebaseDependencies");
             gamebaseDependencies.UpdateGamebaseAllDependenciesFile(settingOption, (error) =>
@@ -218,12 +218,12 @@ namespace NhnCloud.GamebaseTools.SettingTool
                                 history.Remove(settingOption.GetGamebaseVersion());
                                 history.AddSave(installedVersion);
                             }
-                            
-                            AssetDatabase.ImportAsset(DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO)
+
+                            AssetDatabase.ImportAsset(Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO)
                                 .settingTool.path);
                             
                             settingOption.UpdatePlatformSetting();
-                            
+
                             AssetDatabase.Refresh();
 
                             callback(null);
@@ -245,7 +245,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
         {
             AdapterSettings.Clear();
 
-            string filePath = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).adapterSelection.path;
+            string filePath = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).adapterSelection.path;
 
             try
             {
@@ -268,9 +268,9 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         public void ClearHistory()
         {
-            DataManager.RemoveKey(DataKey.SETTING_HISTORY);
+            Data.DataManager.RemoveKey(DataKey.SETTING_HISTORY);
             
-            string filePath = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO)
+            string filePath = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO)
                 .adapterSelection.historyPath;
 
             try
@@ -294,7 +294,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         private void SaveAdapterSelectionFile(SettingOption settingOption, SettingToolCallback.ErrorDelegate callback)
         {
-            string filePath = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).adapterSelection.path;
+            string filePath = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).adapterSelection.path;
 
             JsonWriter writer = new JsonWriter
             {
@@ -318,7 +318,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         private void RemoveLagacyAdapterFile(SettingToolCallback.ErrorDelegate callback)
         {
-            string filePath = DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).legacyAdapterSetting.path;
+            string filePath = Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO).legacyAdapterSetting.path;
 
             try
             {

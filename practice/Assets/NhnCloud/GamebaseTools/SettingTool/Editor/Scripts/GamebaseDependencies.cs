@@ -35,7 +35,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         public void UpdateGamebaseAllDependenciesFile(SettingOption settingOption, SettingToolCallback.ErrorDelegate callback)
         {
-            var document = DataManager.GetData<XmlDocument>(DataKey.GAMEBASE_ALL_DEPENDENCIES);
+            var document = Data.DataManager.GetData<XmlDocument>(DataKey.GAMEBASE_ALL_DEPENDENCIES);
 
             var androidPackages = document.SelectSingleNode("dependencies/androidPackages");
             var iosPods = document.SelectSingleNode("dependencies/iosPods");
@@ -63,7 +63,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
         {
             try
             {
-                document.Save(DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO)
+                document.Save(Data.DataManager.GetData<SettingToolResponse.LocalFileInfo>(DataKey.LOCAL_FILE_INFO)
                     .gamebaseAllDependencies.path);
             }
             catch (Exception e)
@@ -77,7 +77,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         public void RemoveGamebaseAllDependencies(SettingToolCallback.ErrorDelegate callback)
         {
-            var document = DataManager.GetData<XmlDocument>(DataKey.GAMEBASE_ALL_DEPENDENCIES);
+            var document = Data.DataManager.GetData<XmlDocument>(DataKey.GAMEBASE_ALL_DEPENDENCIES);
             var androidPackages = document.SelectSingleNode("dependencies/androidPackages");
             var iosPods = document.SelectSingleNode("dependencies/iosPods");
 

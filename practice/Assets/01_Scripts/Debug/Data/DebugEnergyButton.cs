@@ -13,7 +13,7 @@ public class DebugEnergyButton : UIButton
     }
     protected override void OnClicked()
     {
-        DataBase.PlayerData.Value.UpdateEnergy(EnergyAmount);
+        GameDataManager.PlayerData.Value.UpdateEnergy(EnergyAmount);
     }
 #endif
 }

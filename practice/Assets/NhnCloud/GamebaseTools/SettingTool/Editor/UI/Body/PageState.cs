@@ -27,7 +27,7 @@ namespace NhnCloud.GamebaseTools.SettingTool.Ui
         {
             this.settingData = settingData;
             
-            var supportVersion = DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
+            var supportVersion = Data.DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
             
             installedVersion = GamebaseInfo.GetInstalledVersion();
             

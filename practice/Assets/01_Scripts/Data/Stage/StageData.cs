@@ -54,13 +54,13 @@ public class StageData
             // 적 보스 공격력 배수
             Stage.EnemyInfo.BossAttackMultiplier.Start = DataTable.Enemy.EnemyMap["Start"].Boss_AttackMultiply;
             Stage.EnemyInfo.BossAttackMultiplier.Constant = DataTable.Enemy.EnemyMap["Constant"].Boss_AttackMultiply;
-            Stage.EnemyInfo.BossAttackMultiplier.Exponent = DataTable.Enemy.EnemyMap["Exponent"].Boss_AttackMultiply;
+            Stage.EnemyInfo.BossAttackMultiplier.Exponent = (double)DataTable.Enemy.EnemyMap["Exponent"].Boss_AttackMultiply;
             Stage.EnemyInfo.BossAttackMultiplier.SetEnemyStat(i);
 
             // 적 보스 체력 배수
             Stage.EnemyInfo.BossHPMultiplier.Start = DataTable.Enemy.EnemyMap["Start"].Boss_HPMultiply;
             Stage.EnemyInfo.BossHPMultiplier.Constant = DataTable.Enemy.EnemyMap["Constant"].Boss_HPMultiply;
-            Stage.EnemyInfo.BossHPMultiplier.Exponent = DataTable.Enemy.EnemyMap["Exponent"].Boss_HPMultiply;
+            Stage.EnemyInfo.BossHPMultiplier.Exponent = (double)DataTable.Enemy.EnemyMap["Exponent"].Boss_HPMultiply;
             Stage.EnemyInfo.BossHPMultiplier.SetEnemyStat(i);
 
             // 웨이브 정보

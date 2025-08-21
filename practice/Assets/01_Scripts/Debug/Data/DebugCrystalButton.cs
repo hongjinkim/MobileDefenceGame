@@ -13,7 +13,7 @@ public class DebugCrystalButton : UIButton
     }
     protected override void OnClicked()
     {
-        DataBase.PlayerData.Value.UpdateCrystal(CrystalAmount);
+        GameDataManager.PlayerData.Value.UpdateCrystal(CrystalAmount);
     }
 #endif
 }

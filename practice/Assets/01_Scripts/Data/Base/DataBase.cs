@@ -10,8 +10,6 @@ public class DataBase : MonoBehaviour
     public static DataBase Instance { get; private set; } = null;
 
     // data 클래스들을 여기에 선언
-
-    [TabGroup("Tabs", "Player"), HideLabel][InlineProperty][SerializeField] private PlayerData playerData = new PlayerData();
     [TabGroup("Tabs", "Initial"), HideLabel][InlineProperty][SerializeField] private InitialData initialData = new InitialData();
     [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData = new HeroData();
     [TabGroup("Tabs", "HeroUpgrade"), HideLabel][InlineProperty][SerializeField] private HeroUpgradeData heroUpgradeData = new HeroUpgradeData();
@@ -43,7 +41,6 @@ public class DataBase : MonoBehaviour
     private void LoadData()
     {
         // 각 데이터 클래스의 데이터를 로드
-        playerData.LoadData();
         initialData.LoadData();
         heroData.LoadData();
         heroUpgradeData.LoadData();
@@ -63,6 +60,4 @@ public class DataBase : MonoBehaviour
     {
         return Instance.stageData.StageNameDict.TryGetValue(id, out name);
     }
-
-    public static PlayerData PlayerData => Instance.playerData;
 }

@@ -16,7 +16,7 @@ namespace NhnCloud.GamebaseTools.SettingTool.Ui
         public void Initialize()
         {
             installedVersion = GamebaseInfo.GetInstalledVersion();
-            var supportVersion = DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
+            var supportVersion = Data.DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
             
             lastestVersion = new GamebaseVersion();
             lastestVersion.unity = supportVersion.GetUnityLastVersion();

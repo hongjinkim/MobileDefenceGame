@@ -10,7 +10,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
      
         public VersionStatus()
         {
-            supportVersion = DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
+            supportVersion = Data.DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
 
             CheckSettingToolStatus();
         }
@@ -35,7 +35,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
             }
             
             SettingToolLog.Debug(string.Format("SettingToolUpdateStatus:{0}", toolUpdateStatus), GetType(), "CheckSettingToolStatus");
-            DataManager.SetData(DataKey.SETTING_TOOL_UPDATE_STATUS, toolUpdateStatus);
+            Data.DataManager.SetData(DataKey.SETTING_TOOL_UPDATE_STATUS, toolUpdateStatus);
         }
 
         public static bool IsUpdate(IGamebaseVersion version)
@@ -53,7 +53,7 @@ namespace NhnCloud.GamebaseTools.SettingTool
 
         public static bool IsSupportVersion(IGamebaseVersion version)
         {
-            var supportVersion = DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
+            var supportVersion = Data.DataManager.GetData<SettingToolResponse.SupportVersion>(DataKey.SUPPOET_VERSION);
 
             if (supportVersion?.unity?.Contains(version.GetUnityVersion())== false)
             {

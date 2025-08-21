@@ -27,8 +27,8 @@ public class EnemyStatValue
 
 public class DoubleEnemyStatValue
 {
-    public double Start;
-    public double Constant;   // 상수곱
+    public BigNum Start;
+    public BigNum Constant;   // 상수곱
     public double Exponent;
     public double Stat;
 
@@ -36,6 +36,6 @@ public class DoubleEnemyStatValue
     {
         int s = Math.Max(stage, 1);
 
-        Stat = Start + Constant * (Math.Exp(Exponent * s) - 1.0);
+        Stat = (double)(Start + Constant * (BigNum.Exp(Exponent * s) - 1.0));
     }
 }

@@ -39,7 +39,7 @@ public class MainPageUI : MonoBehaviour
     private void OnDataLoaded()
     {
         Debug.Log("MainPageUI: Data Loaded");
-        playerValue = DataBase.PlayerData.Value;
+        playerValue = GameDataManager.PlayerData.Value;
         currentStage = PlayerManager.Instance.CurrentStage;
         stageName = DataBase.TryGetStageName(
             currentStage,
