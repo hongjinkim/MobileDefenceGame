@@ -27,6 +27,8 @@ public class HeroData
             heroData.Grade = heroList[i].Hero_Grade;
             heroData.Name = heroList[i].Hero_Name;
             heroData.Description = heroList[i].Hero_Description;
+            heroData.HeroType = heroList[i].Hero_Type;
+            heroData.Element = heroList[i].Hero_Element;
             heroData.AttackPower = heroList[i].Initial_Attack;
             heroData.Health = heroList[i].Initial_Health;
             heroData.AttackSpeed = heroList[i].AttackSpeed;

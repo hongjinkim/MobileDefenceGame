@@ -7,9 +7,12 @@ using UnityEngine;
 [Serializable]
 public class HeroValue
 {
+    // ∞Ì¡§ Ω∫≈»
     public string Name;
     public string Description;
     public EGrade Grade;
+    public EHeroType HeroType;
+    public EHeroElementType Element;
     public BigNum AttackPower;
     public BigNum Health;
     public float AttackSpeed;

@@ -67,6 +67,8 @@ namespace DataTable
 		public System.Int32 Initial_Attack;
 		public System.Int32 Initial_Health;
 		public System.Single AttackSpeed;
+		public EHeroType Hero_Type;
+		public EHeroElementType Hero_Element;
   
 
 #region fuctions

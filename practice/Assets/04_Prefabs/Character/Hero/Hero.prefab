@@ -1121,6 +1121,8 @@ MonoBehaviour:
     Name: 
     Description: 
     Grade: 0
+    HeroType: 0
+    Element: 0
     AttackPower:
       M: 0
       E: 0
