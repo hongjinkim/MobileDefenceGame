@@ -13,11 +13,11 @@ public class PlayerHeroState
     public BigNum Exp; // 경험치
 
     public PlayerHeroState() { }
-    public PlayerHeroState(string heroId)
+    public PlayerHeroState(string heroId, int level = 1, int star = 1)
     {
         HeroId = heroId;
-        Level = 1;
-        Star = 1;
+        Level = level;
+        Star = star;
         Exp = 0;
     }
 }
@@ -45,7 +45,7 @@ public class PlayerHeroValue : BaseSaveData<PlayerHeroValue>
 
     // 도감 상태: heroId -> Hidden/Seen/Owned
     [ShowInInspector]
-    public Dictionary<string, EHeroDiscoveryState> Codex = new();
+    public Dictionary<string, EHeroDiscoveryState> Collection = new();
 
     // 덱(팀): deckId -> heroId 리스트
     [ShowInInspector]
@@ -54,35 +54,37 @@ public class PlayerHeroValue : BaseSaveData<PlayerHeroValue>
     // ── 기본 쿼리 ─────────────────────────────────────────────
     public bool IsOwned(string heroId) => Owned.ContainsKey(heroId);
 
-    public PlayerHeroState Acquire(string heroId)
+    public PlayerHeroState Acquire(string heroId, int level = 1, int star = 1)
     {
         if (!Owned.TryGetValue(heroId, out var s))
         {
-            s = new PlayerHeroState(heroId);
+            s = new PlayerHeroState(heroId, level, star);
             Owned[heroId] = s;
         }
-        PromoteCodex(heroId, EHeroDiscoveryState.Owned);
+        PromoteCollection(heroId, EHeroDiscoveryState.Owned);
         return s;
     }
 
-    public void Seen(string heroId) => PromoteCodex(heroId, EHeroDiscoveryState.Seen);
+    public void Seen(string heroId) => PromoteCollection(heroId, EHeroDiscoveryState.Seen);
 
-    private void PromoteCodex(string heroId, EHeroDiscoveryState target)
+    private void PromoteCollection(string heroId, EHeroDiscoveryState target)
     {
-        if (!Codex.TryGetValue(heroId, out var cur) || (int)target > (int)cur)
-            Codex[heroId] = target;
+        if (!Collection.TryGetValue(heroId, out var cur) || (int)target > (int)cur)
+            Collection[heroId] = target;
     }
 
     /// 마스터에 존재하는 모든 heroId에 대해 Codex 키를 보장(Hidden으로 채움)
-    public void EnsureCodexKeys(HeroData master)
+    public void EnsureCollectionKeys(HeroData master)
     {
         foreach (var id in master.HeroDict.Keys)
-            if (!Codex.ContainsKey(id))
-                Codex[id] = EHeroDiscoveryState.Hidden;
+            if (!Collection.ContainsKey(id))
+                Collection[id] = EHeroDiscoveryState.Hidden;
     }
 
+
+
     // ── 뷰 생성(마스터 이름/속성 붙이기) ─────────────────────
-    public IEnumerable<PlayerHeroView> GetCodexList(HeroData master,
+    public IEnumerable<PlayerHeroView> GetCollectionList(HeroData master,
         Func<HeroValue, bool> filter = null)
     {
         // 도감은 전체 마스터 기준
@@ -93,7 +95,7 @@ public class PlayerHeroValue : BaseSaveData<PlayerHeroValue>
 
             Owned.TryGetValue(kv.Key, out var owned);
             // 도감 상태가 없을 수도 있으니 Hidden으로 기본 제공
-            Codex.TryGetValue(kv.Key, out var state);
+            Collection.TryGetValue(kv.Key, out var state);
 
             // Hidden이어도 뷰는 뽑되, UI에서 상태로 필터/마스킹 가능
             yield return new PlayerHeroView
@@ -172,6 +174,19 @@ public class PlayerHeroValue : BaseSaveData<PlayerHeroValue>
                 Star = s?.Star ?? 0,
                 Exp = s?.Exp ?? 0
             };
+        }
+    }
+
+    // 도감에 있는 모든 영웅을 Seen으로 표시
+    public void SetAllSeen(HeroData master)
+    {
+        
+        foreach (var id in master.HeroDict.Keys)
+        {
+            if (Collection.TryGetValue(id, out var state) && state < EHeroDiscoveryState.Seen)
+            {
+                Collection[id] = EHeroDiscoveryState.Seen;
+            }
         }
     }
 }
