@@ -101,7 +101,9 @@
 ---
 
 ### 🎨 사용 에셋 (Assets Used)
-
+- [Odin Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) – 인스펙터 에셋
+- [Gamebase Setting Tool](https://assetstore.unity.com/packages/tools/utilities/gamebase-setting-tool-107598) – 설정 에셋
+- [Game Package Manager](https://assetstore.unity.com/packages/tools/utilities/game-package-manager-147711) – 패키지 관리 / 추가 기능 에셋
 - [2D Casual UI HD](https://assetstore.unity.com/packages/2d/gui/icons/2d-casual-ui-hd-82080) – UI  
 - [Cartoon FX Remaster Free](https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-remaster-free-109565) – VFX / 파티클 이펙트  
 - [FREE Casual Game SFX Pack](https://assetstore.unity.com/packages/audio/sound-fx/free-casual-game-sfx-pack-144412) – 사운드 효과  
