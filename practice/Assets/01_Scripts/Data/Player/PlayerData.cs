@@ -36,13 +36,16 @@ public class PlayerData
         // 2) 테스트용 도감 세팅: 마스터 전체를 Seen으로 설정
         Hero.SetAllSeen(master);
 
-        // 3) 테스트용 보유 세팅: 마스터의 앞 3개를 획득한다고 가정
-        var first3 = master.HeroDict.Keys.Take(3).ToList();
-        if (first3.Count >= 1) Hero.Acquire(first3[0], level: 5, star: 1);
-        if (first3.Count >= 2) Hero.Acquire(first3[1], level: 10, star: 2);
-        if (first3.Count >= 3) Hero.Acquire(first3[2], level: 1, star: 3);
+        // 3) 테스트용 보유 세팅: 마스터의 앞 5개를 획득한다고 가정
+        var first5 = master.HeroDict.Keys.Take(5).ToList();
+        if (first5.Count >= 1) Hero.Acquire(first5[0], level: 5, star: 1);
+        if (first5.Count >= 2) Hero.Acquire(first5[1], level: 10, star: 2);
+        if (first5.Count >= 3) Hero.Acquire(first5[2], level: 10, star: 3);
+        if (first5.Count >= 4) Hero.Acquire(first5[3], level: 10, star: 3);
+        if (first5.Count >= 5) Hero.Acquire(first5[4], level: 10, star: 3);
+
 
         // 4) 덱 구성(보유한 애들만, 중복 제거, 최대 5칸)
-        Hero.SetDeck("Team1", first3, maxSize: 5, ownedOnly: true);
+        Hero.SetDeck("Team1", first5, maxSize: 5, ownedOnly: true);
     }
 }
