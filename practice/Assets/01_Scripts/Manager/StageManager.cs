@@ -17,6 +17,7 @@ public class StageManager : BasicSingleton<StageManager>
 
     public SkillChoiceUI skillChoiceUI;
 
+    private bool _prepared;
     private bool _spawnStarted = false;
     private bool _choiceConsumed = false;   // 이번 선택 1회만 허용
 
@@ -36,15 +37,43 @@ public class StageManager : BasicSingleton<StageManager>
         EventManager.Unsubscribe(EEventType.LastBossDead, OnLastBossDead);
     }
 
-    public void StageStart()
+    private void Start()
     {
-        InitStage();
+        EventManager.Raise(EEventType.CameraChange, CameraMode.Lobby);
+    }
+
+    // ★ 어두워진 동안 수행할 준비 단계
+    public IEnumerator StagePrepareRoutine()
+    {
+        if (!_prepared)
+        {
+            InitStage();        // 스테이지 데이터/씬 셋업, 이전 스테이지 정리 등
+            // 필요 시: 풀/어드레서블 프리워밍, 텍스처 스트리밍 워밍업 등
+            // yield return Addressables.DownloadDependenciesAsync(stageKey).ToCoroutine();
+            // EnemyPool.Prewarm(...);  // 동기라면 그냥 호출
+            _prepared = true;
+        }
+
+        // 한 프레임 정도 레이아웃/카메라 안정화(선택)
+        yield return null;
+    }
+
+    // 스테이지 종료/로비 복귀 시에 호출해 초기화 해두면 좋다.
+    public void ResetPrepared()
+    {
+        _prepared = false;
+    }
+
+    public void StageStart() // 기존 호출 경로 안전망 (필요 시 유지)
+    {
+        if (!_prepared) InitStage(); // 준비 안 됐다면 안전망
         _spawnStarted = false;
         StartCoroutine(StartAfterTwoLevelUpsOnce());
     }
 
     private void InitStage()
     {
+        EventManager.Raise(EEventType.CameraChange, CameraMode.Stage);
         InGameHeroManager.Instance.InstantiateHero();
 
         currentStage = PlayerManager.Instance.CurrentStage;
@@ -65,6 +94,8 @@ public class StageManager : BasicSingleton<StageManager>
     private IEnumerator StartAfterTwoLevelUpsOnce()
     {
         if (_spawnStarted) yield break;
+
+        Debug.Log("Starting stage after two level-ups");
 
         RequestLevelUp();
         RequestLevelUp();

@@ -15,17 +15,16 @@ public class UIManager : BasicSingleton<UIManager>
 
     public void StartStageTransition()
     {
-        // 어두워지는 순간 패널 전환(선택) ? 필요 없으면 제거
         transition.SetDarkToggleTargets(
             toEnable: new[] { stagePanel },
             toDisable: new[] { lobbyPanel }
         );
 
-        // 트랜지션은 범용 Play, 여기서만 끝난 뒤 StageStart 수행
-        transition.Play(() =>
-        {
-            StageManager.Instance.StageStart();
-        });
+        // 어두워진 뒤 준비 + UI 프라임(그 프레임에 바로 보이도록) → 1프레임 정착 → 밝게
+        transition.PlayWaitCoroutine(
+        atDarkCoroutine: () => StageManager.Instance.StagePrepareRoutine(),
+        onFinished: () => StageManager.Instance.StageStart()
+        );
     }
 
     // 범용: 트랜지션만 재생하고 아무 것도 안 하고 싶을 때

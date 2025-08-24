@@ -1,9 +1,12 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Threading.Tasks;
 
 [DisallowMultipleComponent]
 public class CircleTransition : MonoBehaviour
@@ -37,9 +40,13 @@ public class CircleTransition : MonoBehaviour
     [SerializeField] private bool blockNavigationDuringTransition = true;      // 키보드/패드 Submit/Cancel 등
     [SerializeField] private EventSystem eventSystem;                           // 선택: 지정 없으면 EventSystem.current 사용
 
+    [Header("Task")]
+    private Coroutine _waitRoutine;
+    private CancellationTokenSource _cts;
+
     Material mat;
     int _radiusId, _centerId, _featherId, _rectId, _colorId;
-    Tweener tweenClose, tweenOpen;
+    Tweener tweenClose, tweenOpen, tweenDarkHold;
 
     // 복원용 저장
     bool _prevRaycastTarget;
@@ -144,58 +151,189 @@ public class CircleTransition : MonoBehaviour
     }
     // ------------------------------
 
-    /// <summary>
-    /// 범용 트랜지션 재생. 끝난 뒤 onFinished(선택)를 호출.
-    /// </summary>
-    public void Play(Action onFinished = null)
+    // ===== 공통: 즉시 오픈(대기 없음) 버전 =====
+    public void Play(Action atDark = null, Action onFinished = null)
     {
         if (!overlayImage || !mat) return;
 
+        // 정리
         tweenClose?.Kill();
         tweenOpen?.Kill();
+        if (_waitRoutine != null) { StopCoroutine(_waitRoutine); _waitRoutine = null; }
+        _cts?.Cancel(); _cts?.Dispose(); _cts = null;
 
         UpdateRectSize();
         overlayImage.enabled = true;
 
-        // ★ 입력 차단 시작
+        // 입력 차단 시작
         BeginBlockInput();
 
         float r = startRadius;
         mat.SetFloat(_radiusId, r);
 
-        // 1) 닫힘 (빠르게 시작 → 느리게 끝)
+        // 밝음(startRadius) → 어두움(endRadius)
         tweenClose = DOTween.To(() => r, v =>
         {
             r = v;
             mat.SetFloat(_radiusId, r);
         }, endRadius, closeDuration)
         .SetEase(Ease.OutCubic)
-        .SetUpdate(true) // unscaled
+        .SetUpdate(true)
         .OnComplete(() =>
         {
-            // 어두운 타이밍에 필요 UI 토글
+            // 완전 어두움
+            ToggleAtDark();
+            try { atDark?.Invoke(); } catch (Exception e) { Debug.LogException(e); }
+
+            // 즉시 다시 밝아짐
+            StartOpen(r, onFinished);
+        });
+    }
+
+    // ===== 코루틴이 끝난 뒤 밝아지는 버전 =====
+    // 예: transition.PlayWaitCoroutine(() => StageManager.Instance.StageStartRoutine());
+    public void PlayWaitCoroutine(Func<IEnumerator> atDarkCoroutine, Action onFinished = null, int settleFramesBeforeOpen = 1, Action beforeOpen = null)
+    {
+        if (!overlayImage || !mat) return;
+
+        tweenClose?.Kill();
+        tweenOpen?.Kill();
+        if (_waitRoutine != null) { StopCoroutine(_waitRoutine); _waitRoutine = null; }
+        _cts?.Cancel(); _cts?.Dispose(); _cts = null;
+
+        UpdateRectSize();
+        overlayImage.enabled = true;
+        BeginBlockInput();
+
+        float r = startRadius;
+        mat.SetFloat(_radiusId, r);
+
+        tweenClose = DOTween.To(() => r, v =>
+        {
+            r = v;
+            mat.SetFloat(_radiusId, r);
+        }, endRadius, closeDuration)
+        .SetEase(Ease.OutCubic)
+        .SetUpdate(true)
+        .OnComplete(() =>
+        {
             ToggleAtDark();
 
-            // 2) 어둠 유지 후 열림
-            DOVirtual.DelayedCall(darkHold, () =>
+            _waitRoutine = StartCoroutine(WaitThenOpen_Coroutine(atDarkCoroutine, r, onFinished, settleFramesBeforeOpen, beforeOpen));
+        });
+    }
+    private IEnumerator WaitThenOpen_Coroutine(Func<IEnumerator> work, float currentRadius, Action onFinished, int settleFrames, Action beforeOpen)
+    {
+        // 1) 어두울 때 준비 코루틴 수행
+        IEnumerator e = null;
+        try { e = work?.Invoke(); } catch (Exception ex) { Debug.LogException(ex); }
+        if (e != null) yield return StartCoroutine(e);
+
+        // 2) 레이아웃/캔버스 정착(한 프레임 권장)
+        for (int i = 0; i < Mathf.Max(0, settleFrames); i++)
+        {
+            Canvas.ForceUpdateCanvases();     // 즉시 레이아웃/그리기 데이터 갱신
+            yield return null;                 // 다음 프레임까지 대기
+        }
+
+        // (선택) 오픈 직전 콜백
+        beforeOpen?.Invoke();
+
+        // 3) 밝히기 시작
+        StartOpen(currentRadius, onFinished);
+        _waitRoutine = null;
+    }
+
+    private IEnumerator WaitThenOpen_Coroutine(Func<IEnumerator> work, float currentRadius, Action onFinished)
+    {
+        IEnumerator e = null;
+        try { e = work(); }
+        catch (Exception ex) { Debug.LogException(ex); }
+
+        if (e != null)
+            yield return StartCoroutine(e);
+
+        StartOpen(currentRadius, onFinished);
+        _waitRoutine = null;
+    }
+
+    // ===== Task가 끝난 뒤 밝아지는 버전 =====
+    // 예: transition.PlayWaitAsync(ct => StageManager.Instance.StageStartAsync(ct));
+    public void PlayWaitAsync(Func<CancellationToken, Task> atDarkAsync, Action onFinished = null)
+    {
+        if (!overlayImage || !mat) return;
+
+        tweenClose?.Kill();
+        tweenOpen?.Kill();
+        if (_waitRoutine != null) { StopCoroutine(_waitRoutine); _waitRoutine = null; }
+        _cts?.Cancel(); _cts?.Dispose(); _cts = null;
+
+        UpdateRectSize();
+        overlayImage.enabled = true;
+        BeginBlockInput();
+
+        float r = startRadius;
+        mat.SetFloat(_radiusId, r);
+
+        tweenClose = DOTween.To(() => r, v =>
+        {
+            r = v;
+            mat.SetFloat(_radiusId, r);
+        }, endRadius, closeDuration)
+        .SetEase(Ease.OutCubic)
+        .SetUpdate(true)
+        .OnComplete(() =>
+        {
+            ToggleAtDark();
+
+            if (atDarkAsync == null)
             {
-                tweenOpen = DOTween.To(() => r, v =>
-                {
-                    r = v;
-                    mat.SetFloat(_radiusId, r);
-                }, startRadius, openDuration)
-                .SetEase(Ease.OutCubic)
-                .SetUpdate(true)
-                .OnComplete(() =>
-                {
-                    overlayImage.enabled = false;
+                StartOpen(r, onFinished);
+                return;
+            }
 
-                    // ★ 입력 차단 해제
-                    EndBlockInput();
+            _cts = new CancellationTokenSource();
+            var token = _cts.Token;
 
-                    onFinished?.Invoke(); // 트랜지션 완주 후
-                });
-            }, true); // true = unscaled
+            // Task 완료를 프레임 루프로 감시
+            _waitRoutine = StartCoroutine(WaitTaskThenOpen_Coroutine(atDarkAsync, token, r, onFinished));
+        });
+    }
+
+    private IEnumerator WaitTaskThenOpen_Coroutine(Func<CancellationToken, Task> work, CancellationToken token, float currentRadius, Action onFinished)
+    {
+        Task task = null;
+        try { task = work(token); }
+        catch (Exception ex) { Debug.LogException(ex); }
+
+        if (task != null)
+        {
+            while (!task.IsCompleted) yield return null;
+            if (task.IsFaulted) Debug.LogException(task.Exception);
+        }
+
+        StartOpen(currentRadius, onFinished);
+
+        _waitRoutine = null;
+        _cts?.Dispose(); _cts = null;
+    }
+
+    // ===== 공통 오픈 처리 =====
+    private void StartOpen(float currentRadius, Action onFinished)
+    {
+        float r = currentRadius; // 현 값에서 시작
+        tweenOpen = DOTween.To(() => r, v =>
+        {
+            r = v;
+            mat.SetFloat(_radiusId, r);
+        }, startRadius, openDuration)
+        .SetEase(Ease.OutCubic)
+        .SetUpdate(true)
+        .OnComplete(() =>
+        {
+            overlayImage.enabled = false;
+            EndBlockInput();
+            onFinished?.Invoke();
         });
     }
 

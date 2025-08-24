@@ -22,6 +22,14 @@ public class CameraController : MonoBehaviour
     {
         targetPositionStage = PositionInfo.Instance.StageCenter.position;
         targetPositionLobby = PositionInfo.Instance.LobbyCenter.position;
+
+
+        EventManager.Subscribe<CameraMode>(EEventType.CameraChange, UpdateCameraPosition);
+    }
+
+    private void OnApplicationQuit()
+    {
+        EventManager.Unsubscribe<CameraMode>(EEventType.CameraChange, UpdateCameraPosition);
     }
 
     private void Start()
