@@ -73,7 +73,7 @@ public class PlayerHeroValue : BaseSaveData<PlayerHeroValue>
             Collection[heroId] = target;
     }
 
-    /// 마스터에 존재하는 모든 heroId에 대해 Codex 키를 보장(Hidden으로 채움)
+    /// 마스터에 존재하는 모든 heroId에 대해 Collection 키를 보장(Hidden으로 채움)
     public void EnsureCollectionKeys(HeroData master)
     {
         foreach (var id in master.HeroDict.Keys)
