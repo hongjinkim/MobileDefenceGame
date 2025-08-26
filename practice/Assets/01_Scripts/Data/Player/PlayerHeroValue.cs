@@ -13,6 +13,16 @@ public class PlayerHeroState
     public int Star; // 영웅 별 등급
     public BigNum Exp; // 경험치
 
+    public Dictionary<EEquipmentType, EquipmentValue> Equipped = new()
+    {
+        { EEquipmentType.Weapon,    null },
+        { EEquipmentType.Helmet,     null },
+        { EEquipmentType.Armor,null },
+        { EEquipmentType.Necklace,null },
+        { EEquipmentType.Ring,   null },
+        { EEquipmentType.Shoes,  null }
+    };
+
     public PlayerHeroState() { }
     public PlayerHeroState(string heroId, int level = 1, int star = 1)
     {

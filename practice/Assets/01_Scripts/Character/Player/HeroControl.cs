@@ -99,7 +99,9 @@ public class HeroControl : CharacterBase
         Target = null;
 
         // 초기상태 설정
-        InitHP(100); // 체력 설정
+        //FinalHeroStats finalStats = HeroStatCalculator.Compose(Value, );
+
+        //InitHP(finalStats.Health); // 체력 설정
         AttackCollider.gameObject.SetActive(false);
         ChangeState(EActType.Init);
     }

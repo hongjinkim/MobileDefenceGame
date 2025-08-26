@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EEquuipmentType
+public enum EEquipmentType
 {
     Weapon,
     Helmet,

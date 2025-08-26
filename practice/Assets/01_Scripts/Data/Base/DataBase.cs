@@ -16,6 +16,7 @@ public class DataBase : MonoBehaviour
     [TabGroup("Tabs", "Initial"), HideLabel][InlineProperty][SerializeField] public InitialData initialData = new InitialData();
     [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData = new HeroData();
     [TabGroup("Tabs", "HeroUpgrade"), HideLabel][InlineProperty][SerializeField] private HeroUpgradeData heroUpgradeData = new HeroUpgradeData();
+    [TabGroup("Tabs", "HeroUpgrade"), HideLabel][InlineProperty][SerializeField] private EquipmentData equipmentData = new EquipmentData();
     [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private StageData stageData = new StageData();
 
     private void Awake()
