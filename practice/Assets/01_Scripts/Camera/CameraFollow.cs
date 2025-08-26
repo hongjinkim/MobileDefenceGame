@@ -13,31 +13,29 @@ public class CameraController : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private float cameraAngleX = 60f;  // X축 회전 각도
     [Range(5f, 20f)] public float cameraDistance = 11.18f;  // 카메라와 목표 사이의 거리
-    public CameraMode cameraMode = CameraMode.Stage;  // 현재 카메라 모드
-    private Vector3 targetPositionStage;     // 바라보는 목표 위치
-    private Vector3 targetPositionLobby;     // 바라보는 목표 위치
+    public CameraMode cameraMode;  // 현재 카메라 모드
+    [SerializeField] private Transform targetPositionStage;     // 바라보는 목표 위치
+    [SerializeField] private Transform targetPositionLobby;     // 바라보는 목표 위치
+    [SerializeField] private Camera cam;
 
 
     private void Awake()
     {
-        targetPositionStage = PositionInfo.Instance.StageCenter.position;
-        targetPositionLobby = PositionInfo.Instance.LobbyCenter.position;
-
-
-        EventManager.Subscribe<CameraMode>(EEventType.CameraChange, UpdateCameraPosition);
+        EventManager.Subscribe<CameraMode>(EEventType.CameraChange, UpdateCamera);
     }
 
     private void OnApplicationQuit()
     {
-        EventManager.Unsubscribe<CameraMode>(EEventType.CameraChange, UpdateCameraPosition);
+        EventManager.Unsubscribe<CameraMode>(EEventType.CameraChange, UpdateCamera);
     }
 
     private void Start()
     {
-        UpdateCameraPosition(cameraMode);
+        UpdateCamera(cameraMode);
     }
 
-    private void UpdateCameraPosition(CameraMode cameraMode)
+
+    private void UpdateCamera(CameraMode cameraMode)
     {
         // 라디안으로 변환
         float angleInRadian = cameraAngleX * Mathf.Deg2Rad;
@@ -51,10 +49,13 @@ public class CameraController : MonoBehaviour
         switch (cameraMode)
         {
             case CameraMode.Stage:
-                targetPosition = targetPositionStage;
+                targetPosition = targetPositionStage.position;
+                cam.orthographic = true;
+                cameraDistance = 20f;
                 break;
             case CameraMode.Lobby:
-                targetPosition = targetPositionLobby;
+                targetPosition = targetPositionLobby.position;
+                cam.orthographic = false;
                 break;
             default:
                 targetPosition = Vector3.zero;
@@ -72,7 +73,7 @@ public class CameraController : MonoBehaviour
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        UpdateCameraPosition(cameraMode);
+        UpdateCamera(cameraMode);
     }
 #endif
 }

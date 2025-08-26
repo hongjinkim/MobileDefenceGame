@@ -13,6 +13,14 @@ public class MainPageUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI stageNumText;
     [SerializeField] private TextMeshProUGUI stageNameText;
     [SerializeField] private TextMeshProUGUI waveText;
+    [Header("로비 연출")]
+    [SerializeField] private float scrollSpeed = 5f; // m/s
+    [SerializeField] private Vector3 scrollAxis = new Vector3(0, 0, -1); // 뒤로 흐르는 방향
+    [SerializeField] private float tileLength = 10f; // 각 타일의 길이(Z)
+    [SerializeField] private int visibleTiles = 3;
+
+    private Transform[] tiles;
+
 
     private PlayerValue playerValue;
     private int currentStage;
