@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [Serializable]
 public class PlayerData
@@ -47,5 +48,76 @@ public class PlayerData
 
         // 4) 덱 구성(보유한 애들만, 중복 제거, 최대 5칸)
         Hero.SetDeck("Team1", first5, maxSize: 5, ownedOnly: true);
+    }
+
+    public Dictionary<string, string> GetPlayerDataForServerUpload(IJSONSerializer serializer)
+    {
+        Dictionary<string, string> result = new();
+
+        var account = new ServerSaveDataAccount
+        {
+            Account = Value,
+        };
+
+        var contents = new ServerSaveDataContents
+        {
+
+        };
+
+        var level = new ServerSaveDataLevel
+        {
+
+        };
+
+        var record = new ServerSaveDataRecord
+        {
+
+        };
+
+        var max = new ServerSaveDataMax
+        {
+
+        };
+
+        result["Account"] = serializer.Serialize(account);
+        result["Contents"] = serializer.Serialize(contents);
+        result["Level"] = serializer.Serialize(level);
+        result["Record"] = serializer.Serialize(record);
+        result["Max"] = serializer.Serialize(max);
+
+        return result;
+    }
+
+    [Serializable]
+    public class ServerSaveDataAccount
+    { 
+        public PlayerValue Account;
+    }
+
+    [Serializable]
+    public class ServerSaveDataContents
+    {
+
+
+    }
+
+    [Serializable]
+    public class ServerSaveDataLevel
+    {
+
+
+    }
+
+    [Serializable]
+    public class ServerSaveDataRecord
+    {
+
+
+    }
+
+    [Serializable]
+    public class ServerSaveDataMax
+    {
+
     }
 }
