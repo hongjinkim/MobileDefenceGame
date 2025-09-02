@@ -1,18 +1,17 @@
 using System;
 using UnityEngine;
 
-namespace POOM
+
+public class DeviceClockResponser : MonoBehaviour, IClockResponser
 {
-    public class DeviceClockResponser : MonoBehaviour, IClockResponser
-    {
-        [SerializeField]
-        private string DateTimeFormat = "o";
+    [SerializeField]
+    private string DateTimeFormat = "o";
 
 
-        public string NowLocalString() => DateTimeOffset.Now.ToString(DateTimeFormat);
+    public string NowLocalString() => DateTimeOffset.Now.ToString(DateTimeFormat);
 
-        public string NowUTCString() => DateTimeOffset.UtcNow.ToString(DateTimeFormat);
+    public string NowUTCString() => DateTimeOffset.UtcNow.ToString(DateTimeFormat);
         
-    }
-
 }
+
+

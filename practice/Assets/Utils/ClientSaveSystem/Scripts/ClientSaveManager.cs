@@ -4,10 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*  Poom Client Save Manager : Version 2.1  ( Last Updated 2023-08-24 )
- *  패치 내역 : 사용성 전면 개편, 의존성 개선
- */
-
 public class ClientSaveManager : MonoBehaviour
 {
     // 데이터 조작 발견 시 실행되는 이벤트

@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*  Poom Clock Manager Version 1.0
-    *  : 최초 공유 버전
-    */
 
 [RequireComponent(typeof(Clock))]
 public class ClockManager : MonoBehaviour
@@ -17,7 +14,7 @@ public class ClockManager : MonoBehaviour
     public static Action OnSuccessSetValidClock;
 
     [Header("설정")]
-    public PoomClockSettings Settings = PoomClockSettings.UseNetworkTime;
+    public EClockSettings Settings = EClockSettings.UseNetworkTime;
     [Tooltip("형식은 0000-00-00T00:00:00Z")]
     public string CustomTimeUTC = string.Empty;
     public bool RequestAgainOnRefocus = false;
@@ -80,13 +77,13 @@ public class ClockManager : MonoBehaviour
 
     public void StartRequest()
     {
-        if (Settings == PoomClockSettings.UseDeviceTime)
+        if (Settings == EClockSettings.UseDeviceTime)
         {
             OnSuccess(DateTimeOffset.UtcNow);
             return;
         }
 
-        if (Settings == PoomClockSettings.UseCustomTime)
+        if (Settings == EClockSettings.UseCustomTime)
         {
             if (string.IsNullOrWhiteSpace(CustomTimeUTC) == true)
             {
@@ -167,7 +164,7 @@ public class ClockManager : MonoBehaviour
 
 
 
-    public enum PoomClockSettings
+    public enum EClockSettings
     {
         UseNetworkTime,
         UseDeviceTime,

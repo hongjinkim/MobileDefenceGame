@@ -13,13 +13,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Character
+  - Popup
+  - Enemy
+  - Player
   - Debug
   - Effect
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - ToolTip
   - 
   - 
   - 

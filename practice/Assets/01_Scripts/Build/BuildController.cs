@@ -93,13 +93,13 @@ public class BuildController : MonoBehaviour
 
     void ServerSetting()
     {
-        PlayFabSettings.staticSettings.TitleId = 라이브서버 ? ServerTitleId_Live : ServerTitleId_Test;
-        ServerText_Test.enabled = !라이브서버;
-        ServerText_Live.enabled = 라이브서버;
+        //PlayFabSettings.staticSettings.TitleId = 라이브서버 ? ServerTitleId_Live : ServerTitleId_Test;
+        //ServerText_Test.enabled = !라이브서버;
+        //ServerText_Live.enabled = 라이브서버;
 
-        //버전체크기능을 라이브서버 여부에 종속시킴
-        VersionCheck.SetActive(라이브서버);
-        VersionCheck_Test.enabled = 라이브서버;
+        ////버전체크기능을 라이브서버 여부에 종속시킴
+        //VersionCheck.SetActive(라이브서버);
+        //VersionCheck_Test.enabled = 라이브서버;
     }
 
     void AABbuildSetting()
