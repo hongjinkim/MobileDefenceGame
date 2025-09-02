@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using PlayFab;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -14,21 +15,20 @@ public class BuildController : MonoBehaviour
 
     [Header("빌드세팅")]
     [SerializeField] private bool 디버그끄기;
-    //[SerializeField] private bool 라이브서버;
-    //[SerializeField] private bool AAB빌드;
-    //[SerializeField] private string 배포버전;
-    //[SerializeField] private int 번들버전;
+    [SerializeField] private bool 라이브서버;
+    [SerializeField] private bool AAB빌드;
+    [SerializeField] private string 배포버전;
+    [SerializeField] private int 번들버전;
 
 
-    //수정이 필요할때 HideInInspector를 없애고 링크를 걸면 됨
     [SerializeField] private GameObject DEBUG;
-    //[SerializeField] private GameObject VersionCheck;
-    //[SerializeField] private TextMeshProUGUI VersionCheck_Test;
+    [SerializeField] private GameObject VersionCheck;
+    [SerializeField] private TextMeshProUGUI VersionCheck_Test;
 
-    //[SerializeField] private string ServerTitleId_Live;
-    //[SerializeField] private string ServerTitleId_Test;
-    //[SerializeField] private TextMeshProUGUI ServerText_Test;
-    //[SerializeField] private TextMeshProUGUI ServerText_Live;
+    [SerializeField] private string ServerTitleId_Live;
+    [SerializeField] private string ServerTitleId_Test;
+    [SerializeField] private TextMeshProUGUI ServerText_Test;
+    [SerializeField] private TextMeshProUGUI ServerText_Live;
 
     private string AppVersion_pre;
     private int BundleCode_pre;
@@ -37,8 +37,8 @@ public class BuildController : MonoBehaviour
     private const string DEBUG_ON = "DEBUG_ON";
     private const string DEBUG_OFF = "DEBUG_OFF";
 
-    //public bool GetLiveServer => 라이브서버;
-    //public string GetAppVersion => 배포버전;
+    public bool GetLiveServer => 라이브서버;
+    public string GetAppVersion => 배포버전;
 
     private void Awake()
     {
@@ -93,64 +93,64 @@ public class BuildController : MonoBehaviour
 
     void ServerSetting()
     {
-        //PlayFabSettings.staticSettings.TitleId = 라이브서버 ? ServerTitleId_Live : ServerTitleId_Test;
-        //ServerText_Test.enabled = !라이브서버;
-        //ServerText_Live.enabled = 라이브서버;
+        PlayFabSettings.staticSettings.TitleId = 라이브서버 ? ServerTitleId_Live : ServerTitleId_Test;
+        ServerText_Test.enabled = !라이브서버;
+        ServerText_Live.enabled = 라이브서버;
 
-        ////버전체크기능을 라이브서버 여부에 종속시킴
-        //VersionCheck.SetActive(라이브서버);
-        //VersionCheck_Test.enabled = 라이브서버;
+        //버전체크기능을 라이브서버 여부에 종속시킴
+        VersionCheck.SetActive(라이브서버);
+        VersionCheck_Test.enabled = 라이브서버;
     }
 
     void AABbuildSetting()
     {
-        ////PlayerSetting에서 변경한 경우
-        //if (AABbuild_pre.Equals(EditorUserBuildSettings.buildAppBundle) == false)
-        //{
-        //    AAB빌드 = EditorUserBuildSettings.buildAppBundle;
-        //    AABbuild_pre = EditorUserBuildSettings.buildAppBundle;
-        //}
-        ////Inspector에서 변경한 경우
-        //else if (AABbuild_pre.Equals(AAB빌드) == false)
-        //{
-        //    EditorUserBuildSettings.buildAppBundle = AAB빌드;
-        //    AABbuild_pre = AAB빌드;
+        //PlayerSetting에서 변경한 경우
+        if (AABbuild_pre.Equals(EditorUserBuildSettings.buildAppBundle) == false)
+        {
+            AAB빌드 = EditorUserBuildSettings.buildAppBundle;
+            AABbuild_pre = EditorUserBuildSettings.buildAppBundle;
+        }
+        //Inspector에서 변경한 경우
+        else if (AABbuild_pre.Equals(AAB빌드) == false)
+        {
+            EditorUserBuildSettings.buildAppBundle = AAB빌드;
+            AABbuild_pre = AAB빌드;
 
-        //    RepaintWindow("UnityEditor.BuildPlayerWindow");
-        //}
+            RepaintWindow("UnityEditor.BuildPlayerWindow");
+        }
     }
 
     void AppVersionSetting()
     {
-        ////PlayerSetting에서 변경한 경우
-        //if (AppVersion_pre.Equals(PlayerSettings.bundleVersion) == false)
-        //{
-        //    배포버전 = PlayerSettings.bundleVersion;
-        //    AppVersion_pre = PlayerSettings.bundleVersion;
-        //}
-        ////Inspector에서 변경한 경우
-        //else if (AppVersion_pre.Equals(배포버전) == false)
-        //{
-        //    PlayerSettings.bundleVersion = 배포버전;
-        //    AppVersion_pre = 배포버전;
-        //}
+        //PlayerSetting에서 변경한 경우
+        if (AppVersion_pre.Equals(PlayerSettings.bundleVersion) == false)
+        {
+            배포버전 = PlayerSettings.bundleVersion;
+            AppVersion_pre = PlayerSettings.bundleVersion;
+        }
+        //Inspector에서 변경한 경우
+        else if (AppVersion_pre.Equals(배포버전) == false)
+        {
+            PlayerSettings.bundleVersion = 배포버전;
+            AppVersion_pre = 배포버전;
+        }
     }
 
     void BundleVersionSetting()
     {
-        ////PlayerSetting에서 변경한 경우
-        //if (BundleCode_pre.Equals(PlayerSettings.Android.bundleVersionCode) == false)
-        //{
-        //    번들버전 = PlayerSettings.Android.bundleVersionCode;
-        //    BundleCode_pre = PlayerSettings.Android.bundleVersionCode;
-        //}
+        //PlayerSetting에서 변경한 경우
+        if (BundleCode_pre.Equals(PlayerSettings.Android.bundleVersionCode) == false)
+        {
+            번들버전 = PlayerSettings.Android.bundleVersionCode;
+            BundleCode_pre = PlayerSettings.Android.bundleVersionCode;
+        }
 
-        ////Inspector에서 변경한 경우
-        //else if (BundleCode_pre.Equals(번들버전) == false)
-        //{
-        //    PlayerSettings.Android.bundleVersionCode = 번들버전;
-        //    BundleCode_pre = 번들버전;
-        //}
+        //Inspector에서 변경한 경우
+        else if (BundleCode_pre.Equals(번들버전) == false)
+        {
+            PlayerSettings.Android.bundleVersionCode = 번들버전;
+            BundleCode_pre = 번들버전;
+        }
     }
 
     void PreprocessorSetting()
