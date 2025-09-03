@@ -1652,7 +1652,10 @@ GameObject:
   - component: {fileID: 1056309625}
   - component: {fileID: 1056309628}
   - component: {fileID: 1056309627}
+  - component: {fileID: 1056309630}
+  - component: {fileID: 1056309629}
   - component: {fileID: 1056309626}
+  - component: {fileID: 1056309631}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -1713,8 +1716,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LiveServerId: 186DE8
   TestServerId: E0B93
+  LoginManager: {fileID: 0}
   ClockManager: {fileID: 342009293}
   HeaderDataManager: {fileID: 1056309627}
+  ServerDataReceiver: {fileID: 1056309630}
+  ClientDataReader: {fileID: 1056309629}
+  ClientDataToServer: {fileID: 1999176827}
+  PopupNoInternet: {fileID: 0}
+  PopupLoginMethod: {fileID: 0}
+  PopupLoginFailure: {fileID: 0}
+  PopupOverwriteSpinner: {fileID: 0}
+  PopupTesterLogin: {fileID: 0}
+  PopupServerUnderConstruction: {fileID: 0}
+  BlockSpinner: {fileID: 0}
+  PopupPrivatePolicy: {fileID: 0}
+  TapToStartButton: {fileID: 730423304}
+  ProgressText: {fileID: 851931905}
+  DebugPanel: {fileID: 0}
+  LoadingBar: {fileID: 223720115}
+  LoadingFill: {fileID: 134407671}
+  BgmSound: {fileID: 1056309631}
+--- !u!114 &1056309629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056309624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3afc6274bcc37f458ebee44ae79aca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1056309630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056309624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044223328354e3e469a5a17e7943510f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1056309631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056309624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af35a3c58a7a2e146a18f0f63cf15906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Channel>k__BackingField: 2
+  AudioHandler: {fileID: 11400000, guid: 5b4512a28788f7b408112d03a4b6acf9, type: 2}
+  PlayOnEnable: 0
+  Clip: {fileID: 0}
+  DissolveDuration: 1
 --- !u!1 &1080622965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2461,7 +2523,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 639000934993980265, guid: 202d8dc54f76d5c428f9dee8c76e503e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6895205318173847853, guid: 202d8dc54f76d5c428f9dee8c76e503e, type: 3}
       propertyPath: m_Name
@@ -2654,7 +2716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "\uB514\uBC84\uADF8\uB044\uAE30": 0
-  "\uB77C\uC774\uBE0C\uC11C\uBC84": 0
+  "\uB77C\uC774\uBE0C\uC11C\uBC84": 1
   "AAB\uBE4C\uB4DC": 0
   "\uBC30\uD3EC\uBC84\uC804": 1.00
   "\uBC88\uB4E4\uBC84\uC804": 0

@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class BaseAudioPlayer : MonoBehaviour
 {
-    [SerializeField]
-    public virtual MixerChannel Channel { get; set; }
-    public AudioHandler AudioHandler;
+    [field: SerializeField]
+    public virtual MixerChannel Channel { get; set; } = MixerChannel.None;
+    public AudioHandler AudioHandler = null;
 
     public void Play(AudioClip clip)
     {
