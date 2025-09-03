@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameDataManager : BasicSingleton<GameDataManager>
 {
     // 서버에서 불러오는 플레이어 데이터
-    private PlayerData playerData = new PlayerData();
+    [ShowInInspector]private PlayerData playerData = new PlayerData();
 
     private bool _playerLoaded; // 중복 방지
 
