@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerValue : BaseSaveData<PlayerValue>
 {
+    public string NickName = "Player"; // 닉네임
     public int MaxEnergy = 30; // 최대 에너지
     public int CurrentEnergy = 0; // 현재 에너지
     public BigNum Gold = 500; // 골드
