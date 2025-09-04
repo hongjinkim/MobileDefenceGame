@@ -164,7 +164,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
             }
             else if (lastLoginMethod == "GPGS")
             {
-                LoginManager.LoginWithGooglePlayService();
+
             }
             else if (lastLoginMethod == string.Empty)
             {
@@ -174,7 +174,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
 
             if (lastLoginMethod == "GPGS")
             {
-                LoginManager.LoginWithGooglePlayService();
+
             }
             else if (lastLoginMethod == string.Empty)
             {

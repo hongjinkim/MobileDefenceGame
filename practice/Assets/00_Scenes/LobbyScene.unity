@@ -1280,6 +1280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 407779615}
+  - component: {fileID: 407779616}
   m_Layer: 5
   m_Name: Popup - PrivacyPolicy
   m_TagString: Untagged
@@ -1306,6 +1307,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &407779616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407779614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fab4d85a9587c34086c324d4c0b4a69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AgreeButton: {fileID: 0}
 --- !u!1 &423254236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,6 +2248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 855368444}
+  - component: {fileID: 855368445}
   m_Layer: 5
   m_Name: Popup - LoginMethod
   m_TagString: Untagged
@@ -2261,6 +2276,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &855368445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855368443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3543646bd594a854c8e4fbc1fb389779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoginManager: {fileID: 0}
+  Block: {fileID: 0}
+  GPGSButton: {fileID: 0}
+  GuestButton: {fileID: 0}
 --- !u!1 &889756980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2937,6 +2968,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257454616}
+  - component: {fileID: 1257454617}
   m_Layer: 5
   m_Name: Popup - Ban
   m_TagString: Untagged
@@ -2963,6 +2995,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1257454617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257454615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b17f09a7730e1c4f9f640a8a0bf087f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PopupEvent: {fileID: 0}
+  LocalExitText: {fileID: 0}
+  ExitButton: {fileID: 0}
 --- !u!1 &1263439934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,6 +3749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1708390806}
+  - component: {fileID: 1708390807}
   m_Layer: 5
   m_Name: Popup - Restore
   m_TagString: Untagged
@@ -3728,6 +3776,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1708390807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708390805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e63aabc0e8c31a74b830f4e5a2f7ac74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PopupEvent: {fileID: 0}
+  RestoreButton: {fileID: 0}
+  ExitButton: {fileID: 0}
+  RestoreDateText: {fileID: 0}
+  ContinuousRestorePopup: {fileID: 0}
+  BlockSpinner: {fileID: 0}
+  ServerToClient: {fileID: 0}
 --- !u!1 &1824576932
 GameObject:
   m_ObjectHideFlags: 0
@@ -3946,8 +4013,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1976557927}
+  - component: {fileID: 1976557928}
   m_Layer: 5
-  m_Name: Popup - ContinuousRestore
+  m_Name: Popup - ContinuosRestore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3972,6 +4040,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1976557928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976557926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a86f3e703fd5f47834229e5106520a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PopupEvent: {fileID: 0}
+  RestoreDateText: {fileID: 0}
+  LocalExitText: {fileID: 0}
+  ExitButton: {fileID: 0}
 --- !u!1 &1999176825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4121,6 +4205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2142766953}
+  - component: {fileID: 2142766954}
   m_Layer: 5
   m_Name: Popup - TesterLogin
   m_TagString: Untagged
@@ -4147,6 +4232,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &2142766954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142766952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96c3d035f3f25e4caad6c55c8e5343c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Settings: {fileID: 0}
+  LoginManager: {fileID: 0}
+  TesterLoginPopup: {fileID: 0}
 --- !u!4 &3086316910824195162
 Transform:
   m_ObjectHideFlags: 0

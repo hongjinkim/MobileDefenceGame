@@ -102,16 +102,6 @@ public class LoginManager : MonoBehaviour
     //    }
     //}
 
-
-    public void LoginWithGooglePlayService()
-    {
-        //print($"※ 구글 로그인");
-
-        //if (isInitialized == false) Initialize();
-
-        //Google.Login();
-    }
-
     public void LoginWithEmail(string email, string password, string username)
     {
         print($"※ 테스터 로그인: {email}");
