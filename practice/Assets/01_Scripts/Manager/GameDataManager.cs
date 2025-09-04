@@ -40,6 +40,15 @@ public class GameDataManager : BasicSingleton<GameDataManager>
         EventManager.Raise(EEventType.DataLoaded);
     }
 
+    public static void OverWritePlayerData(PlayerData playerData)
+    {
+        Instance.playerData = playerData;
+    }
+    public static void ResetPlayerData()
+    {
+        Instance.playerData = new PlayerData();
+    }
+
 
     public static DataBase DataBase => DataBase.Instance;
     public static PlayerData PlayerData => Instance.playerData;

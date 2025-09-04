@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,71 @@ public class PlayerData
 
         // 4) 덱 구성(보유한 애들만, 중복 제거, 최대 5칸)
         Hero.SetDeck("Team1", first5, maxSize: 5, ownedOnly: true);
+    }
+
+    public void Overwrite(Dictionary<string, string> dict)
+    {
+        if (dict.ContainsKey("Header") == true)
+        {
+            ServerHeaderManager.StaticHeader
+                = JsonConvert.DeserializeObject<ServerHeaderData>(dict["Header"]);
+        }
+
+        if (dict.ContainsKey(ServerDataKeys.ACCOUNT) == true)
+        {
+            var data = JsonConvert.DeserializeObject<ServerSaveDataAccount>(dict[ServerDataKeys.ACCOUNT]);
+            Overwrite(data);
+        }
+
+        if (dict.ContainsKey(ServerDataKeys.CONTENTS) == true)
+        {
+            var data = JsonConvert.DeserializeObject<ServerSaveDataContents>(dict[ServerDataKeys.CONTENTS]);
+            Overwrite(data);
+        }
+
+        if (dict.ContainsKey(ServerDataKeys.LEVEL) == true)
+        {
+            var data = JsonConvert.DeserializeObject<ServerSaveDataLevel>(dict[ServerDataKeys.LEVEL]);
+            Overwrite(data);
+        }
+
+        if (dict.ContainsKey(ServerDataKeys.RECORD) == true)
+        {
+            var data = JsonConvert.DeserializeObject<ServerSaveDataRecord>(dict[ServerDataKeys.RECORD]);
+            Overwrite(data);
+        }
+
+        if (dict.ContainsKey(ServerDataKeys.MAX) == true)
+        {
+            var data = JsonConvert.DeserializeObject<ServerSaveDataMax>(dict[ServerDataKeys.MAX]);
+            Overwrite(data);
+        }
+    }
+
+    public void Overwrite(ServerSaveDataAccount data)
+    {
+        Value = data.Account;
+
+    }
+
+    public void Overwrite(ServerSaveDataContents data)
+    {
+ 
+    }
+
+    public void Overwrite(ServerSaveDataLevel data)
+    {
+
+    }
+
+    public void Overwrite(ServerSaveDataRecord data)
+    {
+
+    }
+
+    public void Overwrite(ServerSaveDataMax data)
+    {
+
     }
 
     public Dictionary<string, string> GetPlayerDataForServerUpload(IJSONSerializer serializer)
