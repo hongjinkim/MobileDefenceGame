@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14fb3678bb9214e4180bf09ed269dec1, type: 3}
   m_Name: LanguageDictionary
   m_EditorClassIdentifier: 
-  <CurrentLanguage>k__BackingField: 6
+  <CurrentLanguage>k__BackingField: 2
   fontData:
   - {fileID: 11400000, guid: efe7cbc015fa26741abbd2bdcecb0101, type: 2}
   - {fileID: 11400000, guid: bfb52352d5a1c354db9441002179f2b6, type: 2}

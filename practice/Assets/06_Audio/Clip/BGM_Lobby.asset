@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1ccf720ac9584348a8f148146bd4a9b, type: 3}
-  m_Name: AudioClip
+  m_Name: BGM_Lobby
   m_EditorClassIdentifier: 
-  Clip: {fileID: 0}
-  Volume: 0.8
+  Clip: {fileID: 8300000, guid: e117390a18c5a4d4d87a2d1fc4afaf30, type: 3}
+  Volume: 0.7

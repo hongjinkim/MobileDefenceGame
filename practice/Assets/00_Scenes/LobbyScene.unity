@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 387e59c29208cca469816482117eecc8, type: 2}
+--- !u!1 &29395722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 29395723}
+  - component: {fileID: 29395725}
+  - component: {fileID: 29395724}
+  m_Layer: 0
+  m_Name: BGMVolumeKeeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &29395723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29395722}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1056309625}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &29395724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29395722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c0c9927905ca94b9d510f6726aff08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channel: 2
+  VolumeHandler: {fileID: 11400000, guid: 7201264e9f121ef4b8aa2c0090bad258, type: 2}
+--- !u!114 &29395725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29395722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c871df32db9f054f8384c36496e0c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveKey: BGM_VOLUME
+  VolumeController: {fileID: 29395724}
 --- !u!1 &69296826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2798,7 +2859,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2128493606}
+  - {fileID: 29395723}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056309626
@@ -2898,7 +2961,7 @@ MonoBehaviour:
   <Channel>k__BackingField: 2
   AudioHandler: {fileID: 11400000, guid: 5b4512a28788f7b408112d03a4b6acf9, type: 2}
   PlayOnEnable: 0
-  Clip: {fileID: 11400000, guid: 2454cdd12d18a96459f684ad21d5872e, type: 2}
+  Clip: {fileID: 11400000, guid: 506eb9a61ec25a142a4e59746f5592d1, type: 2}
   DissolveDuration: 1
 --- !u!1 &1080622965
 GameObject:
@@ -4196,6 +4259,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2128493605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128493606}
+  - component: {fileID: 2128493608}
+  - component: {fileID: 2128493607}
+  m_Layer: 0
+  m_Name: SFXVolumeKeeper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2128493606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128493605}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1056309625}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2128493607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128493605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c0c9927905ca94b9d510f6726aff08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channel: 1
+  VolumeHandler: {fileID: 11400000, guid: 243b57c9972ca7b4f948f224eba80e69, type: 2}
+--- !u!114 &2128493608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128493605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c871df32db9f054f8384c36496e0c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SaveKey: SFX_VOLUME
+  VolumeController: {fileID: 2128493607}
 --- !u!1 &2142766952
 GameObject:
   m_ObjectHideFlags: 0
