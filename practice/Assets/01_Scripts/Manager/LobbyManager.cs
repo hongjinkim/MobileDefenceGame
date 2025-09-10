@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 public class LobbyManager : BasicSingleton<LobbyManager>
 {
     public static event Action<string> OnSuccessRegisterRandomDisplayName;
@@ -17,7 +18,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
     public string TestServerId = "";
 
     [Header("Managers")]
-    [HideInInspector]public LoginManager LoginManager;
+    public LoginManager LoginManager;
     public ClockManager ClockManager;
     public ServerHeaderManager HeaderDataManager;
     public ServerPlayerDataReceiver ServerDataReceiver;
@@ -39,24 +40,20 @@ public class LobbyManager : BasicSingleton<LobbyManager>
     public TextMeshProUGUI ProgressText;
     //public PrologueDisplay Prologue;
     //public FadeOutEvent FadeOutScene;
-    //public PopupRestoreDisplay RestorePopup;
-    //public PopupBanDisplay BanPopup;
+    public PopupRestoreDisplay RestorePopup;
+    public PopupBan BanPopup;
     public GameObject DebugPanel;
     public GameObject LoadingBar;
     public Image LoadingFill;
-    //public Image LoadingBarIcon;
-    //public Animator LoadingBarAnimator;
-    //public Sprite LoadingFinishedSprite;
-    //public GameObject LoadingUIEffect;
+    public Image LoadingBarIcon;
+    public Animator LoadingBarAnimator;
+    public Sprite LoadingFinishedSprite;
+    public GameObject LoadingUIEffect;
     private float loadingbarLength;
     private float loadingbarHalfLength;
 
     [Header("SOUND")]
     public AudioPlayerDissolve BgmSound;
-
-    //public PoomVolumeHandler BGMVolumeHandler = null;
-    //public PoomVolumeHandler SFXVolumeHandler = null;
-
 
     private RandomUsernameUploader randomIdCreator;
     private bool onCompleteDataLoading = false;
@@ -64,15 +61,18 @@ public class LobbyManager : BasicSingleton<LobbyManager>
     private bool onCompleteTitleData = false;
     private AsyncOperation mainSceneLoadOperation = null;
 
+
     private PlayerData Player => GameDataManager.PlayerData;
 
-    private void Awake()
+
+private void Awake()
     {
         randomIdCreator = new RandomUsernameUploader();
         randomIdCreator.OnSuccess += OnSuccessUpdateRandomDisplayName;
         loadingbarLength = LoadingFill.rectTransform.rect.size.x;
         loadingbarHalfLength = loadingbarLength / 2;
     }
+
 
     private void OnEnable()
     {
@@ -86,13 +86,12 @@ public class LobbyManager : BasicSingleton<LobbyManager>
         ServerHeaderManager.OnDifferPlayerId += AskRestore;
         ServerHeaderManager.OnDifferDeviceId += AskRestore;
         ServerHeaderManager.OnNext += OnValidHeader;
-        //PrologueDisplay.OnFinish += GoToMainScene;
+        PrologueDisplay.OnFinish += GoToMainScene;
         PopupForceOverwriter.OnFinishOverwrite += SetDataReady;
         PlayFabServerTitleDataReceiver.OnRefresh += SetTitleDataReady;
         ServerStateChecker.OnServerUnderConstruction += UnderConstruction;
-        //RestorePopup.OnSuccessRestore += SuccessRestore;
-        //RestorePopup.OnEmptyData += CreateNewUser;
-        //RestorePopup.OnExit += MuteSound;
+        RestorePopup.OnSuccessRestore += SuccessRestore;
+        RestorePopup.OnEmptyData += CreateNewUser;
 
         TapToStartButton.onClick.AddListener(OnClickTapToStartButton);
     }
@@ -110,16 +109,17 @@ public class LobbyManager : BasicSingleton<LobbyManager>
         ServerHeaderManager.OnDifferPlayerId -= AskRestore;
         ServerHeaderManager.OnDifferDeviceId -= AskRestore;
         ServerHeaderManager.OnNext -= OnValidHeader;
-        //PrologueDisplay.OnFinish -= GoToMainScene;
+        PrologueDisplay.OnFinish -= GoToMainScene;
         PopupForceOverwriter.OnFinishOverwrite -= SetDataReady;
         PlayFabServerTitleDataReceiver.OnRefresh -= SetTitleDataReady;
         ServerStateChecker.OnServerUnderConstruction -= UnderConstruction;
-        //RestorePopup.OnSuccessRestore -= SuccessRestore;
-        //RestorePopup.OnEmptyData -= CreateNewUser;
-        //RestorePopup.OnExit -= MuteSound;
+        RestorePopup.OnSuccessRestore -= SuccessRestore;
+        RestorePopup.OnEmptyData -= CreateNewUser;
 
         TapToStartButton.onClick.RemoveListener(OnClickTapToStartButton);
     }
+
+
     private IEnumerator Start()
     {
         // Tap to Start 버튼 숨김
@@ -157,7 +157,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
 #if UNITY_EDITOR
         isUnityEditor = true;
 #endif
-        string lastLoginMethod = PlayerPrefs.GetString("KIKI_LAST_LOGIN_METHOD", "");
+        string lastLoginMethod = PlayerPrefs.GetString("LAST_LOGIN_METHOD", "");
         if (isUnityEditor == true || isTestServer == true)
         {
             PopupTesterLogin.SetActive(true);
@@ -172,7 +172,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
             }
             else if (lastLoginMethod == "GPGS")
             {
-
+                //LoginManager.LoginWithGooglePlayService();
             }
             else if (lastLoginMethod == string.Empty)
             {
@@ -182,7 +182,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
 
             if (lastLoginMethod == "GPGS")
             {
-
+                //LoginManager.LoginWithGooglePlayService();
             }
             else if (lastLoginMethod == string.Empty)
             {
@@ -221,10 +221,10 @@ public class LobbyManager : BasicSingleton<LobbyManager>
         }
 
         OnProgress(1f);
-        //LoadingBarAnimator.enabled = false;
-        //LoadingBarIcon.sprite = LoadingFinishedSprite;
-        //LoadingBarIcon.transform.DOPunchScale(Vector3.one * 0.1f, 0.8f);
-        //LoadingUIEffect.SetActive(true);
+        LoadingBarAnimator.enabled = false;
+        LoadingBarIcon.sprite = LoadingFinishedSprite;
+        LoadingBarIcon.transform.DOPunchScale(Vector3.one * 0.1f, 0.8f);
+        LoadingUIEffect.SetActive(true);
 
 
         yield return new WaitForSeconds(1.5f);
@@ -297,14 +297,14 @@ public class LobbyManager : BasicSingleton<LobbyManager>
     private void AskRestore()
     {
         print("복원 여부 확인 필요. 서버헤더와 불일치 하거나, 클라이언트 데이터만 없음");
-        //RestorePopup.gameObject.SetActive(true);
+        RestorePopup.gameObject.SetActive(true);
     }
 
     // 차단 처리
     private void OnBanned(string customData)
     {
         print("차단 유저로 확인됨");
-        //BanPopup.gameObject.SetActive(true);
+        BanPopup.gameObject.SetActive(true);
     }
 
 
@@ -367,25 +367,26 @@ public class LobbyManager : BasicSingleton<LobbyManager>
         TapToStartButton.gameObject.SetActive(false);
         StopAllCoroutines();
 
-        //bool prologue = Player.Value.IsPrologue;
-        //if (prologue == true)
-        //{
-        //    StartCoroutine(FadeOutAndActiveMainScene());
-        //}
-        //else
-        //{
-        //    Player.Value.SetPrologue(true);
-        //    Prologue.gameObject.SetActive(true);
-        //    Prologue.StartPrologue();
-        //}
+        //mainSceneLoadOperation = SceneManager.LoadSceneAsync("Main");
+        //mainSceneLoadOperation.allowSceneActivation = false;
+
+        bool prologue = Player.Value.IsPrologue;
+        if (prologue == true)
+        {
+            StartCoroutine(FadeOutAndActiveMainScene());
+        }
+        else
+        {
+            Player.Value.SetPrologue(true);
+            Prologue.gameObject.SetActive(true);
+            Prologue.StartPrologue();
+        }
     }
 
     private IEnumerator FadeOutAndActiveMainScene()
     {
-        //MuteSound();
-
-        //FadeOutScene.gameObject.SetActive(true);
-        float fadeTime = 1f; //FadeOutScene.StartFadeOut();
+        FadeOutScene.gameObject.SetActive(true);
+        float fadeTime = FadeOutScene.StartFadeOut();
 
         yield return new WaitForSeconds(fadeTime);
 
@@ -411,7 +412,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
     private void OnProgress(float progress)
     {
         LoadingFill.fillAmount = progress;
-        //LoadingBarIcon.transform.localPosition = new Vector2(loadingbarLength * progress - loadingbarHalfLength, 2);
+        LoadingBarIcon.transform.localPosition = new Vector2(loadingbarLength * progress - loadingbarHalfLength, 2);
         ProgressText.text = (int)(progress * 100) + "%";
     }
 
@@ -427,15 +428,13 @@ public class LobbyManager : BasicSingleton<LobbyManager>
         onCompleteTitleData = true;
     }
 
-private void RegisterDataToSaveManager(string playerID)
+
+    private void RegisterDataToSaveManager(string playerID)
     {
         print("자동 저장하도록 등록 완료");
 
         ClientSaveManager.Add($"SAVE_KEY_VALUE_{playerID}", Player.Value);
-
-        // 추후 데이터가 많아지면 여기에 추가 등록
-
+        
         ClientSaveManager.Run();
     }
 }
-
