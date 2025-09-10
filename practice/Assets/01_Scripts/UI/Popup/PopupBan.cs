@@ -5,7 +5,7 @@ using UnityEngine;
 public class PopupBan : MonoBehaviour
 {
     [SerializeField] private PopupEvent PopupEvent;
-    [SerializeField] private LocalizedTMPKeyParams LocalExitText;
+    //[SerializeField] private LocalizedTMPKeyParams LocalExitText;
     [SerializeField] private EventButton ExitButton;
 
     private float currentTimer = 0;
@@ -32,7 +32,7 @@ public class PopupBan : MonoBehaviour
 
     private void UpdateUI()
     {
-        LocalExitText.UpdateParameters((false, $"{(exitTime - currentTimer)}"));
+        //LocalExitText.UpdateParameters((false, $"{(exitTime - currentTimer)}"));
     }
 
     private IEnumerator ExitTimer()

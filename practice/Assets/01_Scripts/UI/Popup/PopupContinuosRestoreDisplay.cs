@@ -7,7 +7,7 @@ public class PopupContinuousRestoreDisplay : MonoBehaviour
 {
     [SerializeField] private PopupEvent PopupEvent;
     [SerializeField] private TextMeshProUGUI RestoreDateText;
-    [SerializeField] private LocalizedTMPKeyParams LocalExitText;
+    //[SerializeField] private LocalizedTMPKeyParams LocalExitText;
     [SerializeField] private EventButton ExitButton;
 
     private float currentTimer = 0;
@@ -36,7 +36,7 @@ public class PopupContinuousRestoreDisplay : MonoBehaviour
     {
         RestoreDateText.text = ServerHeaderManager.StaticHeader
             .RestoredTime.ToLocalTime().DateTime.ToString("yyyy-MM-dd HH:mm:ss");
-        LocalExitText.UpdateParameters((false, $"{(exitTime - currentTimer)}"));
+        //LocalExitText.UpdateParameters((false, $"{(exitTime - currentTimer)}"));
     }
 
     private IEnumerator ExitTimer()
