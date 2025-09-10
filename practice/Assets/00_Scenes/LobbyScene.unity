@@ -5836,7 +5836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClockManager: {fileID: 342009293}
   LiveServerId: 186DE8
-  DebugSensor: {fileID: 0}
+  DebugSensor: {fileID: 1506075364}
 --- !u!114 &342009292
 MonoBehaviour:
   m_ObjectHideFlags: 0

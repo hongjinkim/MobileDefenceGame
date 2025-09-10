@@ -15,23 +15,8 @@ public class PlayerManager : BasicSingleton<PlayerManager>
 
     public int CurrentStage = 1; // 추후 서버에서 진행상황 받아서 설정
 
-    public PlayerData playerData { get; private set; }
+    public PlayerData playerData => GameDataManager.PlayerData;
 
-    private void OnEnable()
-    {
-
-    }
-
-    private void OnDisable()
-    {
-
-    }
-
-    private void Awake()
-    {
-        // PlayerData 초기화
-        playerData = GameDataManager.PlayerData;
-    }
 
     private void Start()
     {

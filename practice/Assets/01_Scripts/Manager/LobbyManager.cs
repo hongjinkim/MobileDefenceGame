@@ -211,7 +211,7 @@ public class LobbyManager : BasicSingleton<LobbyManager>
 
         OnProgress(randomHalf);
 
-        mainSceneLoadOperation = SceneManager.LoadSceneAsync("Main");
+        mainSceneLoadOperation = SceneManager.LoadSceneAsync("MainScene");
         mainSceneLoadOperation.allowSceneActivation = false;
 
         while (mainSceneLoadOperation.progress < 0.9f)

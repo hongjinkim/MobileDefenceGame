@@ -164,7 +164,7 @@ public class ClientSaveManager : MonoBehaviour
         {
             autosaveProcess = StartCoroutine(OnEndOfFrame());
 #if UNITY_EDITOR
-            print($"<PoomSaveManager> 자동저장 시스템이 작동을 시작합니다.");
+            print($"<SaveManager> 자동저장 시스템이 작동을 시작합니다.");
 #endif 
         }
     }
