@@ -6,7 +6,7 @@ public class DebugLoginButtonController : MonoBehaviour
 {
     public PlayFabSharedSettings Settings;
 
-    [HideInInspector]public LoginManager LoginManager;
+    [SerializeField]private LoginManager LoginManager;
     public GameObject TesterLoginPopup;
 
     private void OnEnable()

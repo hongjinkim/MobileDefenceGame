@@ -55,39 +55,13 @@ public class LoginManager : MonoBehaviour
     public static Action OnFilteredTooLongUsername;
 
 
-
-    // -------
-
-    public static LoginManager Instance { get; private set; } = null;
-
-
-    [SerializeField] private GameObject PoomDebugConsole;
-
-    [SerializeField] private PlayFabSharedSettings PlayFabSettings;
-
     public PlayFabEmailLoginModule Email { get; private set; } = null;
 #if UNITY_EDITOR
     public PlayFabGuestLoginModule Guest { get; private set; } = null;
 #endif
     private PlayFabGoogleLoginModule GoogleToPlayFab { get; set; } = null;
 
-
     private bool isInitialized = false;
-
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            Initialize();
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     //private void Start()
     //{

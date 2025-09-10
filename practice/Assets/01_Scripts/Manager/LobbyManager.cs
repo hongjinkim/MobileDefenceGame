@@ -66,6 +66,14 @@ public class LobbyManager : BasicSingleton<LobbyManager>
 
     private PlayerData Player => GameDataManager.PlayerData;
 
+    private void Awake()
+    {
+        randomIdCreator = new RandomUsernameUploader();
+        randomIdCreator.OnSuccess += OnSuccessUpdateRandomDisplayName;
+        loadingbarLength = LoadingFill.rectTransform.rect.size.x;
+        loadingbarHalfLength = loadingbarLength / 2;
+    }
+
     private void OnEnable()
     {
         LoginManager.OnBannedPlayFabAccount += OnBanned;
