@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Timeline;
 using UnityEngine.UIElements;
 
 [Serializable]
@@ -17,7 +18,7 @@ public class PlayerData
     public void LoadData()
 	{
 		//TestLoadPlayerValue();
-		//TestLoadPlayerHeroValue();
+		LoadPlayerHeroValue();
     }
 
 	private void TestLoadPlayerValue()
@@ -28,12 +29,17 @@ public class PlayerData
 		Value.Gold = 1000;
 		Value.Crystal = 200;
     }
-	private void TestLoadPlayerHeroValue()
+	private void LoadPlayerHeroValue()
 	{
 		var master = DataBase.GetHeroData();
 
         // 1) 도감(컬렉션) 키 보장 (마스터 전체를 Hidden으로 초기화)
         Hero.EnsureCollectionKeys(master);
+    }
+
+    private void TestAquireHero()
+    {
+        var master = DataBase.GetHeroData();
 
         // 2) 테스트용 도감 세팅: 마스터 전체를 Seen으로 설정
         Hero.SetAllSeen(master);

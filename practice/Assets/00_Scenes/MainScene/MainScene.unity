@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a5ece0cc7fb3747a7ce035352ebb4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoadEnabled: 0
   lobbyPanel: {fileID: 1712154825}
   stagePanel: {fileID: 513436347}
   transition: {fileID: 122642529}
@@ -2161,6 +2162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370ae2749f0ba2641898c142d3b83c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoadEnabled: 0
   m_Pools: []
 --- !u!1 &630760903
 GameObject:
@@ -3735,6 +3737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82e34072dfd5004aa1d3af9300b12e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoadEnabled: 0
   MinPos: {fileID: 989271475}
   MaxPos: {fileID: 328160196}
   StageCenter: {fileID: 2007158930}
@@ -5139,6 +5142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5309ee77543b2be4586cf7b632e5e446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoadEnabled: 0
   m_Pools: []
 --- !u!1 &1606602127
 GameObject:

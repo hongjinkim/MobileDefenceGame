@@ -4899,6 +4899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455f7f03242a44f4aacd24125c4e1a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoadEnabled: 0
   AppUpdatePopup: {fileID: 634476465}
 --- !u!1 &274421470
 GameObject:
@@ -12680,6 +12681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10708ec34a435a74e9cb6c93083a9f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoadEnabled: 1
 --- !u!4 &904390385
 Transform:
   m_ObjectHideFlags: 0
@@ -14880,6 +14882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6327901a74393b40a8d0d85eac4cc59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoadEnabled: 0
   LiveServerId: 186DE8
   TestServerId: E0B93
   LoginManager: {fileID: 0}
@@ -24911,6 +24914,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 310450522683818875, guid: 9a7ff2bc95107374aa2f91063c635497, type: 3}
+      propertyPath: dontDestroyOnLoadEnabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5691980462318586866, guid: 9a7ff2bc95107374aa2f91063c635497, type: 3}
       propertyPath: m_Name
       value: EventManager

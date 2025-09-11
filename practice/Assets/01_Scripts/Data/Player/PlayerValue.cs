@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerValue : BaseSaveData<PlayerValue>
 {
-    public string NickName = "Player"; // 닉네임
+    public string NickName; // 닉네임
     public bool IsPrologue = false; // 프롤로그 진행 여부
     public int MaxEnergy = 30; // 최대 에너지
     public int CurrentEnergy = 0; // 현재 에너지
