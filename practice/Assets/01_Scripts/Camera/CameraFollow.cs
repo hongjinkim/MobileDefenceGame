@@ -19,12 +19,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Camera cam;
 
 
-    private void Awake()
+    private void OnEnable()
     {
         EventManager.Subscribe<CameraMode>(EEventType.CameraChange, UpdateCamera);
     }
 
-    private void OnApplicationQuit()
+    private void OnDisable()
     {
         EventManager.Unsubscribe<CameraMode>(EEventType.CameraChange, UpdateCamera);
     }

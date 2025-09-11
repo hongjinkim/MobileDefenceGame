@@ -1,7 +1,7 @@
 public enum EEventType
 {
     None = 0,
-    DataLoaded, // 데이터 로드 완료 이벤트
+    MainSceneOpened, // 로비 -> 메인 씬 오픈 이벤트
     EnemyDied, // 적 사망 이벤트
     HeroDied, // 영웅 사망 이벤트
     LevelUp, // 레벨업 이벤트

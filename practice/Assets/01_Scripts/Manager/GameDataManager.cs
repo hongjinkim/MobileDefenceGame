@@ -35,9 +35,6 @@ public class GameDataManager : BasicSingleton<GameDataManager>
         playerData.LoadData();
 
         _playerLoaded = true;
-
-        // 2) 이제 최종 준비 완료 이벤트 발행 (UI/시스템들이 이걸 듣게)
-        EventManager.Raise(EEventType.DataLoaded);
     }
 
     public static void OverWritePlayerData(PlayerData playerData)

@@ -8,7 +8,7 @@ public class EventListenerTester : MonoBehaviour
 {
     [Title("이벤트 등록 테스트")]
     [EnumPaging]
-    public EEventType eventType = EEventType.DataLoaded;
+    public EEventType eventType = EEventType.MainSceneOpened;
 
     [InfoBox("단순/페이로드 이벤트 구분 필요시 직접 수정")]
     public bool isSimpleEvent = true;

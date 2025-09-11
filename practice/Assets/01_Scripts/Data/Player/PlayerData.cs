@@ -16,8 +16,8 @@ public class PlayerData
     // 데이터 로드, 추후 서버에서 받아오는 부분 구현 예정
     public void LoadData()
 	{
-		TestLoadPlayerValue();
-		TestLoadPlayerHeroValue();
+		//TestLoadPlayerValue();
+		//TestLoadPlayerHeroValue();
     }
 
 	private void TestLoadPlayerValue()

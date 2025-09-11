@@ -26,18 +26,18 @@ public class MainPageUI : MonoBehaviour
     private int currentStage;
     private string stageName;
 
-    private void Awake()
+    private void OnEnable()
     {
-        EventManager.Subscribe(EEventType.DataLoaded, OnDataLoaded);
+        EventManager.Subscribe(EEventType.MainSceneOpened, OnDataLoaded);
         EventManager.Subscribe(EEventType.EnergyUpdated, UpdateEnergyText);
         EventManager.Subscribe(EEventType.GoldUpdated, UpdateGoldText);
         EventManager.Subscribe(EEventType.CrystalUpdated, UpdateCrystalText);
         EventManager.Subscribe(EEventType.StageCleared, UpdateStageClearText);
     }
 
-    private void OnApplicationQuit()
+    private void OnDisable()
     {
-        EventManager.Unsubscribe(EEventType.DataLoaded, OnDataLoaded);
+        EventManager.Unsubscribe(EEventType.MainSceneOpened, OnDataLoaded);
         EventManager.Unsubscribe(EEventType.EnergyUpdated, UpdateEnergyText);
         EventManager.Unsubscribe(EEventType.GoldUpdated, UpdateGoldText);
         EventManager.Unsubscribe(EEventType.CrystalUpdated, UpdateCrystalText);

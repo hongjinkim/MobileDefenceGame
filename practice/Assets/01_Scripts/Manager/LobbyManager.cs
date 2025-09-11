@@ -38,17 +38,17 @@ public class LobbyManager : BasicSingleton<LobbyManager>
     [Header("UI")]
     public Button TapToStartButton;
     public TextMeshProUGUI ProgressText;
-    //public PrologueDisplay Prologue;
-    //public FadeOutEvent FadeOutScene;
+    public PrologueDisplay Prologue;
+    public FadeOutEvent FadeOutScene;
     public PopupRestoreDisplay RestorePopup;
     public PopupBan BanPopup;
     public GameObject DebugPanel;
     public GameObject LoadingBar;
     public Image LoadingFill;
-    public Image LoadingBarIcon;
-    public Animator LoadingBarAnimator;
-    public Sprite LoadingFinishedSprite;
-    public GameObject LoadingUIEffect;
+    //public Image LoadingBarIcon;
+    //public Animator LoadingBarAnimator;
+    //public Sprite LoadingFinishedSprite;
+    //public GameObject LoadingUIEffect;
     private float loadingbarLength;
     private float loadingbarHalfLength;
 
@@ -221,10 +221,10 @@ private void Awake()
         }
 
         OnProgress(1f);
-        LoadingBarAnimator.enabled = false;
-        LoadingBarIcon.sprite = LoadingFinishedSprite;
-        LoadingBarIcon.transform.DOPunchScale(Vector3.one * 0.1f, 0.8f);
-        LoadingUIEffect.SetActive(true);
+        //LoadingBarAnimator.enabled = false;
+        //LoadingBarIcon.sprite = LoadingFinishedSprite;
+        //LoadingBarIcon.transform.DOPunchScale(Vector3.one * 0.1f, 0.8f);
+        //LoadingUIEffect.SetActive(true);
 
 
         yield return new WaitForSeconds(1.5f);
@@ -367,11 +367,8 @@ private void Awake()
         TapToStartButton.gameObject.SetActive(false);
         StopAllCoroutines();
 
-        //mainSceneLoadOperation = SceneManager.LoadSceneAsync("Main");
-        //mainSceneLoadOperation.allowSceneActivation = false;
-
         bool prologue = Player.Value.IsPrologue;
-        if (prologue == true)
+        if (!prologue)
         {
             StartCoroutine(FadeOutAndActiveMainScene());
         }
@@ -412,7 +409,7 @@ private void Awake()
     private void OnProgress(float progress)
     {
         LoadingFill.fillAmount = progress;
-        LoadingBarIcon.transform.localPosition = new Vector2(loadingbarLength * progress - loadingbarHalfLength, 2);
+        //LoadingBarIcon.transform.localPosition = new Vector2(loadingbarLength * progress - loadingbarHalfLength, 2);
         ProgressText.text = (int)(progress * 100) + "%";
     }
 
