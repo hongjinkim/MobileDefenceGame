@@ -39,6 +39,7 @@ public class DataBase : MonoBehaviour
     {
         LoadData();
         IsLoaded = true;
+
         Debug.Log("DataBase Initialized and Data Loaded Successfully.");
 
         OnLoaded?.Invoke();
@@ -59,7 +60,6 @@ public class DataBase : MonoBehaviour
     {
         return Instance.heroData.HeroDict.TryGetValue(id, out value);
     }
-
     public static bool TryGetStageValue(int id, out StageValue value)
     {
         return Instance.stageData.StageDict.TryGetValue(id.ToString(), out value);

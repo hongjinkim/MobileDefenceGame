@@ -18,7 +18,7 @@ public class HeroData
 
     public void LoadData()
     {
-        var heroList = DataTable.Hero.HeroList;
+        var heroList = DataTable.Hero.GetList();
         heroCount = heroList.Count;
 
         for (int i = 0; i < heroCount; i++)

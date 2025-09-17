@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38676050d90108c45b307116b444a4d2, type: 3}
-  m_Name: FontData_Korean
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Localization-Locales_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  Language: 2
-  FontAsset: {fileID: 11400000, guid: bef74437e7dff1742b84dbf95344829f, type: 2}
-  FontMaterials: []
+  m_Group: {fileID: 11400000, guid: 609fc5398e618a247906ba8d019a86e7, type: 2}
+  m_StaticContent: 0

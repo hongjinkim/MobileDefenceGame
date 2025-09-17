@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
 
@@ -53,7 +54,7 @@ public class LocalizationSystem : ScriptableObject
 
     public ELanguage GetCurrentLanguage()
     {
-        ELanguage lang = PlayerPrefs.GetString("Kitty_Language").ToPoomLanguage();
+        ELanguage lang = PlayerPrefs.GetString("Kitty_Language").ToEnumLanguage();
 
         if (lang == ELanguage.Other)
             return Configuration.FallbackLanguage;

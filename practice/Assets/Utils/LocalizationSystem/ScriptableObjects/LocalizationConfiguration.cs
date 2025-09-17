@@ -20,7 +20,7 @@ public class LocalizationConfiguration : ScriptableObject
 
         if (DefaultLanguage == ELanguageSettings.SYSTEM_LANGUAGE)
         {
-            ELanguage systemLanguage = Application.systemLanguage.ToPoomLanguage();
+            ELanguage systemLanguage = Application.systemLanguage.ToEnumLanguage();
 
             bool isAvailableLanguage = false;
             for (int i = 0; i < LanguageAvailable.Length; i++)

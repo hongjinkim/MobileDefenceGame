@@ -6,8 +6,8 @@ public enum EHeroClassType
 {
     Warrior,
     Mage,
-    Assassin,
-    Support
+    Ranger,
+    Supporter
 }
 
 [UGS(typeof(EHeroElementType))]

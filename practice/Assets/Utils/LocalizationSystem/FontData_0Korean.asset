@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38676050d90108c45b307116b444a4d2, type: 3}
+  m_Name: FontData_0Korean
+  m_EditorClassIdentifier: 
+  Language: 2
+  FontAsset: {fileID: 11400000, guid: bef74437e7dff1742b84dbf95344829f, type: 2}
+  FontMaterials:
+  - {fileID: 2100000, guid: 0660cf6d2a2a9924c8032174f5128a9e, type: 2}
+  - {fileID: 2100000, guid: dfa6446fbcce9104faefc18fd56450d0, type: 2}
+  - {fileID: 2100000, guid: f084c36a43acb06499a9a5b4e814a699, type: 2}
+  - {fileID: 2100000, guid: 08dc54d5d17672340b3fdbdc78ddc6f5, type: 2}
+  - {fileID: 2100000, guid: 13609beb8222a724e830f257c9590455, type: 2}
+  - {fileID: 2100000, guid: d7483d6a24f164140a4a3811a248b1b5, type: 2}
+  - {fileID: 2100000, guid: 1b73b9555c941fa479685e6c8ac5f8c2, type: 2}
+  - {fileID: 2100000, guid: 39da9322311917449aae6cac1dfec867, type: 2}

@@ -5,7 +5,7 @@ using System;
 public enum EGrade
 {
     Common,
-    Rare,
+    Epic,
     Legendary,
-    Epic
+    Mythic
 }

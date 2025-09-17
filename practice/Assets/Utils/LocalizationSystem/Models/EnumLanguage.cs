@@ -19,7 +19,7 @@ public enum ELanguage
     Other
 }
 
-public static class PoomLanguageExtensions
+public static class LanguageExtensions
 {
     public static SystemLanguage ToSystemLanguage(this ELanguage language)
     {
@@ -41,7 +41,7 @@ public static class PoomLanguageExtensions
         };
     }
 
-    public static ELanguage ToPoomLanguage(this SystemLanguage language)
+    public static ELanguage ToEnumLanguage(this SystemLanguage language)
     {
         return language switch
         {
@@ -60,7 +60,7 @@ public static class PoomLanguageExtensions
         };
     }
 
-    public static ELanguage ToPoomLanguage(this string language)
+    public static ELanguage ToEnumLanguage(this string language)
     {
         return language switch
         {

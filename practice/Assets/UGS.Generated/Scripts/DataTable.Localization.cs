@@ -58,6 +58,7 @@ namespace DataTable
 
 		public System.String Key;
 		public System.String Korean;
+		public System.String English;
   
 
 #region fuctions

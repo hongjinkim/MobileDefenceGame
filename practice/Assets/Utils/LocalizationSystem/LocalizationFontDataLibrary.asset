@@ -14,42 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   List:
   - Language: 2
-    FallbackFontAsset: {fileID: 11400000, guid: 9f0e55203d0f1824885404bd8b9f08d0, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: 70548494f13767b40b7ef8e7d3d8c0e9, type: 3}
+    FallbackFontAsset: {fileID: 11400000, guid: bef74437e7dff1742b84dbf95344829f, type: 2}
+    FallbackMaterial: {fileID: 2100000, guid: a38bd2ce9409f5c4daff97f9b127845d, type: 3}
     KeyFontSet: []
   - Language: 1
-    FallbackFontAsset: {fileID: 11400000, guid: 9f0e55203d0f1824885404bd8b9f08d0, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: 70548494f13767b40b7ef8e7d3d8c0e9, type: 3}
-    KeyFontSet: []
-  - Language: 3
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: 1b2f6cb38fbd7db41883779559e74b91, type: 3}
-    KeyFontSet: []
-  - Language: 4
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: 1b2f6cb38fbd7db41883779559e74b91, type: 3}
-    KeyFontSet: []
-  - Language: 5
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: cf4731a906e239b479e1dd018c61f075, type: 3}
-    KeyFontSet: []
-  - Language: 6
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: cf4731a906e239b479e1dd018c61f075, type: 3}
-    KeyFontSet: []
-  - Language: 7
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: cf4731a906e239b479e1dd018c61f075, type: 3}
-    KeyFontSet: []
-  - Language: 8
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: cf4731a906e239b479e1dd018c61f075, type: 3}
-    KeyFontSet: []
-  - Language: 9
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: cf4731a906e239b479e1dd018c61f075, type: 3}
-    KeyFontSet: []
-  - Language: 10
-    FallbackFontAsset: {fileID: 11400000, guid: c825a85db5870314eaef45184962eeb6, type: 2}
-    FallbackMaterial: {fileID: 2100000, guid: cf4731a906e239b479e1dd018c61f075, type: 3}
+    FallbackFontAsset: {fileID: 11400000, guid: bef74437e7dff1742b84dbf95344829f, type: 2}
+    FallbackMaterial: {fileID: 2100000, guid: a38bd2ce9409f5c4daff97f9b127845d, type: 3}
     KeyFontSet: []
