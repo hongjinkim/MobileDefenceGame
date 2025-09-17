@@ -12654,21 +12654,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialData:
-    GamePlayingSpeed: 0
-    StartAttack: 0
-    StartHealth: 0
+    GameSpeed: 0
     AttackSpeed: 0
-    AttackRange: 0
-  heroUpgradeData:
-    Initial_MaxLevel: 0
-    Initial_MaxPromotionLevel: 0
-    MaxLevel: 0
-    AttackPowerIncrease: 0
-    HealthIncrease: 0
-    Initial_UpgradeStoneCost: 0
-    UpgradeStoneIncrease: 0
-    Initial_UpgradeGoldCost: 0
-    UpgradeGoldIncrease: 0
+    AttackRange_Melee: 0
+    AttackRange_Range: 0
 --- !u!114 &904390384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17483,6 +17472,7 @@ GameObject:
   - component: {fileID: 1263439938}
   - component: {fileID: 1263439937}
   - component: {fileID: 1263439936}
+  - component: {fileID: 1263439940}
   m_Layer: 5
   m_Name: Text - Start
   m_TagString: Untagged
@@ -17631,6 +17621,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263439934}
   m_CullTransparentMesh: 1
+--- !u!114 &1263439940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263439934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e77fa35d408f348b2a5ed9f98d400a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dictionary: {fileID: 11400000, guid: 7cd884803716a054b8f6bda5e54e893c, type: 2}
+  Key: TAP_TO_CONTINUE
 --- !u!1 &1265832917
 GameObject:
   m_ObjectHideFlags: 0

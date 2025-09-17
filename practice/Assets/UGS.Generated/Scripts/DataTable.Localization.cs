@@ -113,6 +113,8 @@ namespace DataTable
 
 
     public static (List<Localization> list, Dictionary<string, Localization> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+
+            
             Dictionary<string, Localization> Map = new Dictionary<string, Localization>();
             List<Localization> List = new List<Localization>();     
             TypeMap.Init();

@@ -114,6 +114,8 @@ namespace DataTable
 
 
     public static (List<StageInfo> list, Dictionary<int, StageInfo> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+
+            
             Dictionary<int, StageInfo> Map = new Dictionary<int, StageInfo>();
             List<StageInfo> List = new List<StageInfo>();     
             TypeMap.Init();
