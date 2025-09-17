@@ -28534,10 +28534,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 639000934993980265, guid: 202d8dc54f76d5c428f9dee8c76e503e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 3687742186873051435, guid: 202d8dc54f76d5c428f9dee8c76e503e, type: 3}
+      propertyPath: PlayFabSettingsAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 698b2db098268c640929a7b8090a31eb, type: 2}
     - target: {fileID: 6895205318173847853, guid: 202d8dc54f76d5c428f9dee8c76e503e, type: 3}
       propertyPath: m_Name
       value: TestServerChecker

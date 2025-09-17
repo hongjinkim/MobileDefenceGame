@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 
-public class PoomTestServerChecker : MonoBehaviour
+public class TestServerChecker : MonoBehaviour
 {
     [Header("PlayFab")]
     public PlayFabSharedSettings PlayFabSettingsAsset;

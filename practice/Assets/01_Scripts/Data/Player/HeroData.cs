@@ -24,19 +24,20 @@ public class HeroData
         for (int i = 0; i < heroCount; i++)
         {
             var heroData = new HeroValue();
+            heroData.ID = heroList[i].Hero_ID;
             heroData.Grade = heroList[i].Hero_Grade;
             heroData.Name = heroList[i].Hero_Name;
             heroData.Description = heroList[i].Hero_Description;
-            heroData.HeroType = heroList[i].Hero_Type;
+            heroData.HeroClass = heroList[i].Hero_Class;
             heroData.Element = heroList[i].Hero_Element;
             heroData.AttackPower = heroList[i].Initial_Attack;
             heroData.Health = heroList[i].Initial_Health;
-            heroData.AttackSpeed = heroList[i].AttackSpeed;
+            heroData.AttackSpeed = DataTable.Initial.InitialList[0].AttackSpeed;
             //HeroIcon = Resources.Load<Sprite>($"Icons/Heroes/{hero.아이콘}");
 
             heroData.SkillUpgradeDict = new Dictionary<string, SkillUpgradeValue>();
             var skillID = heroList[i].Skill_ID;
-            var skillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Skill_ID == skillID).ToList();
+            var skillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Hero_ID == heroData.ID).ToList();
 
             foreach(var skillUpgrade in skillUpgradeList)
             {

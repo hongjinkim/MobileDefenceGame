@@ -1,8 +1,8 @@
 using GoogleSheet.Core.Type;
 
 
-[UGS(typeof(EHeroType))]
-public enum EHeroType
+[UGS(typeof(EHeroClassType))]
+public enum EHeroClassType
 {
     Warrior,
     Mage,

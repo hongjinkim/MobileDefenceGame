@@ -8,10 +8,11 @@ using UnityEngine;
 public class HeroValue
 {
     // ∞Ì¡§ Ω∫≈»
+    public string ID;
     public string Name;
     public string Description;
     public EGrade Grade;
-    public EHeroType HeroType;
+    public EHeroClassType HeroClass;
     public EHeroElementType Element;
     public BigNum AttackPower;
     public BigNum Health;

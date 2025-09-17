@@ -71,7 +71,7 @@ public class TimeManager : MonoBehaviour
 
     private void Start()
     {
-        MainTimeScale = DataBase.Instance.initialData.GamePlayingSpeed;
+        MainTimeScale = DataBase.Instance.initialData.GameSpeed;
         ControlTimeScale(1f);
     }
 

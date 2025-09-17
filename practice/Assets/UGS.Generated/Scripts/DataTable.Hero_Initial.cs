@@ -17,39 +17,39 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class StageInfo : ITable
+    public partial class Hero_Initial : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<StageInfo> loadedList, Dictionary<int, StageInfo> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Hero_Initial> loadedList, Dictionary<int, Hero_Initial> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
-        static string sheetID = "411020660"; // it is sheet id
+        static string sheetID = "1914207167"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, StageInfo> StageInfoMap = new Dictionary<int, StageInfo>();  
-        public static List<StageInfo> StageInfoList = new List<StageInfo>();   
+        public static Dictionary<int, Hero_Initial> Hero_InitialMap = new Dictionary<int, Hero_Initial>();  
+        public static List<Hero_Initial> Hero_InitialList = new List<Hero_Initial>();   
 
         /// <summary>
-        /// Get StageInfo List 
+        /// Get Hero_Initial List 
         /// Auto Load
         /// </summary>
-        public static List<StageInfo> GetList()
+        public static List<Hero_Initial> GetList()
         {{
            if (isLoaded == false) Load();
-           return StageInfoList;
+           return Hero_InitialList;
         }}
 
         /// <summary>
-        /// Get StageInfo Dictionary, keyType is your sheet A1 field type.
+        /// Get Hero_Initial Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, StageInfo>  GetDictionary()
+        public static Dictionary<int, Hero_Initial>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return StageInfoMap;
+           return Hero_InitialMap;
         }}
 
     
@@ -57,8 +57,11 @@ namespace DataTable
 /* Fields. */
 
 		public System.Int32 Key;
-		public System.Int32 Stage_ID;
-		public System.String StageName;
+		public System.Int32 Initial_MaxLevel;
+		public System.Int32 Initial_MaxPromotionLevel;
+		public System.Int32 MaxLevel;
+		public System.Int32 Initial_UpgradeStoneCost;
+		public System.Int32 Initial_PromotionStoneCost;
   
 
 #region fuctions
@@ -69,7 +72,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("StageInfo is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Hero_Initial is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -85,7 +88,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<StageInfo>, Dictionary<int, StageInfo>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Hero_Initial>, Dictionary<int, Hero_Initial>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
 #if UNITY_EDITOR
@@ -113,14 +116,14 @@ namespace DataTable
                
 
 
-    public static (List<StageInfo> list, Dictionary<int, StageInfo> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, StageInfo> Map = new Dictionary<int, StageInfo>();
-            List<StageInfo> List = new List<StageInfo>();     
+    public static (List<Hero_Initial> list, Dictionary<int, Hero_Initial> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, Hero_Initial> Map = new Dictionary<int, Hero_Initial>();
+            List<Hero_Initial> List = new List<Hero_Initial>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(StageInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Hero_Initial).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["StageInfo"];
+            var sheet = jsonObject["Hero_Initial"];
 
             foreach (var column in sheet.Keys)
             {
@@ -139,7 +142,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            StageInfo instance = new StageInfo();
+                            Hero_Initial instance = new Hero_Initial();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -180,8 +183,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            StageInfoList = List;
-                            StageInfoMap = Map;
+                            Hero_InitialList = List;
+                            Hero_InitialMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -191,10 +194,10 @@ namespace DataTable
 
  
 
-        public static void Write(StageInfo data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Hero_Initial data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(StageInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Hero_Initial).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

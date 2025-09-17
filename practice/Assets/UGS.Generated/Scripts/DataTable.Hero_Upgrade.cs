@@ -20,16 +20,16 @@ namespace DataTable
     public partial class Hero_Upgrade : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Hero_Upgrade> loadedList, Dictionary<int, Hero_Upgrade> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Hero_Upgrade> loadedList, Dictionary<string, Hero_Upgrade> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
-        static string sheetID = "1914207167"; // it is sheet id
+        static string sheetID = "1648474245"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, Hero_Upgrade> Hero_UpgradeMap = new Dictionary<int, Hero_Upgrade>();  
+        public static Dictionary<string, Hero_Upgrade> Hero_UpgradeMap = new Dictionary<string, Hero_Upgrade>();  
         public static List<Hero_Upgrade> Hero_UpgradeList = new List<Hero_Upgrade>();   
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace DataTable
         /// Get Hero_Upgrade Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, Hero_Upgrade>  GetDictionary()
+        public static Dictionary<string, Hero_Upgrade>  GetDictionary()
         {{
            if (isLoaded == false) Load();
            return Hero_UpgradeMap;
@@ -56,16 +56,10 @@ namespace DataTable
 
 /* Fields. */
 
-		public System.Int32 Key;
-		public System.Int32 Initial_MaxLevel;
-		public System.Int32 Initial_MaxPromotionLevel;
-		public System.Int32 MaxLevel;
-		public System.Int32 AttackPowerIncrease;
-		public System.Int32 HealthIncrease;
-		public System.Int32 Initial_UpgradeStoneCost;
-		public System.Single UpgradeStoneIncrease;
-		public System.Int32 Initial_UpgradeGoldCost;
-		public System.Single UpgradeGoldIncrease;
+		public System.String Key;
+		public System.Single AttackPowerIncrease;
+		public System.Single HealthIncrease;
+		public System.Single DefenceIncrease;
   
 
 #region fuctions
@@ -92,10 +86,10 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Hero_Upgrade>, Dictionary<int, Hero_Upgrade>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Hero_Upgrade>, Dictionary<string, Hero_Upgrade>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (Application.isPlaying == false)
                 {
                     webInstance = UnityEditorWebRequest.Instance as IHttpProtcol;
@@ -104,10 +98,10 @@ namespace DataTable
                 {
                     webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
                 }
-    #endif
-    #if !UNITY_EDITOR
+#endif
+#if !UNITY_EDITOR
                      webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
-    #endif
+#endif
           
  
                 var mdl = new ReadSpreadSheetReqModel(spreadSheetID);
@@ -120,8 +114,8 @@ namespace DataTable
                
 
 
-    public static (List<Hero_Upgrade> list, Dictionary<int, Hero_Upgrade> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, Hero_Upgrade> Map = new Dictionary<int, Hero_Upgrade>();
+    public static (List<Hero_Upgrade> list, Dictionary<string, Hero_Upgrade> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<string, Hero_Upgrade> Map = new Dictionary<string, Hero_Upgrade>();
             List<Hero_Upgrade> List = new List<Hero_Upgrade>();     
             TypeMap.Init();
             FieldInfo[] fields = typeof(Hero_Upgrade).GetFields(BindingFlags.Public | BindingFlags.Instance);

@@ -7,21 +7,18 @@ using UnityEngine;
 public class InitialData
 {
 
-    public float GamePlayingSpeed;
-
-    public int StartAttack;
-    public int StartHealth;
+    public float GameSpeed;
     public float AttackSpeed;
-    public float AttackRange;
+    public float AttackRange_Melee;
+    public float AttackRange_Range;
 
     public void LoadData()
     {
         var InitialData = DataTable.Initial.GetList()[0];
 
-        GamePlayingSpeed = InitialData.GameSpeed;
-        StartAttack = InitialData.Attack;
-        StartHealth = InitialData.HP;
+        GameSpeed = InitialData.GameSpeed;
         AttackSpeed = InitialData.AttackSpeed;
-        AttackRange = InitialData.AttackRange;
+        AttackRange_Melee = InitialData.AttackRange_Melee;
+        AttackRange_Range = InitialData.AttackRange_Range;
     }
 }

@@ -58,7 +58,6 @@ namespace DataTable
 
 		public System.String Key;
 		public System.String Hero_ID;
-		public System.String Skill_ID;
 		public System.String Upgrade_Name;
 		public System.String Upgrade_Descption;
 		public ESkillUpgradeTier Upgrade_Tier;
@@ -94,7 +93,7 @@ namespace DataTable
         public static void LoadFromGoogle(System.Action<List<SkillUpgrade>, Dictionary<string, SkillUpgrade>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (Application.isPlaying == false)
                 {
                     webInstance = UnityEditorWebRequest.Instance as IHttpProtcol;
@@ -103,10 +102,10 @@ namespace DataTable
                 {
                     webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
                 }
-    #endif
-    #if !UNITY_EDITOR
+#endif
+#if !UNITY_EDITOR
                      webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
-    #endif
+#endif
           
  
                 var mdl = new ReadSpreadSheetReqModel(spreadSheetID);

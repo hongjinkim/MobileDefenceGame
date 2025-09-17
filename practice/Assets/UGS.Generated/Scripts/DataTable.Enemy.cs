@@ -91,7 +91,7 @@ namespace DataTable
         public static void LoadFromGoogle(System.Action<List<Enemy>, Dictionary<string, Enemy>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
                 if (Application.isPlaying == false)
                 {
                     webInstance = UnityEditorWebRequest.Instance as IHttpProtcol;
@@ -100,10 +100,10 @@ namespace DataTable
                 {
                     webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
                 }
-    #endif
-    #if !UNITY_EDITOR
+#endif
+#if !UNITY_EDITOR
                      webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
-    #endif
+#endif
           
  
                 var mdl = new ReadSpreadSheetReqModel(spreadSheetID);
