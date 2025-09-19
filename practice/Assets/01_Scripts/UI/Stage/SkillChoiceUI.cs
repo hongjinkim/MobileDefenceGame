@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class SkillChoiceUI : MonoBehaviour
 {
     public List<SkillOptionButtonUI> optionButtons; 
-    private Action<SkillUpgradeValue> onChosenCallback;
+    private Action<SkillValue> onChosenCallback;
 
     private void Start()
     {
         Hide();
     }
 
-    public void Show(List<SkillUpgradeValue> choices, Action<SkillUpgradeValue> onChosen)
+    public void Show(List<SkillValue> choices, Action<SkillValue> onChosen)
     {
         this.onChosenCallback = onChosen;
         gameObject.SetActive(true);
@@ -34,7 +34,7 @@ public class SkillChoiceUI : MonoBehaviour
         }
     }
 
-    private void OnOptionSelected(SkillUpgradeValue chosenUpgrade)
+    private void OnOptionSelected(SkillValue chosenUpgrade)
     {
         onChosenCallback?.Invoke(chosenUpgrade);
         Hide();

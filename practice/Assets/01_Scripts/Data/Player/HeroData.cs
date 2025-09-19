@@ -20,6 +20,8 @@ public class HeroData
     {
         var heroList = DataTable.Hero.GetList();
         heroCount = heroList.Count;
+        var skillList = DataTable.Skill.GetList();
+
 
         for (int i = 0; i < heroCount; i++)
         {
@@ -35,23 +37,23 @@ public class HeroData
             heroData.AttackSpeed = DataTable.Initial.InitialList[0].AttackSpeed;
             //HeroIcon = Resources.Load<Sprite>($"Icons/Heroes/{hero.아이콘}");
 
-            heroData.SkillUpgradeDict = new Dictionary<string, SkillUpgradeValue>();
+            heroData.SkillDict = new Dictionary<string, SkillValue>();
             var skillID = heroList[i].Skill_ID;
-            var skillUpgradeList = DataTable.SkillUpgrade.SkillUpgradeList.FindAll(skill => skill.Hero_ID == heroData.ID).ToList();
+            
 
-            foreach(var skillUpgrade in skillUpgradeList)
+            foreach(var skill in skillList)
             {
-                var value = new SkillUpgradeValue();
+                var value = new SkillValue();
 
-                value.HeroID = heroList[i].Hero_ID;
-                value.SkillID = skillUpgrade.Upgrade_Name;
-                value.Description = skillUpgrade.Upgrade_Descption;
-                value.Tier = skillUpgrade.Upgrade_Tier;
-                value.Behavior = skillUpgrade.Skill_Behavior;
-                value.value = skillUpgrade.Upgrade_Value;
+                value.Hero_ID = heroList[i].Hero_ID;
+                value.Name = skill.Skill_Name;
+                value.Description = skill.Skill_Description;
+                value.Tier = skill.Skill_Tier;
+                value.Behavior = skill.Skill_Behavior;
+                value.UpgradeType = skill.Skill_Type;
+                value.Value = skill.Skill_Value;
 
-
-                heroData.SkillUpgradeDict[skillUpgrade.Upgrade_Name] = value;
+                heroData.SkillDict[skill.Skill_Name] = value;
                 
             }
 

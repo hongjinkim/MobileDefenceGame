@@ -8,9 +8,9 @@ public class SkillOptionButtonUI : UIButton
     [SerializeField] TextMeshProUGUI skillNameText;
     [SerializeField] TextMeshProUGUI skillDescriptionText;
 
-    public void Setup(SkillUpgradeValue value)
+    public void Setup(SkillValue value)
     {
-        skillNameText.text = value.SkillID; // Assuming ID is the skill name
+        skillNameText.text = value.Name; // Assuming ID is the skill name
         skillDescriptionText.text = value.Description; // Assuming Description is the skill description
     }
 

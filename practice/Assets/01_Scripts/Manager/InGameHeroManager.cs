@@ -12,7 +12,7 @@ public class InGameHeroManager : BasicSingleton<InGameHeroManager>
     public List<HeroControl> HeroDeckList;
     public List<string> HeroSummonedIDs;
 
-    public List<SkillUpgradeValue> allSkillUpgrades;
+    public List<SkillValue> allSkillUpgrades;
     
 
     //public SkillChoiceUI skillChoiceUI;
@@ -55,7 +55,7 @@ public class InGameHeroManager : BasicSingleton<InGameHeroManager>
             heroComp.ID = heroId;
             heroComp.LoadData();
 
-            foreach(var keyValue in heroComp.Value.SkillUpgradeDict)
+            foreach(var keyValue in heroComp.Value.SkillDict)
             {
                 allSkillUpgrades.Add(keyValue.Value);
             }

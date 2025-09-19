@@ -17,10 +17,10 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class SkillUpgrade : ITable
+    public partial class Skill : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<SkillUpgrade> loadedList, Dictionary<string, SkillUpgrade> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<Skill> loadedList, Dictionary<string, Skill> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
@@ -29,27 +29,27 @@ namespace DataTable
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, SkillUpgrade> SkillUpgradeMap = new Dictionary<string, SkillUpgrade>();  
-        public static List<SkillUpgrade> SkillUpgradeList = new List<SkillUpgrade>();   
+        public static Dictionary<string, Skill> SkillMap = new Dictionary<string, Skill>();  
+        public static List<Skill> SkillList = new List<Skill>();   
 
         /// <summary>
-        /// Get SkillUpgrade List 
+        /// Get Skill List 
         /// Auto Load
         /// </summary>
-        public static List<SkillUpgrade> GetList()
+        public static List<Skill> GetList()
         {{
            if (isLoaded == false) Load();
-           return SkillUpgradeList;
+           return SkillList;
         }}
 
         /// <summary>
-        /// Get SkillUpgrade Dictionary, keyType is your sheet A1 field type.
+        /// Get Skill Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, SkillUpgrade>  GetDictionary()
+        public static Dictionary<string, Skill>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return SkillUpgradeMap;
+           return SkillMap;
         }}
 
     
@@ -58,12 +58,12 @@ namespace DataTable
 
 		public System.String Key;
 		public System.String Hero_ID;
-		public System.String Upgrade_Name;
-		public System.String Upgrade_Descption;
-		public ESkillUpgradeTier Upgrade_Tier;
+		public System.String Skill_Name;
+		public System.String Skill_Description;
+		public ESkillUpgradeTier Skill_Tier;
 		public ESkillBehaviorType Skill_Behavior;
-		public ESkillUpgradeType Upgrade_Type;
-		public System.Single Upgrade_Value;
+		public ESkillUpgradeType Skill_Type;
+		public System.Single Skill_Value;
   
 
 #region fuctions
@@ -74,7 +74,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("SkillUpgrade is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("Skill is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -90,7 +90,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<SkillUpgrade>, Dictionary<string, SkillUpgrade>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<Skill>, Dictionary<string, Skill>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
 #if UNITY_EDITOR
@@ -118,16 +118,16 @@ namespace DataTable
                
 
 
-    public static (List<SkillUpgrade> list, Dictionary<string, SkillUpgrade> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+    public static (List<Skill> list, Dictionary<string, Skill> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
 
             
-            Dictionary<string, SkillUpgrade> Map = new Dictionary<string, SkillUpgrade>();
-            List<SkillUpgrade> List = new List<SkillUpgrade>();     
+            Dictionary<string, Skill> Map = new Dictionary<string, Skill>();
+            List<Skill> List = new List<Skill>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(SkillUpgrade).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Skill).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["SkillUpgrade"];
+            var sheet = jsonObject["Skill"];
 
             foreach (var column in sheet.Keys)
             {
@@ -146,7 +146,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            SkillUpgrade instance = new SkillUpgrade();
+                            Skill instance = new Skill();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -187,8 +187,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            SkillUpgradeList = List;
-                            SkillUpgradeMap = Map;
+                            SkillList = List;
+                            SkillMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -198,10 +198,10 @@ namespace DataTable
 
  
 
-        public static void Write(SkillUpgrade data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(Skill data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(SkillUpgrade).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(Skill).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

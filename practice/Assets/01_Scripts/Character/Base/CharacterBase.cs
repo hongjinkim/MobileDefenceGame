@@ -57,16 +57,17 @@ public class CharacterState
 
 public abstract class CharacterBase : MonoBehaviour
 {
-    [ReadOnly]public string ID;
-
-    [SerializeField] public CharacterBase Target;
     [SerializeField] protected Collider AttackCollider;
+    
+    [Header("캐릭터 상태")]
+    [ReadOnly] public string ID;
+    public CharacterState State = new CharacterState();
+    [SerializeField] public CharacterBase Target;
     public Transform CenterPoint;
     public Transform Anchor;
 
-    [Header("캐릭터 상태")]
-    public CharacterState State = new CharacterState();
-
+    [Header("캐릭터 능력")]
+    public Skill Skill;
 
     protected bool isEnemy;
 

@@ -191,13 +191,13 @@ public class StageManager : BasicSingleton<StageManager>
         skillChoiceUI.Show(choices, OnLevelUpChoiceMade);
     }
 
-    private void OnLevelUpChoiceMade(SkillUpgradeValue chosen)
+    private void OnLevelUpChoiceMade(SkillValue chosen)
     {
         // 동일 프레임/중복 클릭 방지
         if (_choiceConsumed) return;
         _choiceConsumed = true;
 
-        Debug.Log($"Chosen upgrade: {chosen.SkillID} for Hero: {chosen.HeroID}");
+        Debug.Log($"Chosen upgrade: {chosen.Name} for Hero: {chosen.Hero_ID}");
         ApplyUpgrade(chosen);
 
         // 이번 요청 1개 소모
@@ -227,26 +227,26 @@ public class StageManager : BasicSingleton<StageManager>
 
 
     // 실제 강화/영웅 소환 적용
-    private void ApplyUpgrade(SkillUpgradeValue selected)
+    private void ApplyUpgrade(SkillValue selected)
     {
         if (selected.Tier == ESkillUpgradeTier.Summon)
-            InGameHeroManager.Instance.SummonHero(selected.HeroID);
+            InGameHeroManager.Instance.SummonHero(selected.Hero_ID);
         else
             /* 강화 적용 로직 */
 
-            Debug.Log($"Applied upgrade: {selected.SkillID} on Hero: {selected.HeroID}");
+            Debug.Log($"Applied upgrade: {selected.Name} on Hero: {selected.Hero_ID}");
             ;
     }
 
     // 선택지 3개 생성
-    private List<SkillUpgradeValue> GenerateSkillChoices()
+    private List<SkillValue> GenerateSkillChoices()
     {
-        var result = new List<SkillUpgradeValue>();
+        var result = new List<SkillValue>();
         var summonCandidates = InGameHeroManager.Instance.allSkillUpgrades
-            .FindAll(x => x.Tier == ESkillUpgradeTier.Summon && !InGameHeroManager.Instance.HeroSummonedIDs.Contains(x.HeroID));
+            .FindAll(x => x.Tier == ESkillUpgradeTier.Summon && !InGameHeroManager.Instance.HeroSummonedIDs.Contains(x.Hero_ID));
 
         // 미소환 영웅 우선 3개까지
-        var summonShuffle = new List<SkillUpgradeValue>(summonCandidates);
+        var summonShuffle = new List<SkillValue>(summonCandidates);
         Shuffle(summonShuffle);
         for (int i = 0; i < 3 && i < summonShuffle.Count; i++)
             result.Add(summonShuffle[i]);
@@ -256,7 +256,7 @@ public class StageManager : BasicSingleton<StageManager>
         {
             var otherCandidates = InGameHeroManager.Instance.allSkillUpgrades
                 .FindAll(x => x.Tier != ESkillUpgradeTier.Summon)
-                .FindAll(x => InGameHeroManager.Instance.HeroSummonedIDs.Contains(x.HeroID) /* or 기타 조건 */);
+                .FindAll(x => InGameHeroManager.Instance.HeroSummonedIDs.Contains(x.Hero_ID) /* or 기타 조건 */);
 
             Shuffle(otherCandidates);
 

@@ -18,6 +18,6 @@ public class HeroValue
     public BigNum Health;
     public float AttackSpeed;
 
-    [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Upgrade ID", ValueLabel = "Info")]
-    public Dictionary<string, SkillUpgradeValue> SkillUpgradeDict = new Dictionary<string, SkillUpgradeValue>();
+    [ShowInInspector, DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout, KeyLabel = "Skill ID", ValueLabel = "Info")]
+    public Dictionary<string, SkillValue> SkillDict = new Dictionary<string, SkillValue>();
 }

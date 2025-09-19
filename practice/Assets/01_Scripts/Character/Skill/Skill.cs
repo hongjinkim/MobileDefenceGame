@@ -5,5 +5,12 @@ using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
-   
+    public void UseSkill(CharacterBase master)
+    {
+
+    }
+    public void UpgradeSkill(string upgradeID)
+    {
+
+    }
 }
