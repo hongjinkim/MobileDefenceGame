@@ -1072,11 +1072,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1663903d0acb8a4780eb5b28e2ecee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: Hero
-  Target: {fileID: 0}
   AttackCollider: {fileID: 5785268729392647351}
-  CenterPoint: {fileID: 8973040327272973435}
-  Anchor: {fileID: 1049917981127159093}
+  ID: Hero
   State:
     MaxHp:
       M: 0
@@ -1108,6 +1105,10 @@ MonoBehaviour:
     NoneAttack: 0
     NoneMove: 0
     CurrActName: 
+  Target: {fileID: 0}
+  CenterPoint: {fileID: 8973040327272973435}
+  Anchor: {fileID: 1049917981127159093}
+  Skill: {fileID: 0}
   HP_HUD: {fileID: 574841126844711187}
   HP_HUD_After: {fileID: 8595666516171344938}
   HP_HUD_Fill: {fileID: 1773181523412493916}
@@ -1118,10 +1119,11 @@ MonoBehaviour:
   BodyCollider: {fileID: 3236909165519891910}
   HeroIndex: 0
   Value:
+    ID: 
     Name: 
     Description: 
     Grade: 0
-    HeroType: 0
+    HeroClass: 0
     Element: 0
     AttackPower:
       M: 0

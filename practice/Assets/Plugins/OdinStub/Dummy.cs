@@ -303,6 +303,11 @@ public class ShowInInspector : Attribute { }
         public TableColumnWidth(int width) { }
     }
 
+    public class  PreviewField: Attribute
+    {
+        public PreviewField() { }
+    }
+
 }
 
 namespace Sirenix.Serialization
