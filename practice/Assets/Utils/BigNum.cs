@@ -2,8 +2,6 @@ using System;
 using System.Text;
 using UnityEngine;
 using GoogleSheet.Type;
-using System.ComponentModel;
-using Sirenix.OdinInspector;
 
 [Serializable]
 public struct BigNum
