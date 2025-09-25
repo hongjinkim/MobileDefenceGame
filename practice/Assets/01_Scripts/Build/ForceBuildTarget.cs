@@ -1,5 +1,4 @@
 using UnityEditor;
-using System.IO;
 using UnityEditor.Callbacks;
 
 [InitializeOnLoad]
@@ -19,5 +18,4 @@ public static class ForceBuildTarget
             UnityEngine.Debug.Log($"Build Target forced to {target}");
         }
     }
-    
 }

@@ -1,12 +1,14 @@
 ﻿#if !ODIN_INSPECTOR
+    // Odin이 존재하면 아무것도 정의하지 않음
 using System;
 
 namespace Sirenix.OdinInspector
 {
 
 
-    // 🔹 인스펙터 표시
-    public class ShowInInspector : Attribute { }
+// 🔹 인스펙터 표시/비표시
+public class ShowInInspector : Attribute { }
+    public class HideInInspector : Attribute { }
 
     // 🔹 라벨 제어
     public class HideLabel : Attribute { }
@@ -320,6 +322,4 @@ namespace Sirenix.Serialization
     // ShowInInspector는 Sirenix.OdinInspector만 정의 (충돌 방지 목적)
 
 }
-#else
-
 #endif
