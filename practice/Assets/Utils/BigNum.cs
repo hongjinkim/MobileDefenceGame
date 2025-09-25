@@ -4,6 +4,11 @@ using UnityEngine;
 using GoogleSheet.Type;
 using System.ComponentModel;
 using Sirenix.OdinInspector;
+#if ODIN_INSPECTOR
+using HideInInspector = Sirenix.HideInInspector;
+#else
+using HideInInspector = UnityEngine.HideInInspector;
+#endif
 
 [Serializable]
 public struct BigNum
