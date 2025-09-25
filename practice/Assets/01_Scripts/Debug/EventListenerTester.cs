@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
