@@ -6,9 +6,8 @@ namespace Sirenix.OdinInspector
 {
 
 
-// 🔹 인스펙터 표시/비표시
+// 🔹 인스펙터 비표시
 public class ShowInInspector : Attribute { }
-    public class HideInInspector : Attribute { }
 
     // 🔹 라벨 제어
     public class HideLabel : Attribute { }
