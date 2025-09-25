@@ -6,7 +6,7 @@ public class DebugModeSensor : MonoBehaviour
 {
     public static DebugModeSensor Instance;
 
-    [HideInInspector]public bool IsDebugMode = false;
+    public bool IsDebugMode = false;
     public GameObject DebugObject;
 
     private void Awake()

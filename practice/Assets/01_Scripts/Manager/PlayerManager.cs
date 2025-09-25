@@ -17,12 +17,6 @@ public class PlayerManager : BasicSingleton<PlayerManager>
 
     public PlayerData playerData => GameDataManager.PlayerData;
 
-
-    private void Start()
-    {
-        TestDeck();
-    }
-
     public void GainExp(BigNum GetExp)
     {
         
@@ -34,7 +28,7 @@ public class PlayerManager : BasicSingleton<PlayerManager>
         EventManager.Raise(EEventType.StageCleared);
     }
 
-    private void TestDeck()
+    public void MakeTestDeck()
     {
         HeroDeck[0] = "HERO_001";
         HeroDeck[1] = "HERO_002";
