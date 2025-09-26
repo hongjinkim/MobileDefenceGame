@@ -8,6 +8,13 @@ using Random = UnityEngine.Random;
 
 public class StageManager : BasicSingleton<StageManager>
 {
+
+    [Header("UI")]
+    [SerializeField] private LocalizedTMPConstant levelText;
+    [SerializeField] private LocalizedTMPConstant stageText;
+
+
+    [Header("스테이지 정보")]
     [ReadOnly] public int currentStage;
     [ReadOnly] public int level;
     [ReadOnly] public int exp;
