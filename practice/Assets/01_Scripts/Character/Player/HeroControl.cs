@@ -102,6 +102,7 @@ public class HeroControl : CharacterBase
         //FinalHeroStats finalStats = HeroStatCalculator.Compose(Value, );
 
         //InitHP(finalStats.Health); // 체력 설정
+        InitHP(State.MaxHp); // 테스트용 체력 설정
         AttackCollider.gameObject.SetActive(false);
         ChangeState(EActType.Init);
     }
