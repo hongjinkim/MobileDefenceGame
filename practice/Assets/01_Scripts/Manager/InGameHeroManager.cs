@@ -55,9 +55,9 @@ public class InGameHeroManager : BasicSingleton<InGameHeroManager>
             heroComp.ID = heroId;
             heroComp.LoadData();
 
-            foreach(var keyValue in heroComp.Value.SkillDict)
+            foreach(var keyValue in heroComp.Value.SkillList)
             {
-                allSkillUpgrades.Add(keyValue.Value);
+                allSkillUpgrades.Add(keyValue);
             }
 
             

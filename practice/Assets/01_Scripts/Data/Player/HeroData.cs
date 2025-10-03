@@ -36,28 +36,22 @@ public class HeroData
             heroData.Health = heroList[i].Initial_Health;
             heroData.AttackSpeed = DataTable.Initial.InitialList[0].AttackSpeed;
             //HeroIcon = Resources.Load<Sprite>($"Icons/Heroes/{hero.아이콘}");
-
-            heroData.SkillDict = new Dictionary<string, SkillValue>();
-            var skillID = heroList[i].Skill_ID;
-            
-
-            foreach(var skill in skillList)
-            {
-                var value = new SkillValue();
-
-                value.Hero_ID = heroList[i].Hero_ID;
-                value.Name = skill.Skill_Name;
-                value.Description = skill.Skill_Description;
-                value.Tier = skill.Skill_Tier;
-                value.CanDuplicate = skill.CanDuplicate;
-
-                heroData.SkillDict[skill.Skill_Name] = value;
-                
-            }
-
-
+            heroData.SkillList = new List<SkillValue>();
 
             HeroDict.Add(heroList[i].Hero_ID, heroData);
+        }
+
+        foreach (var skill in skillList)
+        {
+            var value = new SkillValue();
+
+            value.Hero_ID = skill.Hero_ID;
+            value.Name = skill.Skill_Name;
+            value.Description = skill.Skill_Description;
+            value.Tier = skill.Skill_Tier;
+            value.CanDuplicate = skill.CanDuplicate;
+
+            HeroDict[value.Hero_ID].SkillList.Add(value);
         }
     }
 }

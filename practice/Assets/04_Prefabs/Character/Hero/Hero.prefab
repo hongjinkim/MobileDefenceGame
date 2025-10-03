@@ -1132,6 +1132,7 @@ MonoBehaviour:
       M: 0
       E: 0
     AttackSpeed: 0
+    SkillList: []
   animator: {fileID: 8288952950936567541}
   AttackType: 0
 --- !u!95 &8288952950936567541
