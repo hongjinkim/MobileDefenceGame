@@ -979,7 +979,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 220158651}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e77fa35d408f348b2a5ed9f98d400a, type: 3}
   m_Name: 
@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 432153165}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e77fa35d408f348b2a5ed9f98d400a, type: 3}
   m_Name: 
@@ -2329,7 +2329,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 893205761}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e77fa35d408f348b2a5ed9f98d400a, type: 3}
   m_Name: 
@@ -2497,7 +2497,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1038463393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e77fa35d408f348b2a5ed9f98d400a, type: 3}
   m_Name: 
@@ -2702,6 +2702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button - Option_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5721527838636080103, guid: 9a730cc685d68b54aa19212cf54026fa, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 08dc54d5d17672340b3fdbdc78ddc6f5, type: 2}
     - target: {fileID: 5999203132037344057, guid: 9a730cc685d68b54aa19212cf54026fa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2794,6 +2798,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6195733824248299724, guid: 9a730cc685d68b54aa19212cf54026fa, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 13609beb8222a724e830f257c9590455, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4068,6 +4076,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button - Option_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5721527838636080103, guid: 9a730cc685d68b54aa19212cf54026fa, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 08dc54d5d17672340b3fdbdc78ddc6f5, type: 2}
     - target: {fileID: 5999203132037344057, guid: 9a730cc685d68b54aa19212cf54026fa, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4160,6 +4172,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6195733824248299724, guid: 9a730cc685d68b54aa19212cf54026fa, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 13609beb8222a724e830f257c9590455, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5271,6 +5287,10 @@ PrefabInstance:
       propertyPath: Key
       value: SKILL_UPGRADE_001_01
       objectReference: {fileID: 0}
+    - target: {fileID: 2099790003935943396, guid: 89a3228f0a0e6cb45a5f34c55c602bbc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4238293678602083014, guid: 89a3228f0a0e6cb45a5f34c55c602bbc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5355,6 +5375,10 @@ PrefabInstance:
       propertyPath: Key
       value: SKILL_UPGRADE_DESCRIPTION_001_01
       objectReference: {fileID: 0}
+    - target: {fileID: 6168308436886037858, guid: 89a3228f0a0e6cb45a5f34c55c602bbc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6969576822942388638, guid: 89a3228f0a0e6cb45a5f34c55c602bbc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -5379,6 +5403,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7350491766841719403, guid: 89a3228f0a0e6cb45a5f34c55c602bbc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 13609beb8222a724e830f257c9590455, type: 2}
+    - target: {fileID: 8980011657838231872, guid: 89a3228f0a0e6cb45a5f34c55c602bbc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 08dc54d5d17672340b3fdbdc78ddc6f5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4876783439563502104, guid: 89a3228f0a0e6cb45a5f34c55c602bbc, type: 3}

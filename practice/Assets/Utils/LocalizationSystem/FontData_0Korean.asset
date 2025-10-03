@@ -15,6 +15,7 @@ MonoBehaviour:
   Language: 2
   FontAsset: {fileID: 11400000, guid: bef74437e7dff1742b84dbf95344829f, type: 2}
   FontMaterials:
+  - {fileID: -5249699935988921602, guid: bef74437e7dff1742b84dbf95344829f, type: 2}
   - {fileID: 2100000, guid: 0660cf6d2a2a9924c8032174f5128a9e, type: 2}
   - {fileID: 2100000, guid: dfa6446fbcce9104faefc18fd56450d0, type: 2}
   - {fileID: 2100000, guid: f084c36a43acb06499a9a5b4e814a699, type: 2}
