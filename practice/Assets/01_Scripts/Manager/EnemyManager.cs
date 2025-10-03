@@ -167,7 +167,7 @@ public class EnemyManager : BasicSingleton<EnemyManager>
             
 
             // 몬스터 위치 및 인덱스 설정
-            if (enemyType == EEnemyType.StageMonster)
+            if (enemyType == EEnemyType.Normal)
 			{
 				enemyComp.transform.position = GetSpawnPosition(spawnPattern, patternRadius, i, enemyCount);
 			}

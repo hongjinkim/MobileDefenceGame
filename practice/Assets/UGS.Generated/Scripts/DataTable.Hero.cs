@@ -66,7 +66,7 @@ namespace DataTable
 		public System.Int32 Initial_Attack;
 		public System.Int32 Initial_Health;
 		public System.Int32 Initial_Defence;
-		public EHeroElementType Hero_Element;
+		public EElementType Hero_Element;
 		public EHeroClassType Hero_Class;
 		public ERangeType Hero_Range;
   
@@ -98,7 +98,7 @@ namespace DataTable
         public static void LoadFromGoogle(System.Action<List<Hero>, Dictionary<int, Hero>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
                 if (Application.isPlaying == false)
                 {
                     webInstance = UnityEditorWebRequest.Instance as IHttpProtcol;
@@ -107,10 +107,10 @@ namespace DataTable
                 {
                     webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
                 }
-#endif
-#if !UNITY_EDITOR
+    #endif
+    #if !UNITY_EDITOR
                      webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
-#endif
+    #endif
           
  
                 var mdl = new ReadSpreadSheetReqModel(spreadSheetID);
@@ -124,8 +124,6 @@ namespace DataTable
 
 
     public static (List<Hero> list, Dictionary<int, Hero> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-
-            
             Dictionary<int, Hero> Map = new Dictionary<int, Hero>();
             List<Hero> List = new List<Hero>();     
             TypeMap.Init();

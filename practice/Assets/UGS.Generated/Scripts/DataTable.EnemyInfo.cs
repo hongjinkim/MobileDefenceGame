@@ -17,51 +17,51 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class Enemy : ITable
+    public partial class EnemyInfo : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Enemy> loadedList, Dictionary<string, Enemy> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<EnemyInfo> loadedList, Dictionary<int, EnemyInfo> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
-        static string sheetID = "1517056760"; // it is sheet id
+        static string sheetID = "1649954282"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<string, Enemy> EnemyMap = new Dictionary<string, Enemy>();  
-        public static List<Enemy> EnemyList = new List<Enemy>();   
+        public static Dictionary<int, EnemyInfo> EnemyInfoMap = new Dictionary<int, EnemyInfo>();  
+        public static List<EnemyInfo> EnemyInfoList = new List<EnemyInfo>();   
 
         /// <summary>
-        /// Get Enemy List 
+        /// Get EnemyInfo List 
         /// Auto Load
         /// </summary>
-        public static List<Enemy> GetList()
+        public static List<EnemyInfo> GetList()
         {{
            if (isLoaded == false) Load();
-           return EnemyList;
+           return EnemyInfoList;
         }}
 
         /// <summary>
-        /// Get Enemy Dictionary, keyType is your sheet A1 field type.
+        /// Get EnemyInfo Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<string, Enemy>  GetDictionary()
+        public static Dictionary<int, EnemyInfo>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return EnemyMap;
+           return EnemyInfoMap;
         }}
 
     
 
 /* Fields. */
 
-		public System.String Key;
-		public BigNum Monster_HP;
-		public BigNum Monster_Attack;
-		public BigNum Monster_GoldDrop;
-		public BigNum Boss_HPMultiply;
-		public BigNum Boss_AttackMultiply;
+		public System.Int32 Key;
+		public System.String Enemy_ID;
+		public EEnemyType Enemy_Grade;
+		public System.String Enemy_Nickname;
+		public System.String Enemy_Description;
+		public EElementType Enemy_WeakPoint;
   
 
 #region fuctions
@@ -72,7 +72,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("Enemy is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("EnemyInfo is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -88,10 +88,10 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Enemy>, Dictionary<string, Enemy>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<EnemyInfo>, Dictionary<int, EnemyInfo>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
                 if (Application.isPlaying == false)
                 {
                     webInstance = UnityEditorWebRequest.Instance as IHttpProtcol;
@@ -100,10 +100,10 @@ namespace DataTable
                 {
                     webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
                 }
-#endif
-#if !UNITY_EDITOR
+    #endif
+    #if !UNITY_EDITOR
                      webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
-#endif
+    #endif
           
  
                 var mdl = new ReadSpreadSheetReqModel(spreadSheetID);
@@ -116,16 +116,14 @@ namespace DataTable
                
 
 
-    public static (List<Enemy> list, Dictionary<string, Enemy> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-
-            
-            Dictionary<string, Enemy> Map = new Dictionary<string, Enemy>();
-            List<Enemy> List = new List<Enemy>();     
+    public static (List<EnemyInfo> list, Dictionary<int, EnemyInfo> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, EnemyInfo> Map = new Dictionary<int, EnemyInfo>();
+            List<EnemyInfo> List = new List<EnemyInfo>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Enemy).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(EnemyInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["Enemy"];
+            var sheet = jsonObject["EnemyInfo"];
 
             foreach (var column in sheet.Keys)
             {
@@ -144,7 +142,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            Enemy instance = new Enemy();
+                            EnemyInfo instance = new EnemyInfo();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -185,8 +183,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            EnemyList = List;
-                            EnemyMap = Map;
+                            EnemyInfoList = List;
+                            EnemyInfoMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -196,10 +194,10 @@ namespace DataTable
 
  
 
-        public static void Write(Enemy data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(EnemyInfo data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Enemy).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(EnemyInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

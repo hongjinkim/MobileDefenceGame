@@ -20,7 +20,7 @@ public class StageManager : BasicSingleton<StageManager>
     [ReadOnly] public int exp;
 
     [ShowInInspector]
-    private StageValue stageValue;
+    private ChapterValue stageValue;
 
     public SkillChoiceUI skillChoiceUI;
 
@@ -140,7 +140,7 @@ public class StageManager : BasicSingleton<StageManager>
         {
             var sd = list[i];
 
-            if (sd.SpawnPattern == ESpawnPattern.Boss || sd.SpawnPattern == ESpawnPattern.LastBoss)
+            if (sd.SpawnPattern == ESpawnPattern.Elite || sd.SpawnPattern == ESpawnPattern.Boss)
             {
                EnemyManager.Instance.SpawnBoss(stageValue.EnemyInfo, sd.EnemyID);
 
@@ -148,7 +148,7 @@ public class StageManager : BasicSingleton<StageManager>
                 bossDead = false;
                 yield return new WaitUntil(() => bossDead);
             }
-            else if (sd.SpawnPattern == ESpawnPattern.LastBoss)
+            else if (sd.SpawnPattern == ESpawnPattern.Boss)
             {
                 EnemyManager.Instance.SpawnLastBoss(stageValue.EnemyInfo, sd.EnemyID);
                 yield break;

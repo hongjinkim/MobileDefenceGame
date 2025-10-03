@@ -9,7 +9,6 @@ public class SkillValue
     public string Name;
     public string Description;
     public ESkillUpgradeTier Tier;
-    public ESkillBehaviorType Behavior;
-    public ESkillUpgradeType UpgradeType;
+    public bool CanDuplicate;
     public float Value;
 }

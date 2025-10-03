@@ -61,9 +61,7 @@ namespace DataTable
 		public System.String Skill_Name;
 		public System.String Skill_Description;
 		public ESkillUpgradeTier Skill_Tier;
-		public ESkillBehaviorType Skill_Behavior;
-		public ESkillUpgradeType Skill_Type;
-		public System.Single Skill_Value;
+		public System.Boolean CanDuplicate;
   
 
 #region fuctions
@@ -93,7 +91,7 @@ namespace DataTable
         public static void LoadFromGoogle(System.Action<List<Skill>, Dictionary<string, Skill>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
                 if (Application.isPlaying == false)
                 {
                     webInstance = UnityEditorWebRequest.Instance as IHttpProtcol;
@@ -102,10 +100,10 @@ namespace DataTable
                 {
                     webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
                 }
-#endif
-#if !UNITY_EDITOR
+    #endif
+    #if !UNITY_EDITOR
                      webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
-#endif
+    #endif
           
  
                 var mdl = new ReadSpreadSheetReqModel(spreadSheetID);
@@ -119,8 +117,6 @@ namespace DataTable
 
 
     public static (List<Skill> list, Dictionary<string, Skill> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-
-            
             Dictionary<string, Skill> Map = new Dictionary<string, Skill>();
             List<Skill> List = new List<Skill>();     
             TypeMap.Init();

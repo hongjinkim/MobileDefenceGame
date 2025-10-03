@@ -5,8 +5,9 @@ using UnityEngine;
 [UGS(typeof(ESpawnPattern))]
 public enum ESpawnPattern
 {
-    Boss,          // 보스 위치
-    LastBoss,     // 마지막 보스
+    None,           // 없음(단일 위치)
+    Elite,          // 엘리트
+    Boss,          // 보스
     Random,         // 랜덤 위치
     Circle,         // 원형 패턴
     Line,          // 직선 패턴

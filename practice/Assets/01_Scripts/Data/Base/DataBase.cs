@@ -17,7 +17,7 @@ public class DataBase : MonoBehaviour
     [TabGroup("Tabs", "Hero"), HideLabel][InlineProperty][SerializeField] private HeroData heroData = new HeroData();
     [TabGroup("Tabs", "HeroUpgrade"), HideLabel][InlineProperty][SerializeField] private HeroUpgradeData heroUpgradeData = new HeroUpgradeData();
     [TabGroup("Tabs", "HeroUpgrade"), HideLabel][InlineProperty][SerializeField] private EquipmentData equipmentData = new EquipmentData();
-    [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private StageData stageData = new StageData();
+    [TabGroup("Tabs", "Stage"), HideLabel][InlineProperty][SerializeField] private ChapterData stageData = new ChapterData();
 
     private void Awake()
     {
@@ -60,7 +60,7 @@ public class DataBase : MonoBehaviour
     {
         return Instance.heroData.HeroDict.TryGetValue(id, out value);
     }
-    public static bool TryGetStageValue(int id, out StageValue value)
+    public static bool TryGetStageValue(int id, out ChapterValue value)
     {
         return Instance.stageData.StageDict.TryGetValue(id.ToString(), out value);
     }

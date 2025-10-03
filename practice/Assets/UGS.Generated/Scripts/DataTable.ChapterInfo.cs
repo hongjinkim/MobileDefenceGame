@@ -17,39 +17,39 @@ using UnityEngine;
 namespace DataTable
 {
     [GoogleSheet.Attribute.TableStruct]
-    public partial class Initial : ITable
+    public partial class ChapterInfo : ITable
     { 
 
-        public delegate void OnLoadedFromGoogleSheets(List<Initial> loadedList, Dictionary<int, Initial> loadedDictionary);
+        public delegate void OnLoadedFromGoogleSheets(List<ChapterInfo> loadedList, Dictionary<int, ChapterInfo> loadedDictionary);
 
         static bool isLoaded = false;
         static string spreadSheetID = "1_xw0jIQbq5GqWuwVkF91XDMLSelG7qQivMMJcWCfqIc"; // it is file id
-        static string sheetID = "0"; // it is sheet id
+        static string sheetID = "411020660"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
 /* Your Loaded Data Storage. */
     
-        public static Dictionary<int, Initial> InitialMap = new Dictionary<int, Initial>();  
-        public static List<Initial> InitialList = new List<Initial>();   
+        public static Dictionary<int, ChapterInfo> ChapterInfoMap = new Dictionary<int, ChapterInfo>();  
+        public static List<ChapterInfo> ChapterInfoList = new List<ChapterInfo>();   
 
         /// <summary>
-        /// Get Initial List 
+        /// Get ChapterInfo List 
         /// Auto Load
         /// </summary>
-        public static List<Initial> GetList()
+        public static List<ChapterInfo> GetList()
         {{
            if (isLoaded == false) Load();
-           return InitialList;
+           return ChapterInfoList;
         }}
 
         /// <summary>
-        /// Get Initial Dictionary, keyType is your sheet A1 field type.
+        /// Get ChapterInfo Dictionary, keyType is your sheet A1 field type.
         /// - Auto Load
         /// </summary>
-        public static Dictionary<int, Initial>  GetDictionary()
+        public static Dictionary<int, ChapterInfo>  GetDictionary()
         {{
            if (isLoaded == false) Load();
-           return InitialMap;
+           return ChapterInfoMap;
         }}
 
     
@@ -57,12 +57,8 @@ namespace DataTable
 /* Fields. */
 
 		public System.Int32 Key;
-		public System.Single GameSpeed;
-		public System.Single AttackSpeed;
-		public System.Single AttackRange_Melee;
-		public System.Single AttackRange_Range;
-		public System.Single Energy;
-		public System.Single Diamond;
+		public System.Int32 Chapter_ID;
+		public System.String ChapterName;
   
 
 #region fuctions
@@ -73,7 +69,7 @@ namespace DataTable
             if(isLoaded && forceReload == false)
             {
 #if UGS_DEBUG
-                 Debug.Log("Initial is already loaded! if you want reload then, forceReload parameter set true");
+                 Debug.Log("ChapterInfo is already loaded! if you want reload then, forceReload parameter set true");
 #endif
                  return;
             }
@@ -89,7 +85,7 @@ namespace DataTable
         }
  
 
-        public static void LoadFromGoogle(System.Action<List<Initial>, Dictionary<int, Initial>> onLoaded, bool updateCurrentData = false)
+        public static void LoadFromGoogle(System.Action<List<ChapterInfo>, Dictionary<int, ChapterInfo>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
     #if UNITY_EDITOR
@@ -117,14 +113,14 @@ namespace DataTable
                
 
 
-    public static (List<Initial> list, Dictionary<int, Initial> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-            Dictionary<int, Initial> Map = new Dictionary<int, Initial>();
-            List<Initial> List = new List<Initial>();     
+    public static (List<ChapterInfo> list, Dictionary<int, ChapterInfo> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
+            Dictionary<int, ChapterInfo> Map = new Dictionary<int, ChapterInfo>();
+            List<ChapterInfo> List = new List<ChapterInfo>();     
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Initial).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(ChapterInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string, string, string)>(); 
             List<List<string>> rows = new List<List<string>>();
-            var sheet = jsonObject["Initial"];
+            var sheet = jsonObject["ChapterInfo"];
 
             foreach (var column in sheet.Keys)
             {
@@ -143,7 +139,7 @@ namespace DataTable
                         int rowCount = rows[0].Count;
                         for (int i = 0; i < rowCount; i++)
                         {
-                            Initial instance = new Initial();
+                            ChapterInfo instance = new ChapterInfo();
                             for (int j = 0; j < typeInfos.Count; j++)
                             {
                                 try
@@ -184,8 +180,8 @@ namespace DataTable
                         }
                         if(isLoaded == false || forceReload)
                         { 
-                            InitialList = List;
-                            InitialMap = Map;
+                            ChapterInfoList = List;
+                            ChapterInfoMap = Map;
                             isLoaded = true;
                         }
                     } 
@@ -195,10 +191,10 @@ namespace DataTable
 
  
 
-        public static void Write(Initial data, System.Action<WriteObjectResult> onWriteCallback = null)
+        public static void Write(ChapterInfo data, System.Action<WriteObjectResult> onWriteCallback = null)
         { 
             TypeMap.Init();
-            FieldInfo[] fields = typeof(Initial).GetFields(BindingFlags.Public | BindingFlags.Instance);
+            FieldInfo[] fields = typeof(ChapterInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
             var datas = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
             {

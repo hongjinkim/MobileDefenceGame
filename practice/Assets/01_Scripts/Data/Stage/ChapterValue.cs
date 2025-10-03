@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class StageValue
+public class ChapterValue
 {
     public int StageNum;
 

@@ -91,7 +91,7 @@ namespace DataTable
         public static void LoadFromGoogle(System.Action<List<Hero_Initial>, Dictionary<int, Hero_Initial>> onLoaded, bool updateCurrentData = false)
         {      
                 IHttpProtcol webInstance = null;
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
                 if (Application.isPlaying == false)
                 {
                     webInstance = UnityEditorWebRequest.Instance as IHttpProtcol;
@@ -100,10 +100,10 @@ namespace DataTable
                 {
                     webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
                 }
-#endif
-#if !UNITY_EDITOR
+    #endif
+    #if !UNITY_EDITOR
                      webInstance = UnityPlayerWebRequest.Instance as IHttpProtcol;
-#endif
+    #endif
           
  
                 var mdl = new ReadSpreadSheetReqModel(spreadSheetID);
@@ -117,8 +117,6 @@ namespace DataTable
 
 
     public static (List<Hero_Initial> list, Dictionary<int, Hero_Initial> map) CommonLoad(Dictionary<string, Dictionary<string, List<string>>> jsonObject, bool forceReload){
-
-            
             Dictionary<int, Hero_Initial> Map = new Dictionary<int, Hero_Initial>();
             List<Hero_Initial> List = new List<Hero_Initial>();     
             TypeMap.Init();

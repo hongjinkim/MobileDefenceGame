@@ -13,7 +13,7 @@ public class HeroValue
     public string Description;
     public EGrade Grade;
     public EHeroClassType HeroClass;
-    public EHeroElementType Element;
+    public EElementType Element;
     public BigNum AttackPower;
     public BigNum Health;
     public float AttackSpeed;

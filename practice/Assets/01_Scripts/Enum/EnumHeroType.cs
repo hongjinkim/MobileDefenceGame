@@ -9,13 +9,3 @@ public enum EHeroClassType
     Ranger,
     Supporter
 }
-
-[UGS(typeof(EHeroElementType))]
-public enum EHeroElementType
-{
-    Ice,
-    Fire,
-    Thunder,
-    Wind,
-    Special
-}

@@ -49,9 +49,7 @@ public class HeroData
                 value.Name = skill.Skill_Name;
                 value.Description = skill.Skill_Description;
                 value.Tier = skill.Skill_Tier;
-                value.Behavior = skill.Skill_Behavior;
-                value.UpgradeType = skill.Skill_Type;
-                value.Value = skill.Skill_Value;
+                //value.CanDuplicate = skill.CanDuplicate;
 
                 heroData.SkillDict[skill.Skill_Name] = value;
                 
