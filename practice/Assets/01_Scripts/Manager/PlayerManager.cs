@@ -30,11 +30,11 @@ public class PlayerManager : BasicSingleton<PlayerManager>
 
     public void MakeTestDeck()
     {
-        HeroDeck[0] = "HERO_001";
-        HeroDeck[1] = "HERO_002";
-        HeroDeck[2] = "HERO_003";
-        HeroDeck[3] = "HERO_004";
-        HeroDeck[4] = "HERO_005";
+        HeroDeck[0] = "HERO_004";
+        HeroDeck[1] = "HERO_005";
+        HeroDeck[2] = "HERO_006";
+        HeroDeck[3] = "HERO_007";
+        HeroDeck[4] = "HERO_008";
     }
 
     public static void CheckEnergyToStart()

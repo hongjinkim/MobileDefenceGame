@@ -49,7 +49,7 @@ public class HeroData
                 value.Name = skill.Skill_Name;
                 value.Description = skill.Skill_Description;
                 value.Tier = skill.Skill_Tier;
-                //value.CanDuplicate = skill.CanDuplicate;
+                value.CanDuplicate = skill.CanDuplicate;
 
                 heroData.SkillDict[skill.Skill_Name] = value;
                 

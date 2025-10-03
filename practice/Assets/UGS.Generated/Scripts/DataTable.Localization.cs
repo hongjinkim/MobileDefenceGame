@@ -59,9 +59,17 @@ namespace DataTable
 		public System.String Key;
 		public System.String Korean;
 		public System.String English;
-  
+        public System.String ChineseSimplified;
+        public System.String ChineseTraditional;
+        public System.String Japanese;
+        public System.String Spanish;
+        public System.String French;
+        public System.String German;
+        public System.String Portuguese;
+        public System.String Italian;
 
-#region fuctions
+
+        #region fuctions
 
 
         public static void Load(bool forceReload = false)
