@@ -3,7 +3,7 @@
 <summary>프로젝트 개요</summary>
 
 - **프로젝트명** : Unity Practice Project – 콩콩던전 Clone  
-- **개발 기간** : 2025.06.19 ~ 진행 중  
+- **개발 기간** : 2025.06.19 ~ 2025.10.21 
 - **참여 인원 / 역할** : 1인 개발 (기획, 클라이언트, UI/UX, 데이터 구조 설계, 최적화 등 전 영역 담당)  
 - **레퍼런스** : [콩콩던전 (Google Play)](https://play.google.com/store/apps/details?id=com.game.kingrush&hl=ko&pli=1)  
 - **프로젝트 설명** :  
@@ -55,8 +55,8 @@
   - `Dictionary<EEventType, Delegate>` 기반 **EventManager** 설계  
   - 이벤트 구독/해제/실행을 통합 관리하여 모듈 간 의존성 최소화  
 
-- **서버 연동 (예정)**  
-  - **PlayFab** 연동 계획 → 플레이어 데이터 저장/로드 및 서버 검증 구조 학습  
+- **서버 연동**  
+  - PlayFab을 연동하여 플레이어 데이터의 클라우드 저장/로드 및 서버 검증 구현. 푸시 알림, 우편함, 쿠폰 시스템 등 백엔드 기능을 구축하고, 테스트 서버와 라이브 서버를 분리하여 안정적인 개발 환경 구성
 
 - **전투 시스템**  
   - **웨이브 기반 적 스폰** 로직 구현  
@@ -85,19 +85,6 @@
   - 문제 : 초기에는 Excel 데이터 관리 시 수동 반영으로 번거롭고 실수 발생 가능  
   - 해결 : [Unity Google Sheets Integration](https://shlifedev.gitbook.io/unitygooglesheets) 오픈소스 라이브러리를 도입하여 Google Sheets → Script 자동 변환 파이프라인 구축  
   - 결과 : 데이터 변경 즉시 반영 가능, 협업 및 유지보수 효율 향상  
-
-<details>
-<summary>스크린샷 / 영상</summary>
-추후 추가
-
-- **게임 실행 화면**  
-
-- **UI 캡처**  
-
-- **시연 영상 (YouTube 링크 예시)**  
-</details>
-
-
 ---
 
 ### 🎨 사용 에셋 (Assets Used)
